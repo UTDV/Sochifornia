@@ -1,0 +1,133 @@
+﻿/* comfortaa-700 - latin_cyrillic */
+@font-face {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.eot'); /* IE9 Compat Modes */
+    src: local(''), url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.woff') format('woff'), /* Modern Browsers */
+    url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../Content/Fonts/comfortaa-v29-latin_cyrillic-700.svg#Comfortaa') format('svg'); /* Legacy iOS */
+}
+
+
+
+/* caveat-700 - latin_cyrillic */
+@font-face {
+    font-family: 'Caveat';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../Content/Fonts/caveat-v10-latin_cyrillic-700.eot'); /* IE9 Compat Modes */
+    src: local(''), url('../Content/Fonts/caveat-v10-latin_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../Content/Fonts/caveat-v10-latin_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../Content/Fonts/caveat-v10-latin_cyrillic-700.woff') format('woff'), /* Modern Browsers */
+    url('../Content/Fonts/caveat-v10-latin_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../Content/Fonts/caveat-v10-latin_cyrillic-700.svg#Caveat') format('svg'); /* Legacy iOS */
+}
+
+
+
+
+
+.FontClassComfortaaSpacing {
+    font-family: 'Comfortaa';
+    letter-spacing: 9px;
+}
+
+
+.FontClassCaveat {
+    font-family: 'Caveat';
+    font-size: 24px;
+    transform: rotate(4deg);
+    letter-spacing: 5px;
+    color: red;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+.PrintButtonClass {
+    visibility: visible;
+}
+
+
+
+
+@media print {
+    .PrintButtonClass {
+        visibility:hidden;
+    }
+}
+
+
+@media screen and (min-width: 992px) /* Desktop */ {
+
+    .FontClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 22px;
+    }
+
+    .FontClassSize {
+        font-size: 15px;
+    }
+
+    .NameFontClassSize {
+        height: 50px;
+        font-size: 15px;
+    }
+
+    .PropertyRegisterFontSize {
+        font-size: 14px !important;
+    }
+
+
+}
+
+@media screen and (max-width: 991.98px) /* Tablet */ {
+
+    .FontClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 22px;
+    }
+
+    .FontClassSize {
+        font-size: 14px;
+    }
+
+    .NameFontClassSize {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .PropertyRegisterFontSize {
+        font-size: 13px !important;
+    }
+
+
+}
+
+@media screen and (max-width: 575.98px) /* Mobile */ {
+
+    .FontClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 20px;
+    }
+
+    .FontClassSize {
+        font-size: 13px;
+    }
+
+    .NameFontClassSize {
+        height: 50px;
+        font-size: 13px;
+    }
+
+    .PropertyRegisterFontSize {
+        font-size: 12px !important;
+    }
+
+}
+
+
+

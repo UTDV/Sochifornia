@@ -1,0 +1,203 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Site1.master.vb" Inherits="WebEstateProject.Site1" %>
+
+<%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head runat="server">
+
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />   
+
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <meta name="description" content="Недвижимость в Сочи 🏖: элитные квартиры и дома 🏠, новостройки 🏗, коттеджи 🏘 по самым оптимальным ценам от АН Сочифорния. Купить продать квартиру, дом и офис в центре Сочи, Адлере, Красной поляне, Дагомысе, и Сириусе.">
+
+    <meta name="keywords" content="недвижимость Сочи, объявления о недвижимости Сочи, недвижимость в Сочи сайт, купить однокомнатную в Сочи, купить двухкомнатную в Сочи, купить однокомнатную в Адлере, купить апартаменты в Олимпийском парке, купить апартаменты в Красной поляне, купить студию в Сочи">
+
+    <link rel="stylesheet" href="~/Content/FontStyles.css" type="text/css" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Logo/Logo120_120.ico" />
+
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+
+    <link rel="stylesheet" href="~/Content/notify.css" />
+
+    <script src="../Scripts/jquery-3.0.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EWEP28MNW9"></script>
+    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-EWEP28MNW9');
+    </script>
+
+
+<%--    <script src="../sochifornia/Scripts/jquery-3.0.0.js"></script>
+    <script src="../sochifornia/Scripts/bootstrap.js"></script>--%>
+
+
+    <!-- Yandex.Metrika counter -->
+
+    <script type="text/javascript">
+
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(72756289, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true
+        });
+
+    </script>
+
+
+    <!-- /Yandex.Metrika counter -->
+
+
+</head>
+
+<body>
+
+    <script>
+
+        window.replainSettings = { id: 'e082b82b-ede5-43e8-81c2-e32d2c2f0ddd' };
+        (function (u) {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = u;
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })('https://widget.replain.cc/dist/client.js');
+
+    </script>
+
+    <form id="form1" runat="server">
+
+        <div><img src="https://mc.yandex.ru/watch/72756289" style="position:absolute; left:-9999px;" alt="" /></div>
+
+        <div class="container-fluid">
+            <dx:ASPxPanel ID="TopPanel" ClientInstanceName="TopPanel" runat="server" FixedPosition="None"  Border-BorderStyle="None" >                
+                <PanelCollection>
+                    <dx:PanelContent runat="server">
+
+                        
+                        <dx:ASPxFormLayout ID="HeadFormLayout" runat="server" Width="100%" ColumnCount="3" Style="margin-top: 20px; margin-bottom:-10px; margin-left:10px; margin-right: 10px">
+                            <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="500" />
+                            <Items>
+
+                                <dx:LayoutItem ShowCaption="False" ColumnSpan="2">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+
+                                            <dx:ASPxHeadline ID="HeadLine" runat="server"
+                                                HeaderText="Сочи" HeaderStyle-Font-Size="32" HeaderStyle-CssClass="FontClassComfortaaSpacing" HeaderStyle-LineHeight="15" HeaderStyle-Paddings-PaddingTop="15"
+                                                ContentText="недвижимость" ContentStyle-Font-Size="13" ContentStyle-CssClass="FontClassComfortaa" ContentStyle-LineHeight="0"
+                                                Image-Url="~/Content/Logo/Logo2.png" NavigateUrl="~/Default.aspx" ShowImageAsLink="true" Image-ToolTip="На главную" />
+
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+
+                                            <asp:ContentPlaceHolder ID="HeadButtonsContent" runat="server">
+                                            </asp:ContentPlaceHolder>
+
+                                            <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
+                                                Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">
+                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('Login.aspx', '_self'); }" />
+                                            </dx:ASPxButton>
+
+                                            <dx:ASPxButton ID="ExitButton" runat="server" Text="Выход" AutoPostBack="false" RenderMode="link" OnClick="ExitButton_Click" 
+                                                CssClass="PrintButtonClass" Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/exit.png" />
+
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                            </Items>
+                        </dx:ASPxFormLayout>
+
+
+                        <hr style="width:95%" />
+
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxPanel>
+        </div>
+
+        
+
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" >
+
+                
+
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+
+            <dx:ASPxPanel ID="BottomPanel" ClientInstanceName="BottomPanel" runat="server" FixedPosition="None" Height="70px" >
+                <PanelCollection>
+                    <dx:PanelContent runat="server">
+
+                        <div class="container-fluid">
+
+                            <hr style="width:95%" />
+
+
+                            <dx:ASPxFormLayout ID="BottomForm" runat="server" Width="100%" Styles-LayoutItem-Paddings-Padding="10" >
+                                <Items>
+
+                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="PropertyRegisterButtonItem">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                                <dx:ASPxButton ID="PropertyRegisterButton" runat="server" AutoPostBack="false" Text="Список объектов">
+                                                    <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('PropertyRegister.aspx');
+                                                                                            redirectWindow.location; }" />
+                                                </dx:ASPxButton>
+
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                                <dx:ASPxLabel ID="BottomLabel" runat="server" Text="&#169; 2021 Сочи недвижимость" />
+
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                </Items>
+                            </dx:ASPxFormLayout>
+
+                            
+
+                        </div>
+
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxPanel>
+
+
+
+    </form>
+</body>
+</html>
