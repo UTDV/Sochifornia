@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Недвижимость Сочи" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site1.Master" CodeBehind="PropertyRegister.aspx.vb" Inherits="WebEstateProject.PropertyRegister" %>
+﻿<%@ Page Title="Недвижимость Сочи" Language="vb" AutoEventWireup="false" MasterPageFile="~/DeepWeb.Master" CodeBehind="PropertyRegister.aspx.vb" Inherits="WebEstateProject.PropertyRegister" %>
 
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
@@ -47,7 +47,8 @@
                 
                 <dx:GridViewLayoutGroup ColumnSpan="1" GroupBoxDecoration="None" >
                     <Items>
-                        <dx:GridViewColumnLayoutItem ColumnName="Type" />
+                        
+                        <dx:GridViewColumnLayoutItem ColumnName="Type"  />
                         <dx:GridViewColumnLayoutItem ColumnName="District" />
                         <dx:GridViewColumnLayoutItem ColumnName="Complex" />
                         <dx:GridViewColumnLayoutItem ColumnName="Name" />
@@ -58,6 +59,7 @@
                         <dx:GridViewColumnLayoutItem ColumnName="Registration" />
                         <dx:GridViewColumnLayoutItem ColumnName="Stove" />
                         <dx:GridViewColumnLayoutItem ColumnName="Street" />                        
+                        
                     </Items>
                 </dx:GridViewLayoutGroup>
 
@@ -99,7 +101,7 @@
         <Columns>       
             
             <dx:GridViewDataTextColumn FieldName="ID" Width="10%" SortOrder="Descending" />            
-            
+            <dx:GridViewDataTextColumn FieldName="slug" Visible ="false" /> 
             <dx:GridViewDataComboBoxColumn FieldName="Type" Caption="Категория" MinWidth="150" Width="20%" AdaptivePriority="0" >
                 <PropertiesComboBox DataSourceID="TypeDS" TextField="MetaName" ValueField="ID">
                     <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
@@ -420,7 +422,12 @@
         }
 
         function fOpenPage(s, e) {
-            var redirectWindow = window.open('PropertyDetails.aspx?id=' + s.GetRowKey(s.GetFocusedRowIndex()));
+            PropertyRegisterGrid.GetRowValues(PropertyRegisterGrid.GetFocusedRowIndex(), 'slug', fRedirect)
+            
+        }
+
+        function fRedirect(vl) {
+            var redirectWindow = window.open('object/' + vl);
             redirectWindow.location;
         }
 

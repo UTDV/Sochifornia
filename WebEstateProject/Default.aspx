@@ -279,7 +279,7 @@
 
 
                             <Columns>
-
+                                 <dx:CardViewColumn FieldName="slug" Visible ="false" />
                                 <dx:CardViewImageColumn FieldName="ID" >
                                     <DataItemTemplate>
 
@@ -334,7 +334,7 @@
 
                                 <dx:CardViewColumn Name="LinkCard">
                                     <DataItemTemplate>
-                                        <dx:ASPxHyperLink ID="HL" runat="server" Text="Подробнее..." Target="_blank" NavigateUrl='<%# "PropertyDetails.aspx?id=" & Eval("ID") %>' />
+                                        <dx:ASPxHyperLink ID="HL" runat="server" Text="Подробнее..." Target="_blank" NavigateUrl='<%# "object/" & Eval("slug") %>' />
                                     </DataItemTemplate>
                                 </dx:CardViewColumn>
 
@@ -345,7 +345,7 @@
                                 <dx:CardViewColumn FieldName="Rooms" />  
                                 <dx:CardViewColumn FieldName="ASquare" /> 
                                 <dx:CardViewColumn FieldName="ARooms" />
-
+                                 <dx:CardViewColumn FieldName="ARooms" />
                             </Columns>
 
 

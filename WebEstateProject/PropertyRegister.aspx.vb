@@ -7,6 +7,9 @@ Imports DevExpress.Web
 Imports System.Drawing.Text
 Imports System.Drawing.Drawing2D
 
+
+
+
 Public Class PropertyRegister
     Inherits System.Web.UI.Page
 
@@ -23,6 +26,7 @@ Public Class PropertyRegister
         If e.NewValues.Item("ActualUntil") Is Nothing Then
             e.NewValues("ActualUntil") = DateAdd(DateInterval.Month, 1, Now())
         End If
+
 
         Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
@@ -61,21 +65,38 @@ Public Class PropertyRegister
         cmd.Parameters.AddWithValue("ActualUntil", IIf(e.NewValues("ActualUntil") = Nothing, DBNull.Value, e.NewValues("ActualUntil")))
         cmd.Parameters.AddWithValue("Hide", IIf(e.NewValues("Hide") = Nothing, DBNull.Value, e.NewValues("Hide")))
         cmd.Parameters.AddWithValue("Price", e.NewValues("Price"))
+
         c.Open()
         Dim PropertyID = cmd.ExecuteScalar
         c.Close()
         cmd.Dispose()
-        c.Dispose()
+
 
         Directory.CreateDirectory(MapPath("~\Content\Foto\" & PropertyID.ToString))
 
+        'здесь добавлени friendly url
+        'Dim Nm As String =
+
+        Dim slugTxt As String = SlugUniq.GetSlug(e.NewValues("Name"), SlugUniq.SlugType.PropertyObject, PropertyID)
+
+        Dim cmd1 As New SqlCommand("update PropertyObjects
+                                    set slug = @Slug
+                                    where id = @id", c)
+        cmd1.Parameters.AddWithValue("Slug", slugTxt)
+        cmd1.Parameters.AddWithValue("id", PropertyID)
+        cmd1.ExecuteNonQuery()
+        cmd1.Dispose()
+        c.Dispose()
+        '-----------------
     End Sub
 
     Protected Sub PropertyRegisterGrid_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
-
-        Dim ChgPrice = CInt(e.OldValues("Price").ToString = e.NewValues("Price").ToString)
-
         Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+        'здесь добавление slug
+        Dim slugTxt As String = SlugUniq.GetSlug(e.NewValues("Name"), SlugUniq.SlugType.PropertyObject, e.Keys.Values(0))
+
+        '-----------------
+        Dim ChgPrice = CInt(e.OldValues("Price").ToString = e.NewValues("Price").ToString)
 
         Dim cmd As New SqlCommand(" update [dbo].[PropertyObjects]
                                     set Name = @Name,
@@ -101,7 +122,8 @@ Public Class PropertyRegister
                                         ElitProperty = @ElitProperty,
                                         ActualUntil = @ActualUntil,
                                         Hide = @Hide,
-                                        LastUpdate = getdate()
+                                        LastUpdate = getdate(),
+                                        Slug = @Slug
                                     where ID = @ID
 
                                     if @ChgPrice = 0
@@ -136,6 +158,7 @@ Public Class PropertyRegister
         cmd.Parameters.AddWithValue("Hide", e.NewValues("Hide"))
         cmd.Parameters.AddWithValue("Price", e.NewValues("Price"))
         cmd.Parameters.AddWithValue("ChgPrice", ChgPrice)
+        cmd.Parameters.AddWithValue("Slug", slugTxt)
 
         c.Open()
         cmd.ExecuteNonQuery()

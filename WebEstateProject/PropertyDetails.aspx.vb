@@ -5,16 +5,37 @@ Public Class PropertyDetails
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+        Dim ObjectID As String = ""
+        Dim ObjectSlug As String = ""
 
-        If Request.QueryString("id") Is Nothing Then
+        'Request.QueryString("id")
+
+        If Page.RouteData.Values("id") Is Nothing Then
             Response.Redirect("~/Default.aspx")
+        Else
+
+            ObjectSlug = Page.RouteData.Values("id")
+            Dim cmd1 As New SqlCommand("Select id from PropertyObjects where slug = @slug", c)
+            cmd1.Parameters.AddWithValue("slug", ObjectSlug)
+            c.Open()
+            ObjectID = cmd1.ExecuteScalar
+            If ObjectID Is Nothing Then
+                Response.Redirect("~/Default.aspx") ' здесь должен быть редирект на заглушку
+            End If
+
+            c.Close()
+            cmd1.Dispose()
+
         End If
 
-        Directory.CreateDirectory(MapPath("~\Content\Foto\" & Request.QueryString("id").ToString))
 
-        FotoGallary.SettingsFolder.ImageSourceFolder = "~\Content\Foto\" & Request.QueryString("id").ToString
 
-        FotoGallary.SettingsFolder.ImageCacheFolder = "~\Content\Thumb\ImageGalleryThumb\" & Request.QueryString("id").ToString
+        Directory.CreateDirectory(MapPath("~\Content\Foto\" & ObjectID.ToString))
+
+        FotoGallary.SettingsFolder.ImageSourceFolder = "~\Content\Foto\" & ObjectID.ToString
+
+        FotoGallary.SettingsFolder.ImageCacheFolder = "~\Content\Thumb\ImageGalleryThumb\" & ObjectID.ToString
 
         FotoGallary.UpdateImageCacheFolder()
 
@@ -26,10 +47,10 @@ Public Class PropertyDetails
 
         If Not IsPostBack Then
 
-            Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+            'Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
             Dim cmd As New SqlCommand("exec dbo.GetPropertyObjectData @ID", c)
-            cmd.Parameters.AddWithValue("ID", Request.QueryString("id"))
+            cmd.Parameters.AddWithValue("ID", ObjectID)
             c.Open()
             Dim RDR As SqlDataReader
             RDR = cmd.ExecuteReader
@@ -101,7 +122,7 @@ Public Class PropertyDetails
         End If
 
         If ActualStatusHeadline.HeaderText = "СКРЫТО" Then
-            Response.Redirect("~/Default.aspx")
+            Response.Redirect("~/Default.aspx") ' здесь должен быть редирект на заглушку
         End If
 
     End Sub

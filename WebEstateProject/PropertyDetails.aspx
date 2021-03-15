@@ -239,7 +239,10 @@
 
     </dx:ASPxFormLayout>
 
+    <script src="https://yastatic.net/share2/share.js"></script>
 
+
+    <div class="ya-share2" data-curtain data-size="l" data-services="vkontakte,facebook,odnoklassniki,telegram,viber,whatsapp"></div>
 
 
 
