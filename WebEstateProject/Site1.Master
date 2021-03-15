@@ -117,7 +117,7 @@
 
                                             <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
                                                 Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">
-                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('Users/LoginUser.aspx', '_self'); }" />
+                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('../Users/LoginUser.aspx', '_self'); }" />
                                             </dx:ASPxButton>
 
 <%--                                            <dx:ASPxButton ID="ExitButton" runat="server" Text="Выход" AutoPostBack="false" RenderMode="link" OnClick="ExitButton_Click" 
@@ -213,7 +213,7 @@
             </dx:ASPxPanel>
 
         <dx:ASPxCallback ID="CBack" ClientInstanceName="CBack" runat="server" OnCallback="CBack_Callback">
-            <ClientSideEvents CallbackComplete="function(s,e){ var redirectWindow = window.open('/Default.aspx', '_self'); }" />
+            <ClientSideEvents CallbackComplete="function(s,e){ var redirectWindow = window.open('../Default.aspx', '_self'); }" />
         </dx:ASPxCallback>
 
 

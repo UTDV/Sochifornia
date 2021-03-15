@@ -299,7 +299,6 @@
     <Content Include="SendMail.aspx" />
     <Content Include="Users\PersonalData.aspx" />
     <Content Include="Service.aspx" />
-    <Content Include="Users\ConfirmUserData.aspx" />
     <Content Include="Users\LoginUser.aspx" />
     <Content Include="Users\Registration.aspx" />
     <Content Include="Users\UsersList.aspx" />
