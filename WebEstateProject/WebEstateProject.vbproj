@@ -169,8 +169,6 @@
     <Content Include="Content\Logo\Logo2.png" />
     <Content Include="Content\notify.css" />
     <Content Include="Content\notify.min.css" />
-    <Content Include="Content\UsersContent\2F663435-50B9-4358-B8A0-C193F46B1F78\Avatar.png" />
-    <Content Include="Content\UsersContent\4b47e484-8629-4528-bd05-ecfa86a301f0\Avatar.png" />
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -457,7 +455,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UploadTemp\" />
-    <Folder Include="Content\UsersContent\2a7c72b2-38d7-4f85-93b7-6088ad3b9804\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

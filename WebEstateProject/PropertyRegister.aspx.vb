@@ -89,7 +89,9 @@ Public Class PropertyRegister
                                     where id = @id", c)
         cmd1.Parameters.AddWithValue("Slug", slugTxt)
         cmd1.Parameters.AddWithValue("id", PropertyID)
+        c.Open()
         cmd1.ExecuteNonQuery()
+        c.Close()
         cmd1.Dispose()
         c.Dispose()
         '-----------------
