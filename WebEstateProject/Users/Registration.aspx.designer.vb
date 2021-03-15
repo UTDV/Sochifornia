@@ -77,6 +77,15 @@ Partial Public Class Registration
     Protected WithEvents PhoneTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
+    '''ConfirmPhoneButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmPhoneButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
     '''LoginEmailTB элемент управления.
     '''</summary>
     '''<remarks>
@@ -174,6 +183,42 @@ Partial Public Class Registration
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents CheckEmailButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
+    '''ConfirmPhonePopup элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmPhonePopup As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''ConfirmPopupLabel элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmPopupLabel As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''ConfirmPhoneCodeTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmPhoneCodeTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''CheckPhoneButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CheckPhoneButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ConfirmCBack элемент управления.

@@ -15,6 +15,10 @@ Public Class PropertyRegister
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If Session("GUID") Is Nothing Or Session("Status") <> "64" Then
+            Response.Redirect("~/Users/LoginUser.aspx")
+        End If
+
         If Not IsPostBack Then
             HiddenField("OpenFotoID") = ""
         End If
@@ -32,15 +36,16 @@ Public Class PropertyRegister
 
         Dim cmd As New SqlCommand("insert into [dbo].[PropertyObjects] (Creator, Name, Type, Complex, District, Street, Rooms, ApartmentArea, LandArea, Floor, TotalFloor, Status,
 												Condition, Registration, WindowView, Stove, Ipoteka, ToSea, Sale, Description, VIP, ElitProperty, ActualUntil, Hide, LastUpdate)
-                                   values ('system', @Name, @Type, @Complex, @District, @Street, @RoomsNumber, @ApartmentArea, @LandArea, @Floor, @TotalFloor, @Status, @Condition, @Registration, 
+                                   values (@Creator, @Name, @Type, @Complex, @District, @Street, @RoomsNumber, @ApartmentArea, @LandArea, @Floor, @TotalFloor, @Status, @Condition, @Registration, 
                                            @WindowView, @Stove, isnull(@Ipoteka,0), @ToSea, isnull(@Sale,0), @Description, isnull(@VIP,0), isnull(@ElitProperty,0), @ActualUntil, isnull(@Hide,0), getdate())
         
                                    declare @ID int = IDENT_CURRENT('[dbo].[PropertyObjects]')
 
                                    insert into [dbo].[PropertyObjectsMetaData] (Creator, ObjectID, MetaNameID, MetaData)
-                                   values ('system', @ID, 54, @Price) 
+                                   values (@Creator, @ID, 54, @Price) 
 
                                    select @ID", c)
+        cmd.Parameters.AddWithValue("Creator", Session("GUID").ToString)
         cmd.Parameters.AddWithValue("Name", e.NewValues("Name"))
         cmd.Parameters.AddWithValue("Type", e.NewValues("Type"))
         cmd.Parameters.AddWithValue("Complex", IIf(e.NewValues("Complex") = Nothing, DBNull.Value, e.NewValues("Complex")))
@@ -129,9 +134,10 @@ Public Class PropertyRegister
                                     if @ChgPrice = 0
                                     begin
                                         insert into [dbo].[PropertyObjectsMetaData] (Creator, ObjectID, MetaNameID, MetaData)
-                                        values ('system', @ID, 54, @Price)
+                                        values (@Creator, @ID, 54, @Price)
                                     end
                                     ", c)
+        cmd.Parameters.AddWithValue("Creator", Session("GUID").ToString)
         cmd.Parameters.AddWithValue("ID", e.Keys.Values(0))
         cmd.Parameters.AddWithValue("Name", e.NewValues("Name"))
         cmd.Parameters.AddWithValue("Type", e.NewValues("Type"))

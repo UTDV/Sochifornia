@@ -68,13 +68,13 @@ Partial Public Class Site1
     Protected WithEvents AuthorizationButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
-    '''ExitButton элемент управления.
+    '''LKMenu элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents ExitButton As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents LKMenu As Global.DevExpress.Web.ASPxMenu
 
     '''<summary>
     '''MainContent элемент управления.
@@ -104,15 +104,6 @@ Partial Public Class Site1
     Protected WithEvents BottomForm As Global.DevExpress.Web.ASPxFormLayout
 
     '''<summary>
-    '''PropertyRegisterButton элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents PropertyRegisterButton As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
     '''BottomLabel элемент управления.
     '''</summary>
     '''<remarks>
@@ -120,4 +111,13 @@ Partial Public Class Site1
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents BottomLabel As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''CBack элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBack As Global.DevExpress.Web.ASPxCallback
 End Class

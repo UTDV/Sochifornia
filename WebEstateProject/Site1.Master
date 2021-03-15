@@ -108,20 +108,36 @@
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
 
-                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right">
-                                    <LayoutItemNestedControlCollection>
-                                        <dx:LayoutItemNestedControlContainer runat="server">
 
-                                            <asp:ContentPlaceHolder ID="HeadButtonsContent" runat="server">
-                                            </asp:ContentPlaceHolder>
+                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right" >
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">  
+
+                                            <asp:ContentPlaceHolder ID="HeadButtonsContent" runat="server" />
 
                                             <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
                                                 Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">
-                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('../Login.aspx', '_self'); }" />
+                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('Users/LoginUser.aspx', '_self'); }" />
                                             </dx:ASPxButton>
 
-                                            <dx:ASPxButton ID="ExitButton" runat="server" Text="Выход" AutoPostBack="false" RenderMode="link" OnClick="ExitButton_Click" 
-                                                CssClass="PrintButtonClass" Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/exit.png" />
+<%--                                            <dx:ASPxButton ID="ExitButton" runat="server" Text="Выход" AutoPostBack="false" RenderMode="link" OnClick="ExitButton_Click" 
+                                                CssClass="PrintButtonClass" Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/exit.png" />--%>
+
+
+                                            <dx:ASPxMenu ID="LKMenu" runat="server" Border-BorderStyle="None" BackColor="Transparent" CssClass="PrintButtonClass" 
+                                                AutoPostBack="false" >
+                                                <ClientSideEvents ItemClick="function(s,e){ if(e.item.name == 'ExitButton') { CBack.PerformCallback(); } }" />
+                                                <Items>
+                                                    <dx:MenuItem Name="LK" >
+                                                        <Items>
+                                                            <dx:MenuItem Text="Персональные данные" Name="PersonalData" NavigateUrl="Users/PersonalData.aspx"  />
+                                                            <dx:MenuItem Text="Список объектов" Name="PropertyRegister" NavigateUrl="PropertyRegister.aspx"  />
+                                                            <dx:MenuItem Text="Список пользователей" Name="UsersList" NavigateUrl="Users/UsersList.aspx" Visible="false" />
+                                                            <dx:MenuItem Text="Выход" Name="ExitButton" BeginGroup="true"  />
+                                                        </Items>
+                                                    </dx:MenuItem>
+                                                </Items>
+                                            </dx:ASPxMenu>
 
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
@@ -162,18 +178,18 @@
                             <dx:ASPxFormLayout ID="BottomForm" runat="server" Width="100%" Styles-LayoutItem-Paddings-Padding="10" >
                                 <Items>
 
-                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="PropertyRegisterButtonItem">
+<%--                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="PropertyRegisterButtonItem">
                                         <LayoutItemNestedControlCollection>
                                             <dx:LayoutItemNestedControlContainer runat="server">
 
                                                 <dx:ASPxButton ID="PropertyRegisterButton" runat="server" AutoPostBack="false" Text="Список объектов">
-                                                    <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('../PropertyRegister.aspx');
+                                                    <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('PropertyRegister.aspx');
                                                                                             redirectWindow.location; }" />
                                                 </dx:ASPxButton>
 
                                             </dx:LayoutItemNestedControlContainer>
                                         </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
+                                    </dx:LayoutItem>--%>
 
                                     <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
                                         <LayoutItemNestedControlCollection>
@@ -196,6 +212,9 @@
                 </PanelCollection>
             </dx:ASPxPanel>
 
+        <dx:ASPxCallback ID="CBack" ClientInstanceName="CBack" runat="server" OnCallback="CBack_Callback">
+            <ClientSideEvents CallbackComplete="function(s,e){ var redirectWindow = window.open('/Default.aspx', '_self'); }" />
+        </dx:ASPxCallback>
 
 
     </form>

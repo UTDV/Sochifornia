@@ -47,6 +47,8 @@
 }
 
 
+
+
 .PrintButtonClass {
     visibility: visible;
 }
@@ -81,6 +83,9 @@
         font-size: 14px !important;
     }
 
+    .PersonalDataClass {
+        min-width: 300px;
+    }
 
 }
 
@@ -104,7 +109,9 @@
         font-size: 13px !important;
     }
 
-
+    .PersonalDataClass {
+        min-width: 300px;
+    }
 }
 
 @media screen and (max-width: 575.98px) /* Mobile */ {
@@ -125,6 +132,10 @@
 
     .PropertyRegisterFontSize {
         font-size: 12px !important;
+    }
+
+    .PersonalDataClass {
+        min-width: 200px;
     }
 
 }

@@ -5,7 +5,7 @@
 <asp:Content ID="ButtonsContent" ContentPlaceHolderID="HeadButtonsContent" runat="server">
 
     <dx:ASPxButton ID="PrintButton" ClientInstanceName="PrintButton" runat="server" AutoPostBack="false" RenderMode="Link"
-        Image-Url="~/Content/Icons/printer.png" Text="Печать" ToolTip="Печать" CssClass="PrintButtonClass">
+        Image-Url="~/Content/Icons/printer.png" Text="Печать" ToolTip="Печать" CssClass="PrintButtonClass" >
         <ClientSideEvents Click=" function(s,e) {window.print(); } " />        
     </dx:ASPxButton>
 

@@ -120,7 +120,7 @@
             
             <dx:GridViewDataTextColumn FieldName="Complex" Caption="ЖК" MinWidth="150"  Width="20%" AdaptivePriority="0" />
             
-            <dx:GridViewDataTextColumn FieldName="Name" Caption="Название" MinWidth="160" Width="20%" AdaptivePriority="5">
+            <dx:GridViewDataTextColumn FieldName="Name" Caption="Название" MinWidth="160" Width="20%" AdaptivePriority="5" Visible="false">
                 <PropertiesTextEdit>
                     <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
                         RequiredField-IsRequired="true" RequiredField-ErrorText="Поле не заполнено" ErrorFrameStyle-Font-Size="Smaller" 
@@ -160,7 +160,7 @@
 
             <dx:GridViewDataTextColumn FieldName="ActualStatus" Caption="Актуальность" MinWidth="120" Width="10%" AdaptivePriority="0" />
 
-
+            <dx:GridViewDataTextColumn FieldName="Creator" Caption="Создал" MinWidth="120" Width="10%" AdaptivePriority="5" />
 
 
 
@@ -343,7 +343,7 @@
 
     <asp:SqlDataSource ID="PropertyRegisterDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
         
-        SelectCommand="exec dbo.PropertyRegister" 
+        SelectCommand="exec dbo.PropertyRegister @GUID" 
         
         InsertCommand=" " 
         
@@ -351,6 +351,10 @@
                        delete from [dbo].[PropertyObjectsMetaData] where ObjectID = @ID " 
         
         UpdateCommand=" " >
+
+        <SelectParameters>
+            <asp:SessionParameter Name="GUID" SessionField="GUID" DbType="Guid" />
+        </SelectParameters>
 
         <DeleteParameters>
             <asp:Parameter Name="ID" />
