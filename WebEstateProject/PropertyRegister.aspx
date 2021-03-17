@@ -3,9 +3,6 @@
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 
-<asp:Content ID="ButtonsContent" ContentPlaceHolderID="HeadButtonsContent" runat="server">
-
-</asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -33,13 +30,15 @@
             <ColumnMenuItemVisibility ShowCustomizationDialog="true" ShowCustomizationWindow="true" />
         </SettingsContextMenu>
 
-        <Settings VerticalScrollBarMode="Hidden" ShowHeaderFilterButton="True" ShowFilterRow="true" />
+        <Settings VerticalScrollBarMode="Hidden" ShowHeaderFilterButton="True" ShowFilterRow="false" />
 
         <SettingsPager PageSize="15" />
 
         <SettingsEditing Mode="EditForm" />
 
         <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" AllowHideDataCellsByColumnMinWidth="true"  />
+
+        <SettingsSearchPanel Visible="true" />
 
         <EditFormLayoutProperties ColumnCount="3" >
             <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="1000" />

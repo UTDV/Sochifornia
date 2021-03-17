@@ -8,9 +8,8 @@ Public Class Site1
 
         If Request.Path.ToLower = "/users/loginuser.aspx" Or Request.Path.ToLower = "/users/registration.aspx" Then
 
-            AuthorizationButton.Visible = False
+            'AuthorizationButton.Visible = False
             LKMenu.Visible = False
-            'BottomForm.FindItemOrGroupByName("PropertyRegisterButtonItem").Visible = False
 
         Else
 
@@ -18,23 +17,19 @@ Public Class Site1
                 BottomPanel.Visible = False
             End If
 
-            'If Request.IsAuthenticated Then
-            '    AuthorizationButton.Visible = False
-            '    ExitButton.Visible = True
-            '    BottomForm.FindItemOrGroupByName("PropertyRegisterButtonItem").Visible = True
-            'Else
-            '    AuthorizationButton.Visible = True
-            '    ExitButton.Visible = False
-            '    BottomForm.FindItemOrGroupByName("PropertyRegisterButtonItem").Visible = False
-            'End If
+            If Request.Path.Contains("object/") And Request.Browser.IsMobileDevice = False Then
+                LKMenu.Items.FindByName("PrintBtn").Visible = True
+            End If
+
 
             If Session("GUID") Is Nothing Then
-                AuthorizationButton.Visible = True
-                LKMenu.Visible = False
-                'BottomForm.FindItemOrGroupByName("PropertyRegisterButtonItem").Visible = False
-            Else
+                'AuthorizationButton.Visible = True
+                'LKMenu.Visible = False
 
-                'BottomForm.FindItemOrGroupByName("PropertyRegisterButtonItem").Visible = True
+                LKMenu.Items.FindByName("LK").Visible = False
+                LKMenu.Items.FindByName("AuthorizationBtn").Visible = True
+
+            Else
 
                 Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
@@ -54,8 +49,11 @@ Public Class Site1
                 cmd.Dispose()
                 c.Dispose()
 
-                AuthorizationButton.Visible = False
-                LKMenu.Visible = True
+                'AuthorizationButton.Visible = False
+                'LKMenu.Visible = True
+
+                LKMenu.Items.FindByName("LK").Visible = True
+                LKMenu.Items.FindByName("AuthorizationBtn").Visible = False
                 LKMenu.Items.FindByName("LK").Text = Session("UserName").ToString
 
                 If Session("Role").ToString = "60" Then
@@ -77,10 +75,6 @@ Public Class Site1
 
     End Sub
 
-    'Protected Sub ExitButton_Click(sender As Object, e As EventArgs)
-    '    FormsAuthentication.SignOut()
-    '    Response.Redirect("Default.aspx")
-    'End Sub
 
 
 

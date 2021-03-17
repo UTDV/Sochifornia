@@ -4,10 +4,6 @@
 
 
 
-<asp:Content ID="ButtonsContent" ContentPlaceHolderID="HeadButtonsContent" runat="server">
-
-</asp:Content>
-
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>

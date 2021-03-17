@@ -50,15 +50,6 @@ Partial Public Class DeepWeb
     Protected WithEvents HeadLine As Global.DevExpress.Web.ASPxHeadline
 
     '''<summary>
-    '''HeadButtonsContent элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents HeadButtonsContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
-    '''<summary>
     '''AuthorizationButton элемент управления.
     '''</summary>
     '''<remarks>

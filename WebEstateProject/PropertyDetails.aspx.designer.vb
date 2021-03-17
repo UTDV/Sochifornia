@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class PropertyDetails
 
     '''<summary>
-    '''PrintButton элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents PrintButton As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
     '''FormLayout элемент управления.
     '''</summary>
     '''<remarks>

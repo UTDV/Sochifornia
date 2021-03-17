@@ -2,15 +2,6 @@
 
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
-<asp:Content ID="ButtonsContent" ContentPlaceHolderID="HeadButtonsContent" runat="server">
-
-    <dx:ASPxButton ID="PrintButton" ClientInstanceName="PrintButton" runat="server" AutoPostBack="false" RenderMode="Link"
-        Image-Url="~/Content/Icons/printer.png" Text="Печать" ToolTip="Печать" CssClass="PrintButtonClass" >
-        <ClientSideEvents Click=" function(s,e) {window.print(); } " />        
-    </dx:ASPxButton>
-
-</asp:Content>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -56,7 +47,7 @@
                             <PagerSettings EndlessPagingMode="OnClick" ShowMoreItemsText="Загрузить больше..." />
 
                             <SettingsBreakpointsLayout ItemsPerRow="3" ItemsPerPage="6">
-                                <Breakpoints>
+                                <Breakpoints>                             
                                     <dx:ImageGalleryBreakpoint DeviceSize="XSmall" ItemsPerRow="2" />
                                 </Breakpoints>
                             </SettingsBreakpointsLayout>                            

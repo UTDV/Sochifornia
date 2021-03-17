@@ -51,8 +51,6 @@
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
 
-                                            <asp:ContentPlaceHolder ID="HeadButtonsContent" runat="server">
-                                            </asp:ContentPlaceHolder>
 
                                             <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
                                                 Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">

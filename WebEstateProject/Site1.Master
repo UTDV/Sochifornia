@@ -61,6 +61,14 @@
             accurateTrackBounce: true
         });
 
+        function MenuItemClick(s, e) {
+
+            if (e.item.name == 'ExitButton') { CBack.PerformCallback(); };
+
+            if (e.item.name == 'PrintBtn') { window.print(); }
+
+        }
+
     </script>
 
 
@@ -86,7 +94,7 @@
         <div><img src="https://mc.yandex.ru/watch/72756289" style="position:absolute; left:-9999px;" alt="" /></div>
 
         <div class="container-fluid">
-            <dx:ASPxPanel ID="TopPanel" ClientInstanceName="TopPanel" runat="server" FixedPosition="None"  Border-BorderStyle="None" >                
+            <dx:ASPxPanel ID="TopPanel" ClientInstanceName="TopPanel" runat="server" FixedPosition="None"  Border-BorderStyle="None" >        
                 <PanelCollection>
                     <dx:PanelContent runat="server">
 
@@ -95,7 +103,7 @@
                             <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="500" />
                             <Items>
 
-                                <dx:LayoutItem ShowCaption="False" ColumnSpan="2">
+                                <dx:LayoutItem ShowCaption="False" ColumnSpan="2"  >
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -109,25 +117,23 @@
                                 </dx:LayoutItem>
 
 
-                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right" >
+                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right" ParentContainerStyle-Paddings-PaddingTop="20"  >
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">  
 
-                                            <asp:ContentPlaceHolder ID="HeadButtonsContent" runat="server" />
 
-                                            <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
+<%--                                            <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
                                                 Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">
                                                 <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('../Users/LoginUser.aspx', '_self'); }" />
-                                            </dx:ASPxButton>
-
-<%--                                            <dx:ASPxButton ID="ExitButton" runat="server" Text="Выход" AutoPostBack="false" RenderMode="link" OnClick="ExitButton_Click" 
-                                                CssClass="PrintButtonClass" Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/exit.png" />--%>
+                                            </dx:ASPxButton>--%>
 
 
                                             <dx:ASPxMenu ID="LKMenu" runat="server" Border-BorderStyle="None" BackColor="Transparent" CssClass="PrintButtonClass" 
                                                 AutoPostBack="false" >
-                                                <ClientSideEvents ItemClick="function(s,e){ if(e.item.name == 'ExitButton') { CBack.PerformCallback(); } }" />
+                                                <ClientSideEvents ItemClick="function(s,e){ MenuItemClick(s,e); }" />
                                                 <Items>
+                                                    <dx:MenuItem Name="PrintBtn" Text="Печать" Image-Url="~/Content/Icons/printer.png" Visible="false" />
+                                                    <dx:MenuItem Name="AuthorizationBtn" Text="Вход" Image-Url="~/Content/Icons/Login.png" NavigateUrl="Users/LoginUser.aspx" />
                                                     <dx:MenuItem Name="LK" >
                                                         <Items>
                                                             <dx:MenuItem Text="Персональные данные" Name="PersonalData" NavigateUrl="Users/PersonalData.aspx"  />
@@ -177,19 +183,6 @@
 
                             <dx:ASPxFormLayout ID="BottomForm" runat="server" Width="100%" Styles-LayoutItem-Paddings-Padding="10" >
                                 <Items>
-
-<%--                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="PropertyRegisterButtonItem">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server">
-
-                                                <dx:ASPxButton ID="PropertyRegisterButton" runat="server" AutoPostBack="false" Text="Список объектов">
-                                                    <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('PropertyRegister.aspx');
-                                                                                            redirectWindow.location; }" />
-                                                </dx:ASPxButton>
-
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>--%>
 
                                     <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
                                         <LayoutItemNestedControlCollection>

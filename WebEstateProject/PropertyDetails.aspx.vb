@@ -39,11 +39,6 @@ Public Class PropertyDetails
 
         FotoGallary.UpdateImageCacheFolder()
 
-        Dim TpDev = Request.Browser.IsMobileDevice
-
-        If TpDev = True Then
-            PrintButton.Visible = False
-        End If
 
         If Not IsPostBack Then
 
