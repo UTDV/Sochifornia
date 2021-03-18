@@ -50,22 +50,13 @@ Partial Public Class DeepWeb
     Protected WithEvents HeadLine As Global.DevExpress.Web.ASPxHeadline
 
     '''<summary>
-    '''AuthorizationButton элемент управления.
+    '''LKMenu элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents AuthorizationButton As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
-    '''ExitButton элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents ExitButton As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents LKMenu As Global.DevExpress.Web.ASPxMenu
 
     '''<summary>
     '''MainContent элемент управления.
@@ -77,38 +68,11 @@ Partial Public Class DeepWeb
     Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
-    '''BottomPanel элемент управления.
+    '''CBack элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents BottomPanel As Global.DevExpress.Web.ASPxPanel
-
-    '''<summary>
-    '''BottomForm элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents BottomForm As Global.DevExpress.Web.ASPxFormLayout
-
-    '''<summary>
-    '''PropertyRegisterButton элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents PropertyRegisterButton As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
-    '''BottomLabel элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents BottomLabel As Global.DevExpress.Web.ASPxLabel
+    Protected WithEvents CBack As Global.DevExpress.Web.ASPxCallback
 End Class

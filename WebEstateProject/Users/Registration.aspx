@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Регистрация" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site1.Master" CodeBehind="Registration.aspx.vb" Inherits="WebEstateProject.Registration" %>
+﻿<%@ Page Title="Регистрация" Language="vb" AutoEventWireup="false" MasterPageFile="~/DeepWeb.Master" CodeBehind="Registration.aspx.vb" Inherits="WebEstateProject.Registration" %>
 
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 

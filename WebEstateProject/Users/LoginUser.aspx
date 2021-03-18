@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Вход" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site1.Master" CodeBehind="LoginUser.aspx.vb" Inherits="WebEstateProject.Login1" %>
+﻿<%@ Page Title="Вход" Language="vb" AutoEventWireup="false" MasterPageFile="~/DeepWeb.Master" CodeBehind="LoginUser.aspx.vb" Inherits="WebEstateProject.Login1" %>
 
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
