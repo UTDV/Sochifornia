@@ -12,6 +12,19 @@
            text-decoration:underline;
            
         }
+
+        #rcorners1 {
+  border-radius: 100%;
+  background: #17293F;
+  padding: 0px; 
+  width: 8px;
+  height: 8px;
+  margin:6px;
+}
+
+        .ThumbSelectedStyle {
+            border-radius: 100%;
+        }
     </style>
 
     <dx:ASPxFormLayout ID="FormLayout" runat="server" Width="100%" ColumnCount="3">
@@ -288,12 +301,23 @@
                                             ImageSourceFolder='<%# If(System.IO.Directory.Exists(MapPath("~/Content/Foto/" & Eval("ID") & "/")) = True, If(System.IO.Directory.GetFiles(MapPath("~/Content/Foto/" & Eval("ID") & "/")).Count = 0, "~/Content/Foto/007/", "~/Content/Foto/" & Eval("ID") & "/"), "~/Content/Foto/007/") %>' 
                                             
                                             
-                                            ShowNavigationBar="false"
+                                            ShowNavigationBar="true"
                                             Style="z-index: 1; position: relative" Width="270" Height="270" >
 
                                             <SettingsImageArea ImageSizeMode="FillAndCrop" />
 
                                             <SettingsBehavior EnablePagingByClick="True" EnablePagingGestures="true" ImageLoadMode="DynamicLoad" />
+
+                                            <Styles>
+                                                <Thumbnail ImageWidth="20" ImageHeight="20" Border-BorderStyle="None"  SelectedStyle-CssClass="ThumbSelectedStyle" >
+                                                    <SelectedStyle BackColor="#17293F" Border-BorderColor="White"  />
+                                                </Thumbnail>
+                                            </Styles>
+
+                                            <ItemThumbnailTemplate>
+                                                <p id="rcorners1" ></p>
+                                            </ItemThumbnailTemplate>
+                                            
 
                                         </dx:ASPxImageSlider>
 

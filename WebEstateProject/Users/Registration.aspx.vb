@@ -99,7 +99,7 @@ Public Class Registration
                     Session("GUID") = resString
                     Session("Status") = "64"
                     Directory.CreateDirectory(MapPath("~\Content\UsersContent\" & resString))
-                    Response.Redirect("~/Users/PersonalData.aspx")
+                    Response.Redirect("~/PropertyRegister.aspx")
                 Else
                     ErrorLabel.Text = resString
                 End If

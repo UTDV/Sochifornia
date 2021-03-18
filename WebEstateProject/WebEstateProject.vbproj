@@ -172,7 +172,6 @@
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Login.aspx" />
     <Content Include="PropertyDetails.aspx" />
     <Content Include="PropertyRegister.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -322,13 +321,6 @@
     <Compile Include="App_Code\GetHash.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.designer.vb">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.vb">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
