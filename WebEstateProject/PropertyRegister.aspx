@@ -9,7 +9,7 @@
 
     <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
 
-    <dx:ASPxGridView ID="PropertyRegisterGrid" ClientInstanceName="PropertyRegisterGrid" runat="server" Width="100%"    
+    <dx:ASPxGridView ID="PropertyRegisterGrid" ClientInstanceName="PropertyRegisterGrid" runat="server" Width="100%" Style="margin-bottom:20px"    
         DataSourceID="PropertyRegisterDS" KeyFieldName="ID" AutoGenerateColumns="False" Styles-Cell-Paddings-Padding="5px" CssClass="PropertyRegisterFontSize"   
         Settings-AutoFilterCondition="Contains"  SettingsBehavior-AllowEllipsisInText="true" OnRowDeleted="PropertyRegisterGrid_RowDeleted" 
         Styles-Header-Wrap="True" OnRowInserting="PropertyRegisterGrid_RowInserting" OnRowUpdating="PropertyRegisterGrid_RowUpdating" >

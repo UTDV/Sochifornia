@@ -98,6 +98,7 @@ Public Class Registration
                 If res = 1 Then
                     Session("GUID") = resString
                     Session("Status") = "64"
+                    FormsAuthentication.RedirectFromLoginPage(LoginEmailTB.Text, False)
                     Directory.CreateDirectory(MapPath("~\Content\UsersContent\" & resString))
                     Response.Redirect("~/PropertyRegister.aspx")
                 Else

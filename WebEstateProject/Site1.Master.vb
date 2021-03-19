@@ -22,7 +22,7 @@ Public Class Site1
             End If
 
 
-            If Session("GUID") Is Nothing Then
+            If Request.IsAuthenticated = False Or Session("GUID") Is Nothing Then
                 'AuthorizationButton.Visible = True
                 'LKMenu.Visible = False
 
@@ -72,6 +72,7 @@ Public Class Site1
     Protected Sub CBack_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
 
         Session("GUID") = Nothing
+        FormsAuthentication.SignOut()
 
     End Sub
 

@@ -8,7 +8,7 @@ Public Class ConfirmUserData
 
 
 
-        If Session("GUID") Is Nothing Or Session("Status") <> "64" Then
+        If Request.IsAuthenticated = False Or Session("GUID") Is Nothing Or Session("Status") <> "64" Then
             Response.Redirect("~/Users/LoginUser.aspx")
         Else
 

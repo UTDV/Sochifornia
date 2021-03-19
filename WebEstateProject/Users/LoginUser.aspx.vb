@@ -39,6 +39,7 @@ Public Class Login1
         If res = 1 Then
             Session("GUID") = resString
             Session("Status") = userstatus
+            FormsAuthentication.RedirectFromLoginPage(LoginEmailTB.Text, False)
             Response.Redirect("~/PropertyRegister.aspx")
         Else
             ErrorLabel.Text = "Неверный логин или пароль"

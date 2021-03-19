@@ -12,7 +12,7 @@ Public Class DeepWeb
         Else
 
 
-            If Session("GUID") Is Nothing Then
+            If Request.IsAuthenticated = False Or Session("GUID") Is Nothing Then
 
 
                 LKMenu.Items.FindByName("LK").Visible = False
@@ -55,6 +55,9 @@ Public Class DeepWeb
 
 
     Protected Sub CBack_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
+
         Session("GUID") = Nothing
+        FormsAuthentication.SignOut()
+
     End Sub
 End Class
