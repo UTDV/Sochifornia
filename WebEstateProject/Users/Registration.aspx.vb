@@ -96,10 +96,18 @@ Public Class Registration
                 c.Dispose()
 
                 If res = 1 Then
-                    Session("GUID") = resString
-                    Session("Status") = "64"
-                    FormsAuthentication.RedirectFromLoginPage(LoginEmailTB.Text, False)
+                    'Session("GUID") = resString
+                    'Session("Status") = "64"
+
                     Directory.CreateDirectory(MapPath("~\Content\UsersContent\" & resString))
+
+                    Dim ticket As FormsAuthenticationTicket = New FormsAuthenticationTicket(1, resString, Now, Now.AddMinutes(FormsAuthentication.Timeout.TotalMinutes), False, "64|61" & "|" & FirstNameTB.Text & " " & LastNameTB.Text)
+                    Dim encTicket As String = FormsAuthentication.Encrypt(ticket)
+                    Response.Cookies.Add(New HttpCookie(FormsAuthentication.FormsCookieName, encTicket))
+
+
+                    'FormsAuthentication.RedirectFromLoginPage(LoginEmailTB.Text, False)
+
                     Response.Redirect("~/PropertyRegister.aspx")
                 Else
                     ErrorLabel.Text = resString

@@ -8,7 +8,7 @@
     <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
 
     <dx:ASPxFormLayout ID="RegistrationForm" runat="server" Width="100%">
-        <ClientSideEvents Init="function(s,e){ s.SetHeight (window.innerHeight - TopPanel.GetHeight() - BottomPanel.GetHeight() - 60); }" />
+        <ClientSideEvents Init="function(s,e){ s.SetHeight (window.innerHeight - TopPanel.GetHeight() - 60); }" />
         <Items>
             <dx:LayoutGroup Caption="Регистрация нового пользователя" HorizontalAlign="center" Paddings-PaddingTop="20" Paddings-PaddingLeft="30" Paddings-PaddingRight="30">
                 <GridSettings StretchLastItem="True" WrapCaptionAtWidth="500" />

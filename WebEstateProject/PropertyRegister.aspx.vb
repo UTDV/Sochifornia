@@ -20,9 +20,30 @@ Public Class PropertyRegister
         If Not IsPostBack Then
             HiddenField("OpenFotoID") = ""
 
-            If Request.IsAuthenticated = False Or Session("GUID") Is Nothing Or Session("Status") <> "64" Then
+            If Request.IsAuthenticated = False Then
+
                 Response.Redirect("~/Users/LoginUser.aspx")
+
+            Else
+
+                Dim id As FormsIdentity = CType(User.Identity, FormsIdentity)
+                Dim ticket As FormsAuthenticationTicket = id.Ticket
+                Dim userData As String() = ticket.UserData.Split("|")
+
+                Session("GUID") = ticket.Name
+                Session("Status") = userData(0)
+                Session("Role") = userData(1)
+
+                ' Если статус не Активный
+                If Session("Status") <> "64" Then
+                    Session("GUID") = Nothing
+                    FormsAuthentication.SignOut()
+                    Response.Redirect("~/Users/LoginUser.aspx")
+                End If
+
             End If
+
+
 
             'If Session("GUID") Is Nothing Or Session("Status") <> "64" Then
             '    Response.Redirect("~/Users/LoginUser.aspx")

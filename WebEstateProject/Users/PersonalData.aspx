@@ -9,7 +9,7 @@
 
     <dx:ASPxFormLayout ID="FormLayout" ClientInstanceName="FormLayout" runat="server"  DataSourceID="PersonalDataDS" ColumnCount="2" Width="100%" >
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="800" />
-        <ClientSideEvents Init="function(s,e){ s.SetHeight (window.innerHeight - TopPanel.GetHeight() - BottomPanel.GetHeight() - 60); }" />
+        <ClientSideEvents Init="function(s,e){ s.SetHeight (window.innerHeight - TopPanel.GetHeight() - 60); }" />
         <Items>
 
             <dx:LayoutGroup ShowCaption="False" GroupBoxDecoration="Box" ColumnSpan="1" HorizontalAlign="center" Width="20%"   >
