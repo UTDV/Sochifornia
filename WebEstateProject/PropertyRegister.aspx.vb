@@ -62,9 +62,10 @@ Public Class PropertyRegister
         Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
         Dim cmd As New SqlCommand("insert into [dbo].[PropertyObjects] (Creator, Name, Type, Complex, District, Street, Rooms, ApartmentArea, LandArea, Floor, TotalFloor, Status,
-												Condition, Registration, WindowView, Stove, Ipoteka, ToSea, Sale, Description, VIP, ElitProperty, ActualUntil, Hide, LastUpdate)
+												Condition, Registration, WindowView, Stove, Ipoteka, ToSea, Sale, Description, VIP, ElitProperty, ActualUntil, Hide, LastUpdate, Posrednik, Comission)
                                    values (@Creator, @Name, @Type, @Complex, @District, @Street, @RoomsNumber, @ApartmentArea, @LandArea, @Floor, @TotalFloor, @Status, @Condition, @Registration, 
-                                           @WindowView, @Stove, isnull(@Ipoteka,0), @ToSea, isnull(@Sale,0), @Description, isnull(@VIP,0), isnull(@ElitProperty,0), @ActualUntil, isnull(@Hide,0), getdate())
+                                           @WindowView, @Stove, isnull(@Ipoteka,0), @ToSea, isnull(@Sale,0), @Description, isnull(@VIP,0), isnull(@ElitProperty,0), @ActualUntil, isnull(@Hide,0)
+                                            , getdate(), @Posrednik, @Comission)
         
                                    declare @ID int = IDENT_CURRENT('[dbo].[PropertyObjects]')
 
@@ -97,6 +98,8 @@ Public Class PropertyRegister
         cmd.Parameters.AddWithValue("ActualUntil", IIf(e.NewValues("ActualUntil") = Nothing, DBNull.Value, e.NewValues("ActualUntil")))
         cmd.Parameters.AddWithValue("Hide", IIf(e.NewValues("Hide") = Nothing, DBNull.Value, e.NewValues("Hide")))
         cmd.Parameters.AddWithValue("Price", e.NewValues("Price"))
+        cmd.Parameters.AddWithValue("Posrednik", IIf(e.NewValues("Posrednik") = Nothing, DBNull.Value, e.NewValues("Posrednik")))
+        cmd.Parameters.AddWithValue("Comission", IIf(e.NewValues("Comission") = Nothing, DBNull.Value, e.NewValues("Comission")))
 
         c.Open()
         Dim PropertyID = cmd.ExecuteScalar
@@ -157,7 +160,9 @@ Public Class PropertyRegister
                                         ActualUntil = @ActualUntil,
                                         Hide = @Hide,
                                         LastUpdate = getdate(),
-                                        Slug = @Slug
+                                        Slug = @Slug,
+                                        Posrednik = @Posrednik,
+                                        Comission = @Comission
                                     where ID = @ID
 
                                     if @ChgPrice = 0
@@ -194,6 +199,8 @@ Public Class PropertyRegister
         cmd.Parameters.AddWithValue("Price", e.NewValues("Price"))
         cmd.Parameters.AddWithValue("ChgPrice", ChgPrice)
         cmd.Parameters.AddWithValue("Slug", slugTxt)
+        cmd.Parameters.AddWithValue("Posrednik", IIf(e.NewValues("Posrednik") = Nothing, DBNull.Value,e.NewValues("Posrednik")))
+        cmd.Parameters.AddWithValue("Comission", IIf(e.NewValues("Comission") = Nothing, DBNull.Value, e.NewValues("Comission")))
 
         c.Open()
         cmd.ExecuteNonQuery()

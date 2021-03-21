@@ -23,7 +23,7 @@
 
         <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" AllowHideDataCellsByColumnMinWidth="true"  />
 
-        <SettingsDataSecurity AllowDelete="false" AllowEdit="true" AllowInsert="false" />
+        <SettingsDataSecurity AllowDelete="false" AllowEdit="true"/>
 
         <EditFormLayoutProperties ColumnCount="3">
             <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="1000" />
@@ -49,6 +49,8 @@
                         <dx:GridViewColumnLayoutItem ColumnName="VK" />
                         <dx:GridViewColumnLayoutItem ColumnName="Facebook" />
                         <dx:GridViewColumnLayoutItem ColumnName="Instagram" />
+                        <dx:GridViewColumnLayoutItem ColumnName="Phone" />
+                        <dx:GridViewColumnLayoutItem ColumnName="Email" />
 
                     </Items>
                 </dx:GridViewLayoutGroup>
@@ -72,7 +74,7 @@
 
             <dx:GridViewDataTextColumn FieldName="Email" Width="15%" MinWidth="150" AdaptivePriority="0" />
 
-            <dx:GridViewDataTextColumn FieldName="Phone" Caption="Телефон" Width="15%" MinWidth="150" AdaptivePriority="0" />
+            <dx:GridViewDataTextColumn FieldName="Phone" Caption="Телефон" Width="15%" MinWidth="150" AdaptivePriority="0" PropertiesTextEdit-DisplayFormatString ="+# (###) ###-##-##" />
 
             <dx:GridViewDataTextColumn FieldName="LastName" Caption="Фамилия" Width="15%" MinWidth="120" AdaptivePriority="0" />
 
@@ -116,6 +118,7 @@
                 <Items>
                     <dx:GridViewToolbarItem Command="Refresh" />
                     <dx:GridViewToolbarItem Command="Edit" />
+                    <dx:GridViewToolbarItem Command ="New" BeginGroup ="true" />
                 </Items>
             </dx:GridViewToolbar>
         </Toolbars>
@@ -147,7 +150,7 @@
     <asp:SqlDataSource ID="UseresListDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
         SelectCommand=" SELECT [id]
                               ,[Email]
-                              , FORMAT(convert(bigint, [Phone]), '+# (###) ###-##-##') [Phone]
+                              , Phone --FORMAT(convert(bigint, [Phone]), '+# (###) ###-##-##') [Phone]
                               ,[LastName]
                               ,[FirstName]
                               ,[SecondName]
@@ -176,8 +179,42 @@
                             VK = @VK,
                             Facebook = @Facebook,
                             Instagram = @Instagram,
-                            AccountConfirm = @AccountConfirm
-                        where id = @id" >
+                            AccountConfirm = @AccountConfirm,
+                            Phone = @Phone,
+                            Email = @Email
+                        where id = @id" 
+         InsertCommand = "INSERT INTO [dbo].[Users]
+                                   ([Email]
+                                   ,[Phone]
+                                   ,[LastName]
+                                   ,[FirstName]
+                                   ,[SecondName]
+                                   ,[BirthDate]
+                                   ,[Role]
+                                   
+                                   ,[Status]
+                                   ,[WhatsApp]
+                                   ,[Telegram]
+                                   ,[VK]
+                                   ,[Facebook]
+                                   ,[Instagram]
+                                   )
+                             VALUES
+                                   (@Email
+                                   ,@Phone
+                                   ,@LastName
+                                   ,@FirstName
+                                   ,@SecondName
+                                   ,@BirthDate
+                                   ,@Role
+                                   ,@Status
+                                   ,@WhatsApp
+                                   ,@Telegram
+                                   ,@VK
+                                   ,@Facebook
+                                   ,@Instagram
+                                   )"
+        >
         
         <UpdateParameters>
             <asp:Parameter Name="LastName" />
@@ -193,7 +230,26 @@
             <asp:Parameter Name="Instagram" />
             <asp:Parameter Name="AccountConfirm" />
             <asp:Parameter Name="id" />
+            <asp:Parameter Name="Phone" />
+            <asp:Parameter Name="Email" />
         </UpdateParameters>
+        <InsertParameters >
+            <asp:Parameter Name="LastName" />
+            <asp:Parameter Name="FirstName" />
+            <asp:Parameter Name="SecondName" />
+            <asp:Parameter Name="BirthDate" />
+            <asp:Parameter Name="Role" />
+            <asp:Parameter Name="Status" />
+            <asp:Parameter Name="WhatsApp" />
+            <asp:Parameter Name="Telegram" />
+            <asp:Parameter Name="VK" />
+            <asp:Parameter Name="Facebook" />
+            <asp:Parameter Name="Instagram" />
+            <asp:Parameter Name="AccountConfirm" />
+           
+            <asp:Parameter Name="Phone" />
+            <asp:Parameter Name="Email" />
+        </InsertParameters>
     </asp:SqlDataSource>
 
 </asp:Content>

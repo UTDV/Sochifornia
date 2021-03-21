@@ -50,8 +50,11 @@ Public Class PropertyDetails
             Dim RDR As SqlDataReader
             RDR = cmd.ExecuteReader
             RDR.Read()
+            Dim UserGUID As String = ""
 
             If RDR.HasRows Then
+                UserGUID = RDR("Creator").ToString.ToUpper
+
                 TypeLabel.Text = RDR("Type").ToString.ToUpper
                 HeadLine.HeaderText = RDR("Name").ToString
                 Page.Title = RDR("Name").ToString
@@ -73,6 +76,12 @@ Public Class PropertyDetails
                 IpotekaLabel.Text = RDR("Ipoteka").ToString
                 DescriptionLabel.Text = RDR("Description").ToString
                 LastUpdateLabel.Text = RDR("LastUpdate").ToString
+                Posrednik.Text = RDR("Posrednik").ToString
+                Comission.Text = RDR("Comission").ToString
+                CreatorName.Text = RDR("CreatorName").ToString
+                CreatorPhone.HeaderText = RDR("CreatorPhone").ToString
+                CreatorPhone.NavigateUrl = "tel:" + RDR("CreatorPhone").ToString
+
                 If RDR("ActualStatus").ToString <> "Актуально" Then
                     ActualStatusHeadline.HeaderText = RDR("ActualStatus").ToString.ToUpper
                 End If
@@ -114,11 +123,36 @@ Public Class PropertyDetails
                 FormLayout.FindItemOrGroupByName("WindowView").Visible = False
             End If
 
+            'отображение служебной информации
+            If Request.IsAuthenticated = True Then
+                FormLayout.FindItemOrGroupByName("ServiceInfo").Visible = True
+
+                If Session("Role") = "60" Or Session("Role") = "69" Then
+                    If Comission.Text.Length > 0 Then
+                        FormLayout.FindItemOrGroupByName("Comiss").Visible = True
+
+                    End If
+                    Comission.Visible = True
+                End If
+
+                If UserGUID = Session("UserGUID") Then
+                    If Posrednik.Text.Length > 0 Then
+                        FormLayout.FindItemOrGroupByName("Posr").Visible = True
+                    End If
+
+                End If
+
+
+            End If
+
         End If
 
         If ActualStatusHeadline.HeaderText = "СКРЫТО" Then
             Response.Redirect("~/Default.aspx") ' здесь должен быть редирект на заглушку
         End If
+
+
+
 
     End Sub
 

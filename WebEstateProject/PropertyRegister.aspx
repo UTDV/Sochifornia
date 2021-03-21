@@ -57,7 +57,8 @@
                         <dx:GridViewColumnLayoutItem ColumnName="Condition" />
                         <dx:GridViewColumnLayoutItem ColumnName="Registration" />
                         <dx:GridViewColumnLayoutItem ColumnName="Stove" />
-                        <dx:GridViewColumnLayoutItem ColumnName="Street" />                        
+                        <dx:GridViewColumnLayoutItem ColumnName="Street" />                
+                        <dx:GridViewColumnLayoutItem ColumnName="Comission" />      
                         
                     </Items>
                 </dx:GridViewLayoutGroup>
@@ -76,6 +77,7 @@
                                 <dx:GridViewColumnLayoutItem ColumnName="TotalFloor" />
                                 <dx:GridViewColumnLayoutItem ColumnName="LandArea" Caption="Площадь участка" />
                                 <dx:GridViewColumnLayoutItem ColumnName="ActualUntil" />
+                                <dx:GridViewColumnLayoutItem ColumnName="Posrednik" />   
                             </Items>
                         </dx:GridViewLayoutGroup>
 
@@ -232,7 +234,19 @@
                 </PropertiesMemoEdit>
             </dx:GridViewDataMemoColumn>  
             
+            <dx:GridViewDataComboBoxColumn FieldName="Posrednik"  Caption="Посредник" MinWidth="150" Width="10%" Visible="true"  PropertiesComboBox-TextFormatString ="{3} {1}" >
+                <PropertiesComboBox DataSourceID="PosrednikDS" ValueField="ID" TextField ="Phone">
+                    <Columns>
+                        <dx:ListBoxColumn FieldName ="ID" ClientVisible ="false"  ></dx:ListBoxColumn>
+                        <dx:ListBoxColumn Caption ="Имя" FieldName ="FirstName" ></dx:ListBoxColumn>
+                        <dx:ListBoxColumn Caption ="Фамилия" FieldName ="LastName"></dx:ListBoxColumn>
+                        <dx:ListBoxColumn Caption ="Телефон" FieldName ="Phone"></dx:ListBoxColumn>
+                    </Columns>
+                    
+                </PropertiesComboBox>
+            </dx:GridViewDataComboBoxColumn>
 
+            <dx:GridViewDataTextColumn FieldName="Comission" Caption="Комиссия" MinWidth="120" Width="10%" AdaptivePriority="5" Visible ="true" />
         
         </Columns>
 
@@ -337,7 +351,12 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-
+        <asp:SqlDataSource ID="PosrednikDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
+        SelectCommand=" SELECT ID, FirstName, LastName, Phone
+                        FROM [dbo].[Users]
+                        " >
+        
+    </asp:SqlDataSource>
 
 
     <asp:SqlDataSource ID="PropertyRegisterDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 

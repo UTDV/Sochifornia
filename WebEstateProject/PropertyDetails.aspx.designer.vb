@@ -212,6 +212,24 @@ Partial Public Class PropertyDetails
     Protected WithEvents LastUpdateLabel As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
+    '''CreatorName элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CreatorName As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''CreatorPhone элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CreatorPhone As Global.DevExpress.Web.ASPxHeadline
+
+    '''<summary>
     '''DescriptionLabel элемент управления.
     '''</summary>
     '''<remarks>
@@ -219,4 +237,22 @@ Partial Public Class PropertyDetails
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents DescriptionLabel As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''Posrednik элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents Posrednik As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''Comission элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents Comission As Global.DevExpress.Web.ASPxLabel
 End Class

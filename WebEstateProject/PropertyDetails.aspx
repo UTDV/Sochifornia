@@ -14,8 +14,8 @@
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                        <dx:ASPxHeadline ID="HeadLine" runat="server" HorizontalAlign="Center" HeaderStyle-Wrap="True" 
-                            HeaderStyle-CssClass="FontClassComfortaa"  />
+                        <dx:ASPxHeadline ID="HeadLine" runat="server" HorizontalAlign="Center" HeaderStyle-Wrap="True"
+                            HeaderStyle-CssClass="FontClassComfortaa" />
 
                     </dx:LayoutItemNestedControlContainer>
                 </LayoutItemNestedControlCollection>
@@ -25,8 +25,8 @@
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                        <dx:ASPxHeadline ID="ActualStatusHeadline" runat="server" HorizontalAlign="Center" HeaderText="" 
-                            HeaderStyle-CssClass="FontClassCaveat"  HeaderStyle-Paddings-Padding="10" HeaderStyle-Wrap="False" />
+                        <dx:ASPxHeadline ID="ActualStatusHeadline" runat="server" HorizontalAlign="Center" HeaderText=""
+                            HeaderStyle-CssClass="FontClassCaveat" HeaderStyle-Paddings-Padding="10" HeaderStyle-Wrap="False" />
 
                     </dx:LayoutItemNestedControlContainer>
                 </LayoutItemNestedControlCollection>
@@ -47,10 +47,10 @@
                             <PagerSettings EndlessPagingMode="OnClick" ShowMoreItemsText="Загрузить больше..." />
 
                             <SettingsBreakpointsLayout ItemsPerRow="3" ItemsPerPage="6">
-                                <Breakpoints>                             
+                                <Breakpoints>
                                     <dx:ImageGalleryBreakpoint DeviceSize="XSmall" ItemsPerRow="2" />
                                 </Breakpoints>
-                            </SettingsBreakpointsLayout>                            
+                            </SettingsBreakpointsLayout>
 
                             <EmptyDataTemplate>
                                 <dx:ASPxLabel ID="EmptyLabel" runat="server" Text="Нет фотографий :(" />
@@ -62,15 +62,15 @@
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
 
-            <dx:LayoutGroup Caption="Информация" GroupBoxDecoration="HeadingLine" SettingsItemCaptions-AllowWrapCaption="False"   
-                ColumnSpan="1" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12" SettingsItemCaptions-VerticalAlign="Middle" >
+            <dx:LayoutGroup Caption="Информация" GroupBoxDecoration="HeadingLine" SettingsItemCaptions-AllowWrapCaption="False"
+                ColumnSpan="1" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12" SettingsItemCaptions-VerticalAlign="Middle">
                 <CellStyle Paddings-PaddingTop="10" CssClass="FontClassSize" />
                 <Items>
 
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxLabel ID="TypeLabel" runat="server" Wrap="False" CssClass="FontClassSize" Style="text-align:right; margin-bottom:10px" Font-Bold="true" />
+                                <dx:ASPxLabel ID="TypeLabel" runat="server" Wrap="False" CssClass="FontClassSize" Style="text-align: right; margin-bottom: 10px" Font-Bold="true" />
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -78,12 +78,12 @@
                     <dx:LayoutItem Caption="Жилой комплекс" Name="Complex">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxLabel ID="ComplexLabel" runat="server" Wrap="False" CssClass="FontClassSize"  />
+                                <dx:ASPxLabel ID="ComplexLabel" runat="server" Wrap="False" CssClass="FontClassSize" />
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem Caption="Район" >
+                    <dx:LayoutItem Caption="Район">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
                                 <dx:ASPxLabel ID="DistrictLabel" runat="server" Wrap="False" CssClass="FontClassSize" />
@@ -198,34 +198,76 @@
                     <dx:LayoutItem Caption="Ипотека">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxLabel ID="IpotekaLabel" runat="server" Wrap="False" CssClass="FontClassSize"  />
+                                <dx:ASPxLabel ID="IpotekaLabel" runat="server" Wrap="False" CssClass="FontClassSize" />
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem Caption="Обновление">
+                    <dx:LayoutItem Caption="Актуальность">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxLabel ID="LastUpdateLabel" runat="server" Wrap="False" CssClass="FontClassSize"  />
+                                <dx:ASPxLabel ID="LastUpdateLabel" runat="server" Wrap="False" CssClass="FontClassSize" />
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
                 </Items>
             </dx:LayoutGroup>
-            
-            <dx:LayoutGroup Caption="Описание" GroupBoxDecoration="Box" ColumnSpan="2" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12" ParentContainerStyle-Paddings-Padding="10" >                
+            <dx:LayoutGroup Caption="Специалист" GroupBoxDecoration="Box" ColumnSpan="2" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12" ParentContainerStyle-Paddings-Padding="10">
+                <Items>
+                    <dx:LayoutItem Caption="Имя специалиста">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+                                <dx:ASPxLabel ID="CreatorName" runat="server" CssClass="FontClassSize" Style="text-align: justify; line-height: 30px;" />
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Телефон" ColumnSpan="1" RowSpan="1" Paddings-PaddingBottom="10">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxHeadline ID="CreatorPhone" runat="server" HorizontalAlign="Center" HeaderStyle-Wrap="True"
+                                    HeaderStyle-CssClass="FontClassComfortaa" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                </Items>
+            </dx:LayoutGroup>
+
+            <dx:LayoutGroup Caption="Описание" GroupBoxDecoration="Box" ColumnSpan="2" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12" ParentContainerStyle-Paddings-Padding="10">
                 <Items>
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxLabel ID="DescriptionLabel" runat="server" CssClass="FontClassSize" Style="text-align:justify; line-height: 30px;" />
+                                <dx:ASPxLabel ID="DescriptionLabel" runat="server" CssClass="FontClassSize" Style="text-align: justify; line-height: 30px;" />
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
                 </Items>
             </dx:LayoutGroup>
 
+            <dx:LayoutGroup Name="ServiceInfo" Caption="Служебная информация"
+                GroupBoxDecoration="Box" ColumnSpan="2" RowSpan="1" GroupBoxStyle-Caption-Font-Size="12"
+                ParentContainerStyle-Paddings-Padding="10" Visible="false">
+                <Items>
+                    <dx:LayoutItem Caption="Посредник" Name="Posr" Visible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+                                <dx:ASPxLabel ID="Posrednik" runat="server" CssClass="FontClassSize" Style="text-align: justify; line-height: 30px;" />
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem Caption="Комиссия" Name="Comiss" Visible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+                                <dx:ASPxLabel ID="Comission" runat="server" CssClass="FontClassSize" Style="text-align: justify; line-height: 30px;" />
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                </Items>
+            </dx:LayoutGroup>
         </Items>
 
     </dx:ASPxFormLayout>

@@ -1,24 +1,69 @@
 ﻿Imports System.IO
 Imports System.Data.SqlClient
-
+Imports System.Net
 
 Public Class Site1
     Inherits System.Web.UI.MasterPage
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Request.Path.ToLower = "/users/loginuser.aspx" Or Request.Path.ToLower = "/users/registration.aspx" Then
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+        Dim rp = Request.Path.ToLower
+        'записываем ГИД в КУки, чтобы определять Пользака
+        If Request.Cookies("G_S") Is Nothing Then
+            Dim nc As New HttpCookie("G_S")
+            Dim g As Guid
+            g = Guid.NewGuid
+
+            nc.Value = Net.WebUtility.UrlEncode(g.ToString)
+            nc.Expires = DateAdd(DateInterval.Year, 20, Now)
+            Response.Cookies.Add(nc)
+        Else
+
+            If rp.Contains("object/") Then
+                Dim pos As Int32 = 0
+                While rp.IndexOf("-", pos + 1) <> -1
+                    pos = rp.IndexOf("-", pos + 1)
+                End While
+                Dim id = rp.Substring(pos + 1, rp.Length - (pos + 1))
+                Dim strHostName As String = Dns.GetHostName()
+                Dim addresses As IPAddress() = Dns.GetHostEntry(strHostName).AddressList
+
+                Dim cmd1 As New SqlCommand("INSERT INTO [dbo].[ViewsCount]
+                                                   (--[IP],
+                                                   [ObjectGUID]
+                                                   ,[UserGUID])
+                                             VALUES
+                                                   (--@IP,
+                                                   (select guid from PropertyObjects where id = @ID)
+                                                   ,@UserGUID)", c)
+                cmd1.Parameters.AddWithValue("IP", addresses(1).ToString)
+                cmd1.Parameters.AddWithValue("ID", id)
+                cmd1.Parameters.AddWithValue("UserGUID", WebUtility.UrlDecode(Request.Cookies("G_S").Value))
+                c.Open()
+                cmd1.ExecuteNonQuery()
+                c.Close()
+                cmd1.Dispose()
+
+
+            End If
+        End If
+
+
+
+
+        If rp = "/users/loginuser.aspx" Or rp = "/users/registration.aspx" Then
 
             'AuthorizationButton.Visible = False
             LKMenu.Visible = False
 
         Else
 
-            If Request.Path.ToLower = "/propertyregister.aspx" Or Request.Path.ToLower = "/users/userslist.aspx" Then
+            If rp = "/propertyregister.aspx" Or rp = "/users/userslist.aspx" Then
                 BottomPanel.Visible = False
             End If
 
-            If Request.Path.Contains("object/") And Request.Browser.IsMobileDevice = False Then
+            If rp.Contains("object/") And Request.Browser.IsMobileDevice = False Then
                 LKMenu.Items.FindByName("PrintBtn").Visible = True
             End If
 
@@ -37,7 +82,7 @@ Public Class Site1
                 Dim ticket As FormsAuthenticationTicket = id.Ticket
 
                 ' Получаем актуальные данные пользователя из БД
-                Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+
 
                 Dim cmd As New SqlCommand("select Status, Role, [FirstName] + ' ' + [LastName] as UserName from [dbo].[Users] where GUID = @GUID", c)
                 cmd.Parameters.AddWithValue("GUID", ticket.Name.ToString)
@@ -56,7 +101,7 @@ Public Class Site1
                 RDR.Close()
                 c.Close()
                 cmd.Dispose()
-                c.Dispose()
+
 
                 'AuthorizationButton.Visible = False
                 'LKMenu.Visible = True
@@ -72,6 +117,7 @@ Public Class Site1
                 Session("Status") = userStatus
                 Session("Role") = userRole
                 Session("UserName") = userName
+                Session("UserGUID") = ticket.Name.ToUpper
 
 
                 'Рисуем меню
@@ -86,7 +132,6 @@ Public Class Site1
             End If
 
         End If
-
 
 
     End Sub

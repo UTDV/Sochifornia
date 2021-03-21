@@ -95,6 +95,15 @@ Partial Public Class PropertyRegister
     Protected WithEvents DistrictDS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''PosrednikDS элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents PosrednikDS As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''PropertyRegisterDS элемент управления.
     '''</summary>
     '''<remarks>
