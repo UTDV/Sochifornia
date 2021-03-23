@@ -79,8 +79,9 @@ Public Class PropertyDetails
                 Posrednik.Text = RDR("Posrednik").ToString
                 Comission.Text = RDR("Comission").ToString
                 CreatorName.Text = RDR("CreatorName").ToString
-                CreatorPhone.HeaderText = RDR("CreatorPhone").ToString
-                CreatorPhone.NavigateUrl = "tel:" + RDR("CreatorPhone").ToString
+                'CreatorPhoneLabel.Text = RDR("CreatorPhone").ToString
+                CreatorPhone.HeaderText = Format(CDbl(RDR("CreatorPhone").ToString), "+# (###) ###-##-##")
+                CreatorPhone.NavigateUrl = "tel:+" + RDR("CreatorPhone").ToString
 
                 If RDR("ActualStatus").ToString <> "Актуально" Then
                     ActualStatusHeadline.HeaderText = RDR("ActualStatus").ToString.ToUpper
@@ -132,7 +133,7 @@ Public Class PropertyDetails
                         FormLayout.FindItemOrGroupByName("Comiss").Visible = True
 
                     End If
-                    Comission.Visible = True
+
                 End If
 
                 If UserGUID = Session("UserGUID") Then

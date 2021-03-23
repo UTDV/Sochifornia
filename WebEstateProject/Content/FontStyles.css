@@ -70,6 +70,11 @@
         font-size: 22px;
     }
 
+    .PhoneClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 18px;
+    }
+
     .FontClassSize {
         font-size: 15px;
     }
@@ -96,6 +101,11 @@
         font-size: 22px;
     }
 
+    .PhoneClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 16px;
+    }
+
     .FontClassSize {
         font-size: 14px;
     }
@@ -119,6 +129,11 @@
     .FontClassComfortaa {
         font-family: 'Comfortaa';
         font-size: 20px;
+    }
+
+    .PhoneClassComfortaa {
+        font-family: 'Comfortaa';
+        font-size: 14px;
     }
 
     .FontClassSize {

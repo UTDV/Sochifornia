@@ -26,6 +26,8 @@ Public Class Site1
                     pos = rp.IndexOf("-", pos + 1)
                 End While
                 Dim id = rp.Substring(pos + 1, rp.Length - (pos + 1))
+
+                ' переделать
                 Dim strHostName As String = Dns.GetHostName()
                 Dim addresses As IPAddress() = Dns.GetHostEntry(strHostName).AddressList
 
