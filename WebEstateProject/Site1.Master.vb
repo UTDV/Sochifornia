@@ -31,6 +31,8 @@ Public Class Site1
                 Dim strHostName As String = Dns.GetHostName()
                 Dim addresses As IPAddress() = Dns.GetHostEntry(strHostName).AddressList
 
+                Dim correctAddress As String = GetIPAddress(strHostName)
+
                 Dim cmd1 As New SqlCommand("INSERT INTO [dbo].[ViewsCount]
                                                    (--[IP],
                                                    [ObjectGUID]
@@ -145,6 +147,18 @@ Public Class Site1
         FormsAuthentication.SignOut()
 
     End Sub
+
+    Private Function GetIPAddress(ByVal hostname As String)
+
+        Dim host As IPHostEntry = Dns.GetHostEntry(hostname)
+
+        For Each ip As IPAddress In host.AddressList
+            If ip.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
+                Return ip.ToString
+            End If
+        Next
+        Return String.Empty
+    End Function
 
 
 
