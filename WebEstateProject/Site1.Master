@@ -44,9 +44,9 @@
     <script src="../sochifornia/Scripts/bootstrap.js"></script>--%>
 
 
-    <!-- Yandex.Metrika counter -->
-
     <script type="text/javascript">
+
+        //Yandex.Metrika counter
 
         (function (m, e, t, r, i, k, a) {
             m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
@@ -61,6 +61,8 @@
             accurateTrackBounce: true
         });
 
+
+        //Меню
         function MenuItemClick(s, e) {
 
             if (e.item.name == 'ExitButton') { CBack.PerformCallback(); };
@@ -69,10 +71,47 @@
 
         }
 
+        //Запись IP в куки
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        if (getCookie('sfIP') == undefined) {
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'https://api.ipify.org/');
+
+            xhr.send();
+
+            xhr.onload = function () {
+                if (xhr.status != 200) {
+                    var d = new Date;
+                    d.setTime(d.getTime() + 60 * 1000);
+                    document.cookie = 'sfIP=000.000.000.000;path=/;expires=' + d.toGMTString();
+                }
+                else {
+                    var d = new Date;
+                    d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
+                    document.cookie = 'sfIP=' + xhr.responseText + ";path=/;expires=" + d.toGMTString();
+                }
+            };
+
+            xhr.onerror = function () {
+                var d = new Date;
+                d.setTime(d.getTime() + 60 * 1000);
+                document.cookie = 'sfIP=000.000.000.000;path=/;expires=' + d.toGMTString();
+            };
+
+        }
+
+
     </script>
 
 
-    <!-- /Yandex.Metrika counter -->
 
 
 </head>

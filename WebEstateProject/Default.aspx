@@ -27,6 +27,8 @@
         }
     </style>
 
+    <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
+
     <dx:ASPxFormLayout ID="FormLayout" runat="server" Width="100%" ColumnCount="3">
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="1400" />
         <Items>
@@ -259,8 +261,8 @@
                             EnableCardsCache="false" Width="100%" OnCustomCallback="PropertyCardView_CustomCallback" Paddings-PaddingTop="10"  >
 
                             <Settings LayoutMode="Breakpoints" />
-
-                            <SettingsBehavior AllowSelectByCardClick="true" AllowSelectSingleCardOnly="true"   />
+                             
+                            <SettingsBehavior AllowSelectByCardClick="true" AllowSelectSingleCardOnly="true" AllowFocusedCard="true"   />
 
                             <SettingsDataSecurity AllowDelete="false" AllowEdit="false" AllowInsert="false" />
 
@@ -288,8 +290,8 @@
 
 
                             <Columns>
-                                 <dx:CardViewColumn FieldName="slug" Visible ="false" />
-                                <dx:CardViewImageColumn FieldName="ID" >
+                                <dx:CardViewColumn FieldName="slug" Visible="false" />
+                                <dx:CardViewImageColumn FieldName="ID">
                                     <DataItemTemplate>
 
                                         <header style="height: 40px; background-color: black; margin-bottom: -40px; z-index: 2; position: relative; opacity: 0.6; color: white;">
@@ -362,10 +364,24 @@
                                 <dx:CardViewColumn FieldName="Condition" />
                                 <dx:CardViewColumn FieldName="Stove" />
                                 <dx:CardViewColumn FieldName="Ipoteka" />
-                                <dx:CardViewColumn FieldName="Rooms" />  
-                                <dx:CardViewColumn FieldName="ASquare" /> 
+                                <dx:CardViewColumn FieldName="Rooms" />
+                                <dx:CardViewColumn FieldName="ASquare" />
                                 <dx:CardViewColumn FieldName="ARooms" />
-                                 <dx:CardViewColumn FieldName="ARooms" />
+                                <dx:CardViewColumn FieldName="ARooms" />
+
+                                <dx:CardViewColumn FieldName="CreatorPhone" />
+                                <dx:CardViewColumn FieldName="CreatorEmail" />
+                                <dx:CardViewColumn FieldName="CreatorName" />
+                                <dx:CardViewColumn FieldName="CreatorWhatsApp" />
+
+                                <dx:CardViewTextColumn Name="Contacts">
+                                    <DataItemTemplate>
+
+                                        <a id="ContactsButton" style="border:solid; border-width:1px; padding:10px; border-color:#17293F; color:#17293F" href="javascript:OnLinkDeteailsClick(<%#Container.KeyValue.ToString()%>);">Контакты</a>
+
+                                    </DataItemTemplate>
+                                </dx:CardViewTextColumn>
+
                             </Columns>
 
 
@@ -391,14 +407,48 @@
 
                                     <dx:CardViewColumnLayoutItem ColumnName="Rooms" Caption="Комнат" ColumnSpan="2" CssClass="FontClassSize" />
 
-                                    <dx:CardViewColumnLayoutItem ColumnName="LinkCard" VerticalAlign="Bottom" HorizontalAlign="Right" ColumnSpan="2" CssClass="FontClassSize"  />
+                                    <dx:CardViewColumnLayoutItem ColumnName="Contacts" ShowCaption="False" ColumnSpan="2" HorizontalAlign="Center" ParentContainerStyle-Paddings-PaddingTop="20"  />
+
+                                   <%-- <dx:CardViewColumnLayoutItem ColumnSpan="2" ShowCaption="False" ParentContainerStyle-Paddings-PaddingTop="10" ParentContainerStyle-Paddings-PaddingBottom="10" >
+                                        <Template>
+                                            
+                                            <dx:ASPxRoundPanel ID="CreatorContacts" ClientInstanceName="CreatorContacts" runat="server" ShowCollapseButton="false" Collapsed="true" 
+                                                Width="100%" HeaderText="Контакты" AllowCollapsingByHeaderClick="true">
+                                               
+                                                <HeaderStyle BackColor="Transparent" HorizontalAlign="Center" />
+                                                <PanelCollection>
+                                                    <dx:PanelContent runat="server">
+
+                                                        <dx:ASPxHeadline ID="CreatorPhoneHeadline" runat="server" HeaderStyle-Wrap="False" ShowHeaderAsLink="true" NavigateUrl='<%# "tel:+" & Eval("CreatorPhone") %>'
+                                                            Image-Url="~/Content/Icons/SmallPhone.png" ShowImageAsLink="true" HeaderText='<%# Format(CDbl(Eval("CreatorPhone")), "+# (###) ###-##-##") %>' 
+                                                            HeaderStyle-Paddings-PaddingTop="2"  />
+                                                        
+
+                                                        <dx:ASPxHeadline ID="CreatorWhatsAppHeadline" runat="server" HeaderStyle-Wrap="False" ShowHeaderAsLink="true" NavigateUrl='<%# "https://wa.me/7" & Eval("CreatorWhatsApp") %>'
+                                                            Image-Url="~/Content/Icons/whatsapp.png" ShowImageAsLink="true" HeaderText='<%# Format(CDbl(Eval("CreatorWhatsApp")), "+7# (###) ###-##-##") %>' 
+                                                            HeaderStyle-Paddings-PaddingTop="2" Target="_blank"  />
+
+
+
+                                                    </dx:PanelContent>
+                                                </PanelCollection>
+                                            </dx:ASPxRoundPanel>
+
+                                           
+
+                                        </Template>
+                                    </dx:CardViewColumnLayoutItem>--%>
+
+
+
+                                    <dx:CardViewColumnLayoutItem ColumnName="LinkCard" VerticalAlign="Bottom" HorizontalAlign="Right" ColumnSpan="2" CssClass="FontClassSize"   />
 
                                 </Items>
                             </CardLayoutProperties>
 
 
 
-
+                            
                             
 
                         </dx:ASPxCardView>
@@ -421,8 +471,128 @@
 
 
 
+    <dx:ASPxPopupControl ID="ContactsPopup" ClientInstanceName="ContactsPopup" runat="server" HeaderText="Контакты" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" 
+        HeaderStyle-Paddings-PaddingLeft="30" OnWindowCallback="ContactsPopup_WindowCallback" AutoUpdatePosition="true" >
+        <ClientSideEvents Closing="function(s,e){ ContactsFormLayout.SetClientVisible(0); }" />
+        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowCenter" MaxWidth="400" />
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">
+
+                <dx:ASPxHiddenField ID="ObjectHiddenField" runat="server" />
+
+                <dx:ASPxFormLayout ID="ContactsFormLayout" ClientInstanceName="ContactsFormLayout" runat="server" Width="100%" ColumnCount="1" ClientVisible="false" >
+                    <Items>
+
+                        <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="CreatorName">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server">
+
+                                    <dx:ASPxHeadline ID="CreatorNameHL" runat="server" HeaderStyle-Wrap="False" HeaderStyle-CssClass="PhoneClassComfortaa" />
+
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+
+                        <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Name="Phone">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server">
+
+                                    <dx:ASPxHeadline ID="CreatorPhone" runat="server" HeaderStyle-Wrap="False" HeaderStyle-CssClass="PhoneClassComfortaa" ShowHeaderAsLink="true"
+                                        HeaderStyle-Paddings-PaddingTop="7" Image-Url="~/Content/Icons/telephone.png" ShowImageAsLink="true" />
+
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+
+                        <dx:LayoutItem Name="Mail" ShowCaption="False" ParentContainerStyle-Paddings-PaddingTop="10" ParentContainerStyle-Paddings-PaddingBottom="10" HorizontalAlign="Center">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server">
+
+                                    <dx:ASPxButton ID="SendMailButton" ClientInstanceName="SendMailButton" runat="server" Text="Написать" AutoPostBack="false" Width="200"
+                                        Image-Url="~/Content/Icons/envelope.png" ImageSpacing="10">
+                                        <ClientSideEvents Click="function(s,e){ ContactsFormLayout.GetItemByName('CreatorName').SetVisible(0); ContactsFormLayout.GetItemByName('Phone').SetVisible(0); ContactsFormLayout.GetItemByName('Mail').SetVisible(0); ContactsFormLayout.GetItemByName('SendMail').SetVisible(1); ContactsPopup.UpdatePosition(); }" />
+                                    </dx:ASPxButton>
+
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+
+                        <dx:LayoutGroup GroupBoxDecoration="None" CellStyle-Paddings-Padding="10" ClientVisible="false" Name="SendMail">
+                            <Items>
+
+                                <dx:LayoutItem ShowCaption="False">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxTextBox ID="NameSendMail" ClientInstanceName="NameSendMail" runat="server" Width="100%" NullText="Ваше имя" />
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxTextBox ID="PhoneSendMail" ClientInstanceName="PhoneSendMail" runat="server" Width="100%" NullText="Телефон" DisplayFormatString="+# (###) ###-##-##">
+                                                <ClientSideEvents GotFocus="function(s,e){ if(PhoneSendMail.GetText()==''){ PhoneSendMail.SetText('+7'); } }"
+                                                    LostFocus="function(s,e){ if(PhoneSendMail.GetText()=='+7'){ PhoneSendMail.SetText(''); } }" />
+                                            </dx:ASPxTextBox>
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxTextBox ID="EmailSendMail" ClientInstanceName="EmailSendMail" runat="server" Width="100%" NullText="E-mail" />
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxMemo ID="NoteSendMail" ClientInstanceName="NoteSendMail" runat="server" Width="100%" NullText="Меня заинтересовал этот объект. Пожалуйста, расскажите о нем подробнее." Rows="5" />
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+
+                                            <dx:ASPxButton ID="SendButton" runat="server" Width="200" AutoPostBack="false" Text="Отправить">
+                                                <ClientSideEvents Click="function(s,e){ SendButtonClick(); }" />
+                                            </dx:ASPxButton>
+
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                                <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" ClientVisible="false" Name="ErrorLabelItem">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
 
 
+                                            <dx:ASPxLabel ID="ErrorLabel" ClientInstanceName="ErrorLabel" runat="server" Text="" ForeColor="Red" Font-Size="Smaller" />
+
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+
+                            </Items>
+                        </dx:LayoutGroup>
+
+                    </Items>
+                </dx:ASPxFormLayout>
+
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+
+    <dx:ASPxCallback ID="CBackSendMail" ClientInstanceName="CBackSendMail" runat="server" OnCallback="CBackSendMail_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ CBackSendMailResult(e.result); }" />
+    </dx:ASPxCallback>
+
+    <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" />
 
      <script type="text/javascript">
 
@@ -538,7 +708,53 @@
              FilterRoundPanel.SetCollapsed(!FilterRoundPanel.GetCollapsed());
          }
 
+         //Контакты
+         function OnLinkDeteailsClick(vl) {
+             HiddenField.Set("ID", vl);
+             ContactsPopup.PerformCallback(HiddenField.Get("ID"));
+             ContactsPopup.Show();
+         }
 
+
+         //Отправка письма
+         function SendButtonClick() {
+
+             ErrorLabel.SetText('');
+             ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(0);
+
+             if (NameSendMail.GetText() == '') {
+                 ErrorLabel.SetText('Пожалуйста, укажите Ваше имя');
+                 ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
+             }
+             else if (PhoneSendMail.GetText() == '' && EmailSendMail.GetText() == '') {
+                 ErrorLabel.SetText('Пожалуйста, укажите телефон или e-mail');
+                 ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
+             }
+             else if (PhoneSendMail.GetText() != '' && /^\d{10}$/.test(PhoneSendMail.GetText().substring(2)) == false) {
+                 ErrorLabel.SetText('Некорректный номер телефона');
+                 ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
+             }
+             else if (EmailSendMail.GetText() != '' && /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(EmailSendMail.GetText()) == false) {
+                 ErrorLabel.SetText('Некорректный e-mail');
+                 ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
+             }
+             else {
+                 LoadingPanel.Show();
+                 CBackSendMail.PerformCallback();
+             }
+
+         }
+
+         function CBackSendMailResult(vl) {
+             LoadingPanel.Hide();
+             if (vl == 1) {
+                 ContactsPopup.Hide();
+             }
+             else if (vl == 0) {
+                 ErrorLabel.SetText('Что-то пошло не так. Попробуйте еще раз.');
+                 ContactsFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
+             }
+         }
 
      </script>
 

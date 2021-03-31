@@ -159,11 +159,15 @@
     <Content Include="Content\Foto\007\placeholder.png" />
     <Content Include="Content\Icons\CameraIcon.png" />
     <Content Include="Content\Icons\down.png" />
+    <Content Include="Content\Icons\envelope.png" />
     <Content Include="Content\Icons\exit.png" />
     <Content Include="Content\Icons\EyeIcon.png" />
     <Content Include="Content\Icons\Login.png" />
     <Content Include="Content\Icons\printer.png" />
+    <Content Include="Content\Icons\SmallPhone.png" />
+    <Content Include="Content\Icons\telephone.png" />
     <Content Include="Content\Icons\up.png" />
+    <Content Include="Content\Icons\whatsapp.png" />
     <Content Include="Content\Logo\Logo.png" />
     <Content Include="Content\Logo\Logo120_120.ico" />
     <Content Include="Content\Logo\Logo2.png" />

@@ -1,5 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports MimeKit
+Imports MailKit.Net.Smtp
 
 Public Class PropertyDetails
     Inherits System.Web.UI.Page
@@ -78,10 +80,11 @@ Public Class PropertyDetails
                 LastUpdateLabel.Text = RDR("LastUpdate").ToString
                 Posrednik.Text = RDR("Posrednik").ToString
                 Comission.Text = RDR("Comission").ToString
-                CreatorName.Text = RDR("CreatorName").ToString
-                'CreatorPhoneLabel.Text = RDR("CreatorPhone").ToString
+                'CreatorName.Text = RDR("CreatorName").ToString
+                FormLayout.FindItemOrGroupByName("CreatorLayoutGroup").Caption = "Специалист: " & RDR("CreatorName").ToString
                 CreatorPhone.HeaderText = Format(CDbl(RDR("CreatorPhone").ToString), "+# (###) ###-##-##")
                 CreatorPhone.NavigateUrl = "tel:+" + RDR("CreatorPhone").ToString
+                HiddenField("CreatorEmail") = RDR("CreatorEmail").ToString
 
                 If RDR("ActualStatus").ToString <> "Актуально" Then
                     ActualStatusHeadline.HeaderText = RDR("ActualStatus").ToString.ToUpper
@@ -124,6 +127,7 @@ Public Class PropertyDetails
                 FormLayout.FindItemOrGroupByName("WindowView").Visible = False
             End If
 
+
             'отображение служебной информации
             If Request.IsAuthenticated = True Then
                 FormLayout.FindItemOrGroupByName("ServiceInfo").Visible = True
@@ -154,6 +158,39 @@ Public Class PropertyDetails
 
 
 
+
+    End Sub
+
+    Protected Sub CBackSendMail_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
+
+        Try
+
+            Dim emailto As String = HiddenField("CreatorEmail")
+
+            Dim bld As New BodyBuilder()
+            Dim message = New MimeMessage()
+            message.From.Add(New MailboxAddress("Система уведомлений Sochifornia", "info@sochifornia.realty"))
+            message.To.Add(New MailboxAddress(emailto, emailto))
+
+            message.Subject = "Сообщение с сайта от клиента"
+
+            bld.HtmlBody = "<br/>Поступило сообщение от клиента " & NameSendMail.Text & ", телефон: " & IIf(IsNothing(PhoneSendMail.Value) = True, "не указан", PhoneSendMail.Text) &
+                ", почта: " & IIf(IsNothing(EmailSendMail.Value) = True, "не указана", EmailSendMail.Text) & "<br/><br/>" & "Текст сообщения: " & IIf(IsNothing(NoteSendMail.Value) = True, NoteSendMail.NullText, NoteSendMail.Text) &
+                "<br/><br/>" & "<a href=" & Request.Url.AbsoluteUri + "> ССЫЛКА НА ОБЪЕКТ </a>"
+
+            message.Body = bld.ToMessageBody()
+
+            Dim client = New SmtpClient()
+            client.Connect("smtp.mail.ru", 465, True)
+            client.Authenticate("info@sochifornia.realty", "Ii123456")
+            client.Send(message)
+            client.Disconnect(True)
+
+            e.Result = 1
+
+        Catch ex As Exception
+            e.Result = 0
+        End Try
 
     End Sub
 

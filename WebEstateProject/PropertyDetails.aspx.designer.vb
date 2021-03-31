@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class PropertyDetails
 
     '''<summary>
+    '''HiddenField элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents HiddenField As Global.DevExpress.Web.ASPxHiddenField
+
+    '''<summary>
     '''FormLayout элемент управления.
     '''</summary>
     '''<remarks>
@@ -212,15 +221,6 @@ Partial Public Class PropertyDetails
     Protected WithEvents LastUpdateLabel As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
-    '''CreatorName элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents CreatorName As Global.DevExpress.Web.ASPxLabel
-
-    '''<summary>
     '''CreatorPhone элемент управления.
     '''</summary>
     '''<remarks>
@@ -228,6 +228,24 @@ Partial Public Class PropertyDetails
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents CreatorPhone As Global.DevExpress.Web.ASPxHeadline
+
+    '''<summary>
+    '''CallButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CallButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
+    '''SendMailButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SendMailButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''DescriptionLabel элемент управления.
@@ -255,4 +273,94 @@ Partial Public Class PropertyDetails
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents Comission As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''SendMailPopup элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SendMailPopup As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''SendMailFormLayout элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SendMailFormLayout As Global.DevExpress.Web.ASPxFormLayout
+
+    '''<summary>
+    '''NameSendMail элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents NameSendMail As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''PhoneSendMail элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents PhoneSendMail As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''EmailSendMail элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents EmailSendMail As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''NoteSendMail элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents NoteSendMail As Global.DevExpress.Web.ASPxMemo
+
+    '''<summary>
+    '''SendButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SendButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
+    '''ErrorLabel элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ErrorLabel As Global.DevExpress.Web.ASPxLabel
+
+    '''<summary>
+    '''CBackSendMail элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackSendMail As Global.DevExpress.Web.ASPxCallback
+
+    '''<summary>
+    '''LoadingPanel элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 End Class

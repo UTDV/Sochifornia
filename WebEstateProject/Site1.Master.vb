@@ -7,8 +7,10 @@ Public Class Site1
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
         Dim rp = Request.Path.ToLower
+
         'записываем ГИД в КУки, чтобы определять Пользака
         If Request.Cookies("G_S") Is Nothing Then
             Dim nc As New HttpCookie("G_S")
@@ -27,21 +29,17 @@ Public Class Site1
                 End While
                 Dim id = rp.Substring(pos + 1, rp.Length - (pos + 1))
 
-                ' переделать
-                Dim strHostName As String = Dns.GetHostName()
-                Dim addresses As IPAddress() = Dns.GetHostEntry(strHostName).AddressList
 
-                Dim correctAddress As String = GetIPAddress(strHostName)
 
                 Dim cmd1 As New SqlCommand("INSERT INTO [dbo].[ViewsCount]
-                                                   (--[IP],
+                                                   ([IP],
                                                    [ObjectGUID]
                                                    ,[UserGUID])
                                              VALUES
-                                                   (--@IP,
+                                                   (@IP,
                                                    (select guid from PropertyObjects where id = @ID)
                                                    ,@UserGUID)", c)
-                cmd1.Parameters.AddWithValue("IP", addresses(1).ToString)
+                cmd1.Parameters.AddWithValue("IP", Request.Cookies("sfIP").Value)
                 cmd1.Parameters.AddWithValue("ID", id)
                 cmd1.Parameters.AddWithValue("UserGUID", WebUtility.UrlDecode(Request.Cookies("G_S").Value))
                 c.Open()
@@ -148,17 +146,7 @@ Public Class Site1
 
     End Sub
 
-    Private Function GetIPAddress(ByVal hostname As String)
 
-        Dim host As IPHostEntry = Dns.GetHostEntry(hostname)
-
-        For Each ip As IPAddress In host.AddressList
-            If ip.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
-                Return ip.ToString
-            End If
-        Next
-        Return String.Empty
-    End Function
 
 
 
