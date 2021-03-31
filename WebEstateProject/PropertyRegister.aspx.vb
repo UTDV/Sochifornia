@@ -286,7 +286,7 @@ Public Class PropertyRegister
 
 
 
-    Public Shared Function GetReducedImage(ByVal image As Image, ByVal extremeWidth As Integer, ByVal extremeHeight As Integer) As Image
+    Private Function GetReducedImage(ByVal image As Image, ByVal extremeWidth As Integer, ByVal extremeHeight As Integer) As Image
 
         Dim size As New Size(image.Width, image.Height)
 

@@ -70,7 +70,7 @@
 
     </script>
 
-
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 </head>
 
 <body>
@@ -115,6 +115,7 @@
                                                         <Items>
                                                             <dx:MenuItem Text="Персональные данные" Name="PersonalData" NavigateUrl="Users/PersonalData.aspx"  />
                                                             <dx:MenuItem Text="Список объектов" Name="PropertyRegister" NavigateUrl="PropertyRegister.aspx"  />
+                                                            <dx:MenuItem Text="Список публикаций" Name="PostsList" NavigateUrl="PostRegister.aspx" Visible="false" />
                                                             <dx:MenuItem Text="Список пользователей" Name="UsersList" NavigateUrl="Users/UsersList.aspx" Visible="false" />
                                                             <dx:MenuItem Text="Выход" Name="ExitButton" BeginGroup="true"  />
                                                         </Items>

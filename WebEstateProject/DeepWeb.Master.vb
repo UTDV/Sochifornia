@@ -56,6 +56,7 @@ Public Class DeepWeb
                 Session("Status") = userStatus
                 Session("Role") = userRole
                 Session("UserName") = userName
+                Session("UserGUID") = ticket.Name.ToString()
 
 
                 'Рисуем меню
@@ -65,6 +66,7 @@ Public Class DeepWeb
 
                 If userRole = "60" Then
                     LKMenu.Items.FindByName("UsersList").Visible = True
+                    LKMenu.Items.FindByName("PostsList").Visible = True
                 End If
 
             End If

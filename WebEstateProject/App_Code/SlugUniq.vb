@@ -12,7 +12,7 @@ Public Class SlugUniq
             SlgTxt = "Купить квартиру в Сочи вторичное недорого " + Name + " " + Dt.ToString
             SlgTxt = SlgTxt.GenerateSlug("-")
         ElseIf Type = SlugType.Post Then
-            SlgTxt = "Новости недвижимости в Сочи " + Name + " " + Dt.ToString
+            SlgTxt = Dt.ToString + " " + "Новости недвижимости в Сочи " + Name
             SlgTxt = SlgTxt.GenerateSlug("-")
         End If
 

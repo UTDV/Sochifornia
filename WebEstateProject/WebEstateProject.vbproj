@@ -52,8 +52,12 @@
       <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v20.1.Core, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v20.1.Core, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.RichEdit.v20.1.Core, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.SpellChecker.v20.1.Core, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxSpellChecker.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxThemes.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.Resources.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -105,6 +109,7 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -173,9 +178,56 @@
     <Content Include="Content\Logo\Logo2.png" />
     <Content Include="Content\notify.css" />
     <Content Include="Content\notify.min.css" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\1.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\10.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\11.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\15.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\16.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\17.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\18.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\19.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\2.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\20.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\25.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\26.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\27.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\3.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\1200x1200.0\9.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\1.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\10.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\11.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\15.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\16.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\17.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\18.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\19.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\2.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\20.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\25.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\26.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\27.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\3.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\200x200.2\9.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\1.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\10.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\11.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\15.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\16.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\17.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\18.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\19.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\2.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\20.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\25.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\26.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\27.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\3.jpeg" />
+    <Content Include="Content\Thumb\ImageGalleryThumb\42\33fc679e8de21b4ccf1916fb7f7323bc\90x90.2\9.jpeg" />
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="PostEditPage.aspx" />
+    <Content Include="PostRegister.aspx" />
     <Content Include="PropertyDetails.aspx" />
     <Content Include="PropertyRegister.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -345,6 +397,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PostEditPage.aspx.designer.vb">
+      <DependentUpon>PostEditPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostEditPage.aspx.vb">
+      <DependentUpon>PostEditPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PostRegister.aspx.designer.vb">
+      <DependentUpon>PostRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostRegister.aspx.vb">
+      <DependentUpon>PostRegister.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PropertyDetails.aspx.designer.vb">
       <DependentUpon>PropertyDetails.aspx</DependentUpon>
     </Compile>
@@ -451,6 +517,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UploadTemp\" />
+    <Folder Include="Content\PostsFoto\" />
+    <Folder Include="Content\Thumb\PostsThumb\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

@@ -226,6 +226,7 @@
 
             <dx:GridViewDataCheckColumn FieldName="Hide" Caption="Скрыто" MinWidth="100" Width="10%" PropertiesCheckEdit-AllowGrayed="false" Visible="false" />
 
+            
             <dx:GridViewDataMemoColumn FieldName="Description" Caption="Описание" MinWidth="100" Width="10%" Visible="false" >
                 <PropertiesMemoEdit Rows="7">
                     <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
@@ -234,7 +235,7 @@
                 </PropertiesMemoEdit>
             </dx:GridViewDataMemoColumn>  
             
-            <dx:GridViewDataComboBoxColumn FieldName="Posrednik"  Caption="Посредник" MinWidth="150" Width="10%" Visible="true"  PropertiesComboBox-TextFormatString ="{3} {1}" >
+            <dx:GridViewDataComboBoxColumn FieldName="Posrednik"  Caption="Посредник" MinWidth="150" Width="10%" Visible="false"  PropertiesComboBox-TextFormatString ="{3} {1}" >
                 <PropertiesComboBox DataSourceID="PosrednikDS" ValueField="ID" TextField ="Phone">
                     <Columns>
                         <dx:ListBoxColumn FieldName ="ID" ClientVisible ="false"  ></dx:ListBoxColumn>
@@ -246,7 +247,7 @@
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
 
-            <dx:GridViewDataTextColumn FieldName="Comission" Caption="Комиссия" MinWidth="120" Width="10%" AdaptivePriority="5" Visible ="true" />
+            <dx:GridViewDataTextColumn FieldName="Comission" Caption="Комиссия" MinWidth="120" Width="10%" AdaptivePriority="5" Visible ="false" />
         
         </Columns>
 
