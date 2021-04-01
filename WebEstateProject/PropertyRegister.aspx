@@ -18,10 +18,12 @@
             <Item CssClass="PropertyRegisterFontSize" />
         </StylesToolbar>
 
-        <ClientSideEvents Init="function (s,e) {  }" 
+        <ClientSideEvents 
             ToolbarItemClick="function (s,e) { 
             if(e.item.name == 'Foto') { if(PropertyRegisterGrid.GetFocusedRowIndex() == null || PropertyRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { OpenFoto(); } } 
-            if(e.item.name == 'View') { if(PropertyRegisterGrid.GetFocusedRowIndex() == null || PropertyRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { fOpenPage(s,e); } } }" 
+            if(e.item.name == 'View') { if(PropertyRegisterGrid.GetFocusedRowIndex() == null || PropertyRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { fOpenPage(s,e); } }
+            if(e.item.name == 'CustomEdit') { var redirectWindow = window.open('PropertyData.aspx?id=' + s.GetRowKey(s.GetFocusedRowIndex()) ); redirectWindow.location; }
+            }" 
             RowDblClick="function (s,e) { fOpenPage(s,e); }" />
 
         <SettingsBehavior AllowFocusedRow="true" EnableCustomizationWindow="true" ConfirmDelete="true" />
@@ -260,6 +262,7 @@
                     <dx:GridViewToolbarItem Command="Delete" BeginGroup="true" Text="Удалить" />
                     <dx:GridViewToolbarItem Name="Foto" Text="Фотографии" BeginGroup="true" Image-Url="Content/Icons/CameraIcon.png" />
                     <dx:GridViewToolbarItem Name="View" Text="Посмотреть" BeginGroup="true" Image-Url="Content/Icons/EyeIcon.png" />
+                    <dx:GridViewToolbarItem Name="CustomEdit" BeginGroup="true" Text="Редакт" />
                 </Items>
             </dx:GridViewToolbar>
         </Toolbars>

@@ -226,6 +226,7 @@
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="PropertyData.aspx" />
     <Content Include="PostEditPage.aspx" />
     <Content Include="PostRegister.aspx" />
     <Content Include="PropertyDetails.aspx" />
@@ -396,6 +397,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PropertyData.aspx.designer.vb">
+      <DependentUpon>PropertyData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyData.aspx.vb">
+      <DependentUpon>PropertyData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PostEditPage.aspx.designer.vb">
       <DependentUpon>PostEditPage.aspx</DependentUpon>
