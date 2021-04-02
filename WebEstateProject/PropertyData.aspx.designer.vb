@@ -266,6 +266,15 @@ Partial Public Class PropertyData
     Protected WithEvents HideCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
+    '''SaveButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SaveButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
     '''PosrednikDS элемент управления.
     '''</summary>
     '''<remarks>
@@ -345,4 +354,31 @@ Partial Public Class PropertyData
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents PropertyDataDS As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SuccessSavePopup элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents SuccessSavePopup As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''CBackSave элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackSave As Global.DevExpress.Web.ASPxCallback
+
+    '''<summary>
+    '''LoadingPanel элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 End Class

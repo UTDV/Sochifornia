@@ -7,12 +7,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
 
     <dx:ASPxGridView ID="PropertyRegisterGrid" ClientInstanceName="PropertyRegisterGrid" runat="server" Width="100%" Style="margin-bottom:20px"    
         DataSourceID="PropertyRegisterDS" KeyFieldName="ID" AutoGenerateColumns="False" Styles-Cell-Paddings-Padding="5px" CssClass="PropertyRegisterFontSize"   
         Settings-AutoFilterCondition="Contains"  SettingsBehavior-AllowEllipsisInText="true" OnRowDeleted="PropertyRegisterGrid_RowDeleted" 
-        Styles-Header-Wrap="True" OnRowInserting="PropertyRegisterGrid_RowInserting" OnRowUpdating="PropertyRegisterGrid_RowUpdating" >
+        Styles-Header-Wrap="True" >
 
         <StylesToolbar>
             <Item CssClass="PropertyRegisterFontSize" />
@@ -20,7 +19,7 @@
 
         <ClientSideEvents 
             ToolbarItemClick="function (s,e) { 
-            if(e.item.name == 'Foto') { if(PropertyRegisterGrid.GetFocusedRowIndex() == null || PropertyRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { OpenFoto(); } } 
+            if(e.item.name == 'CustomNew') { LoadingPanel.Show(); CBackCreateNewObject.PerformCallback(); } 
             if(e.item.name == 'View') { if(PropertyRegisterGrid.GetFocusedRowIndex() == null || PropertyRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { fOpenPage(s,e); } }
             if(e.item.name == 'CustomEdit') { var redirectWindow = window.open('PropertyData.aspx?id=' + s.GetRowKey(s.GetFocusedRowIndex()) ); redirectWindow.location; }
             }" 
@@ -41,6 +40,8 @@
         <SettingsAdaptivity AdaptivityMode="HideDataCells" AllowOnlyOneAdaptiveDetailExpanded="true" AllowHideDataCellsByColumnMinWidth="true"  />
 
         <SettingsSearchPanel Visible="true" />
+
+        <SettingsDataSecurity AllowDelete="true" AllowEdit="false" AllowInsert="false" />
 
         <EditFormLayoutProperties ColumnCount="3" >
             <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="1000" />
@@ -257,12 +258,10 @@
             <dx:GridViewToolbar SettingsAdaptivity-EnableCollapseRootItemsToIcons="true">
                 <Items>                    
                     <dx:GridViewToolbarItem Command="Refresh" Text="Обновить" />
-                    <dx:GridViewToolbarItem Command="New" BeginGroup="true" Text="Добавить" />
-                    <dx:GridViewToolbarItem Command="Edit" BeginGroup="true" Text="Редактировать" />
+                    <dx:GridViewToolbarItem Name="CustomNew" BeginGroup="true" Text="Добавить" Image-Url="Content/Icons/plus.png" />
+                    <dx:GridViewToolbarItem Name="CustomEdit" BeginGroup="true" Text="Редактировать" Image-Url="Content/Icons/pencil.png" />
                     <dx:GridViewToolbarItem Command="Delete" BeginGroup="true" Text="Удалить" />
-                    <dx:GridViewToolbarItem Name="Foto" Text="Фотографии" BeginGroup="true" Image-Url="Content/Icons/CameraIcon.png" />
-                    <dx:GridViewToolbarItem Name="View" Text="Посмотреть" BeginGroup="true" Image-Url="Content/Icons/EyeIcon.png" />
-                    <dx:GridViewToolbarItem Name="CustomEdit" BeginGroup="true" Text="Редакт" />
+                    <dx:GridViewToolbarItem Name="View" Text="Посмотреть" BeginGroup="true" Image-Url="Content/Icons/EyeIcon.png" />                    
                 </Items>
             </dx:GridViewToolbar>
         </Toolbars>
@@ -365,14 +364,11 @@
 
     <asp:SqlDataSource ID="PropertyRegisterDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
         
-        SelectCommand="exec dbo.PropertyRegister @GUID" 
-        
-        InsertCommand=" " 
+        SelectCommand="exec dbo.PropertyRegister @GUID"        
+
         
         DeleteCommand="delete from [dbo].[PropertyObjects] where ID = @ID
-                       delete from [dbo].[PropertyObjectsMetaData] where ObjectID = @ID " 
-        
-        UpdateCommand=" " >
+                       delete from [dbo].[PropertyObjectsMetaData] where ObjectID = @ID " >
 
         <SelectParameters>
             <asp:SessionParameter Name="GUID" SessionField="GUID" DbType="Guid" />
@@ -386,66 +382,15 @@
  
     
 
-    <dx:ASPxPopupControl ID="FotoPopup" ClientInstanceName="FotoPopup" runat="server" Modal="true"  
-        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" HeaderText="" AllowDragging="true"
-        AutoUpdatePosition="true" HeaderStyle-HorizontalAlign="Center" ShowCloseButton="true" CloseAction="CloseButton">
-        
-        <ClientSideEvents Closing="function(s,e){ FileManager.SetCurrentFolderPath('Foto'); HiddenField.Set('OpenFotoID', ''); }" />
+    <dx:ASPxCallback ID="CBackCreateNewObject" ClientInstanceName="CBackCreateNewObject" runat="server" OnCallback="CBackCreateNewObject_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ CBackCreateNewObjectResult(e.result); }" />
+    </dx:ASPxCallback>
 
-        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowCenter" MaxWidth="900px"  />
-        
-        <ContentStyle Paddings-Padding="20px" />
+    <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" Text="Создание..." />
 
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server">
-
-                <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" OnCustomCallback="FileManager_CustomCallback"      
-                    OnFilesUploaded="FileManager_FilesUploaded" OnItemsDeleted="FileManager_ItemsDeleted" OnFileUploading="FileManager_FileUploading">
-
-                    <ClientSideEvents FilesUploaded="function(s,e){ PropertyRegisterGrid.Refresh(); }" 
-                        ItemsDeleted="function(s,e){ PropertyRegisterGrid.Refresh(); }" 
-                        SelectionChanged="function(s,e){ SelectionChanged(); }" 
-                        CustomCommand="function(s,e){ if(e.commandName == 'CstmBtn'){ FileManager.PerformCallback(FileManager.GetSelectedFile().imageSrc); } }" 
-                        EndCallback="function(s,e){ SelectionChanged(); }" />
-
-                    <Settings RootFolder="~/Content/Foto" ThumbnailFolder="~\Content\Thumb\PropertyRegisterThumb"  AllowedFileExtensions=".jpg,.jpeg,.png" EnableMultiSelect="true" />
-                    <SettingsFolders Visible="false" />
-                    <SettingsEditing AllowDelete="true" AllowRename="true" AllowDownload="true" />
-                    <SettingsAdaptivity Enabled="true" />
-                    <SettingsToolbar ShowFilterBox="false" ShowPath="false" >                        
-                        <Items>
-                            <dx:FileManagerToolbarRefreshButton />
-                            <dx:FileManagerToolbarDeleteButton />
-                            <dx:FileManagerToolbarDownloadButton />
-                            <dx:FileManagerToolbarUploadButton BeginGroup="true" Text="Загрузить" />
-                            <dx:FileManagerToolbarCustomButton BeginGroup="true" Text="Назначить главное фото" CommandName="CstmBtn" ItemStyle-VerticalAlign="Middle" ClientEnabled="false" />
-                        </Items>
-                    </SettingsToolbar>
-                    <SettingsUpload AdvancedModeSettings-EnableMultiSelect="true" AutoStartUpload="true" UseAdvancedUploadMode="true" ShowUploadPanel="false"/>
-                    <SettingsContextMenu Enabled="true" />
-
-                </dx:ASPxFileManager>
-
-
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-    </dx:ASPxPopupControl>
-
+    
 
     <script type="text/javascript">
-
-        function OpenFoto() {
-            HiddenField.Set("OpenFotoID", PropertyRegisterGrid.GetRowKey(PropertyRegisterGrid.GetFocusedRowIndex()))
-            FileManager.SetCurrentFolderPath(HiddenField.Get("OpenFotoID"));
-            FotoPopup.Show();
-            PropertyRegisterGrid.GetRowValues(PropertyRegisterGrid.GetFocusedRowIndex(), 'Name', fCheckCF)
-        }
-
-        function fCheckCF(vl) {
-
-            FotoPopup.SetHeaderText(vl)
-              
-        }
 
         function fOpenPage(s, e) {
             PropertyRegisterGrid.GetRowValues(PropertyRegisterGrid.GetFocusedRowIndex(), 'slug', fRedirect)
@@ -457,17 +402,22 @@
             redirectWindow.location;
         }
 
-        function SelectionChanged() {
-            if (FileManager.GetSelectedItems().length == 1) {
-                FileManager.GetToolbar(0).GetItemByName('CstmBtn').SetEnabled(1);
+
+        function CBackCreateNewObjectResult(vl) {
+
+            LoadingPanel.Hide();
+            PropertyRegisterGrid.Refresh();
+
+            if (vl == '0') {
+                alert('Что-то пошло не так... Попробуйте еще раз или обратитесь к разработчику');
             }
-            else {
-                FileManager.GetToolbar(0).GetItemByName('CstmBtn').SetEnabled(0);
+            else if (vl.startsWith('1') == true) {
+                var redirectWindow = window.open('PropertyData.aspx?id=' + vl.substring(2));
+                redirectWindow.location;
             }
         }
 
     </script>
-
 
 
 </asp:Content>

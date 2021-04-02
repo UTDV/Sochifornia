@@ -5,12 +5,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <dx:ASPxFormLayout ID="PropertyDataForm" ClientInstanceName="PropertyDataForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingTop="10" DataSourceID="PropertyDataDS" >
-        <SettingsAdaptivity SwitchToSingleColumnAtWindowInnerWidth="900" >            
+        <SettingsAdaptivity SwitchToSingleColumnAtWindowInnerWidth="850" >            
             <GridSettings >
                 <Breakpoints>
                     <dx:LayoutBreakpoint MaxWidth="3000" ColumnCount="3" Name="L" />
-                    <dx:LayoutBreakpoint MaxWidth="2000" ColumnCount="2" Name="M" />
-                    <dx:LayoutBreakpoint MaxWidth="1000" ColumnCount="1" Name="S" />
+                    <dx:LayoutBreakpoint MaxWidth="1200" ColumnCount="2" Name="M" />
+                    <dx:LayoutBreakpoint MaxWidth="800" ColumnCount="1" Name="S" />
                 </Breakpoints>
             </GridSettings>
         </SettingsAdaptivity>
@@ -31,13 +31,15 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="320">
-
-                                            <ClientSideEvents FilesUploaded="function(s,e){  }"
-                                                ItemsDeleted="function(s,e){  }"
-                                                SelectionChanged="function(s,e){  }"
-                                                CustomCommand="function(s,e){  }"
-                                                EndCallback="function(s,e){  }" />
+                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="320" 
+                                            OnCustomCallback="FileManager_CustomCallback" OnFilesUploaded="FileManager_FilesUploaded" OnItemsDeleted="FileManager_ItemsDeleted" 
+                                            OnFileUploading="FileManager_FileUploading" >
+                                            
+                                            <SettingsAdaptivity Enabled="true" EnableCollapseFolderContainer="true" CollapseFolderContainerAtWindowInnerWidth="900" />
+                                            
+                                            <ClientSideEvents SelectionChanged="function(s,e){ SelectionChanged(); }"
+                                                CustomCommand="function(s,e){ if(e.commandName == 'CstmBtn'){ FileManager.PerformCallback(FileManager.GetSelectedFile().imageSrc); } }"
+                                                EndCallback="function(s,e){ SelectionChanged(); }" />
 
                                             <Settings ThumbnailFolder="~\Content\Thumb\PropertyRegisterThumb" AllowedFileExtensions=".jpg,.jpeg,.png" EnableMultiSelect="true" />
                                             <SettingsFolders Visible="false" />
@@ -45,11 +47,11 @@
                                             <SettingsAdaptivity Enabled="true" />
                                             <SettingsToolbar ShowFilterBox="false" ShowPath="false">
                                                 <Items>
-                                                    <dx:FileManagerToolbarRefreshButton />
-                                                    <dx:FileManagerToolbarDeleteButton />
-                                                    <dx:FileManagerToolbarDownloadButton />
-                                                    <dx:FileManagerToolbarUploadButton BeginGroup="true" Text="Загрузить" />
-                                                    <dx:FileManagerToolbarCustomButton BeginGroup="true" Text="Назначить главное фото" CommandName="CstmBtn" ItemStyle-VerticalAlign="Middle" ClientEnabled="false" />
+                                                    <dx:FileManagerToolbarRefreshButton AdaptivePriority="0" />
+                                                    <dx:FileManagerToolbarDeleteButton AdaptivePriority="2" />
+                                                    <dx:FileManagerToolbarDownloadButton AdaptivePriority="3" />
+                                                    <dx:FileManagerToolbarUploadButton BeginGroup="true" AdaptivePriority="1" />
+                                                    <dx:FileManagerToolbarCustomButton BeginGroup="true" Text="Назначить главное фото" CommandName="CstmBtn" ItemStyle-VerticalAlign="Middle" ClientEnabled="false" AdaptivePriority="4" />
                                                 </Items>
                                             </SettingsToolbar>
                                             <SettingsUpload AdvancedModeSettings-EnableMultiSelect="true" AutoStartUpload="true" UseAdvancedUploadMode="true" ShowUploadPanel="false" />
@@ -71,7 +73,10 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="5" Border-BorderStyle="None"></dx:ASPxMemo>
+                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="5" Border-BorderStyle="None">
+                                            <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                                RequiredField-IsRequired="true" RequiredField-ErrorText="Заполните описание" ErrorFrameStyle-Font-Size="Smaller"/>                                            
+                                        </dx:ASPxMemo>
 
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
@@ -95,7 +100,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxMemo ID="NameMemo" ClientInstanceName="NameMemo" runat="server" Width="100%" Rows="3"></dx:ASPxMemo>
+                                <dx:ASPxMemo ID="NameMemo" ClientInstanceName="NameMemo" runat="server" Width="100%" Rows="3">
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom"
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxMemo>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -105,7 +113,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="TypeCB" ClientInstanceName="TypeCB" runat="server" Width="100%" DataSourceID="TypeDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="TypeCB" ClientInstanceName="TypeCB" runat="server" Width="100%" DataSourceID="TypeDS" ValueField="ID" TextField="MetaName" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxComboBox>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -115,7 +126,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="DistrictCB" ClientInstanceName="DistrictCB" runat="server" Width="100%" DataSourceID="DistrictDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="DistrictCB" ClientInstanceName="DistrictCB" runat="server" Width="100%" DataSourceID="DistrictDS" ValueField="ID" TextField="MetaName" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxComboBox>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -136,7 +150,10 @@
                             <dx:LayoutItemNestedControlContainer runat="server">
 
                                 <dx:ASPxSpinEdit ID="PriceSpin" ClientInstanceName="PriceSpin" runat="server" Width="100%" NumberFormat="Currency" DisplayFormatInEditMode="true"
-                                    SpinButtons-ShowIncrementButtons="false" DisplayFormatString="C0" />
+                                    SpinButtons-ShowIncrementButtons="false" DisplayFormatString="C0" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxSpinEdit>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -146,7 +163,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxSpinEdit ID="ApartmentAreaSpin" ClientInstanceName="ApartmentAreaSpin" runat="server" Width="100%" NumberType="Float" SpinButtons-ShowIncrementButtons="false" />
+                                <dx:ASPxSpinEdit ID="ApartmentAreaSpin" ClientInstanceName="ApartmentAreaSpin" runat="server" Width="100%" NumberType="Float" SpinButtons-ShowIncrementButtons="false" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxSpinEdit>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -156,7 +176,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="StatusCB" ClientInstanceName="StatusCB" runat="server" Width="100%" DataSourceID="StatusDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="StatusCB" ClientInstanceName="StatusCB" runat="server" Width="100%" DataSourceID="StatusDS" ValueField="ID" TextField="MetaName" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxComboBox>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -166,7 +189,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="ConditionCB" ClientInstanceName="ConditionCB" runat="server" Width="100%" DataSourceID="ConditionDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="ConditionCB" ClientInstanceName="ConditionCB" runat="server" Width="100%" DataSourceID="ConditionDS" ValueField="ID" TextField="MetaName" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxComboBox>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -176,7 +202,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="RegistrationCB" ClientInstanceName="RegistrationCB" runat="server" Width="100%" DataSourceID="RegistrationDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="RegistrationCB" ClientInstanceName="RegistrationCB" runat="server" Width="100%" DataSourceID="RegistrationDS" ValueField="ID" TextField="MetaName" >
+                                    <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                        RequiredField-IsRequired="true" RequiredField-ErrorText="Обязательное поле" ErrorFrameStyle-Font-Size="Smaller"/>
+                                </dx:ASPxComboBox>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -186,7 +215,7 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="StoveCB" ClientInstanceName="StoveCB" runat="server" Width="100%" DataSourceID="StoveDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="StoveCB" ClientInstanceName="StoveCB" runat="server" Width="100%" DataSourceID="StoveDS" ValueField="ID" TextField="MetaName" AllowNull="true" />
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -206,7 +235,7 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxComboBox ID="WindowViewCB" ClientInstanceName="WindowViewCB" runat="server" Width="100%" DataSourceID="WindowViewDS" ValueField="ID" TextField="MetaName" />
+                                <dx:ASPxComboBox ID="WindowViewCB" ClientInstanceName="WindowViewCB" runat="server" Width="100%" DataSourceID="WindowViewDS" ValueField="ID" TextField="MetaName" AllowNull="true" />
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -277,7 +306,7 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxDateEdit ID="ActualUntilDE" ClientInstanceName="ActualUntilDE" runat="server" Width="100%" NullText="По умолчанию +1 месяц"></dx:ASPxDateEdit>
+                                <dx:ASPxDateEdit ID="ActualUntilDE" ClientInstanceName="ActualUntilDE" runat="server" Width="100%" NullText="По умолчанию +1 месяц" AllowNull="false"></dx:ASPxDateEdit>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -355,6 +384,18 @@
                             <dx:LayoutItemNestedControlContainer runat="server">
 
                                 <dx:ASPxCheckBox ID="HideCheckBox" ClientInstanceName="HideCheckBox" runat="server" AllowGrayed="false" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" ParentContainerStyle-Paddings-PaddingTop="20">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxButton ID="SaveButton" ClientInstanceName="SaveButton" runat="server" AutoPostBack="false" Text="Сохранить" >
+                                    <ClientSideEvents Click="function(s,e){ SaveButtonClick();  }" />
+                                </dx:ASPxButton>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -467,5 +508,59 @@
             <asp:QueryStringParameter Name="ID" QueryStringField="id" />
         </SelectParameters>
     </asp:SqlDataSource>
+
+
+    <dx:ASPxPopupControl ID="SuccessSavePopup" ClientInstanceName="SuccessSavePopup" runat="server" ShowHeader="false" CloseAction="OuterMouseClick"
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" BackColor="#ccffcc" Border-BorderColor="#ccffcc" >
+        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowCenter" MaxWidth="300" MaxHeight="100" />
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">
+
+                <div class="row" style="justify-content:center; vertical-align:middle; color:#003300">
+                    Данные успешно сохранены!
+                </div>                            
+
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+
+
+    <dx:ASPxCallback ID="CBackSave" ClientInstanceName="CBackSave" runat="server" OnCallback="CBackSave_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ CBackSaveResult(e.result); }" />
+    </dx:ASPxCallback>
+
+    <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" Text="Сохранение..." />
+
+    <script type="text/javascript">
+
+        function SelectionChanged() {
+            if (FileManager.GetSelectedItems().length == 1) {
+                FileManager.GetToolbar(0).GetItemByName('CstmBtn').SetEnabled(1);
+            }
+            else {
+                FileManager.GetToolbar(0).GetItemByName('CstmBtn').SetEnabled(0);
+            }
+        }
+
+        function CBackSaveResult(vl) {
+            LoadingPanel.Hide();
+            if (vl == 0) {
+                alert('Что-то пошло не так... Попробуйте еще раз или обратитесь к разработчику');
+            }
+            else if (vl == 1) {
+                SuccessSavePopup.Show();
+            }
+        }
+
+        function SaveButtonClick() {
+
+            if (DescriptionMemo.isValid && NameMemo.isValid && TypeCB.isValid && DistrictCB.isValid && PriceSpin.isValid && ApartmentAreaSpin.isValid && StatusCB.isValid && ConditionCB.isValid && RegistrationCB.isValid) {
+                LoadingPanel.Show();
+                CBackSave.PerformCallback();
+            }           
+
+        }
+
+    </script>
 
 </asp:Content>

@@ -248,6 +248,15 @@ Partial Public Class PropertyDetails
     Protected WithEvents SendMailButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
+    '''EditButton элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents EditButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
     '''DescriptionLabel элемент управления.
     '''</summary>
     '''<remarks>
@@ -354,6 +363,15 @@ Partial Public Class PropertyDetails
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents CBackSendMail As Global.DevExpress.Web.ASPxCallback
+
+    '''<summary>
+    '''CBackEditObject элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackEditObject As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''LoadingPanel элемент управления.

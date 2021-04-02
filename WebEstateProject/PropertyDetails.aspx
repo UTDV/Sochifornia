@@ -258,6 +258,18 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
+                    <dx:LayoutItem ShowCaption="False" ParentContainerStyle-Paddings-PaddingTop="10" Name="EditButtonItem" Visible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxButton ID="EditButton" runat="server" Text="Редактировать" AutoPostBack="false" Width="200" RenderMode="Secondary" Image-Url="~/Content/Icons/pencil.png">
+                                    <ClientSideEvents Click="function(s,e){ CBackEditObject.PerformCallback(); }" />
+                                </dx:ASPxButton>
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
                 </Items>
 
             </dx:LayoutGroup>
@@ -390,6 +402,10 @@
         <ClientSideEvents CallbackComplete="function(s,e){ CBackSendMailResult(e.result); }" />
     </dx:ASPxCallback>
 
+    <dx:ASPxCallback ID="CBackEditObject" ClientInstanceName="CBackEditObject" runat="server" OnCallback="CBackEditObject_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ CBackEditObjectResult(e.result); }" />
+    </dx:ASPxCallback>
+
     <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" />
 
     <script type="text/javascript">
@@ -431,6 +447,11 @@
                 ErrorLabel.SetText('Что-то пошло не так. Попробуйте еще раз.');
                 SendMailFormLayout.GetItemByName('ErrorLabelItem').SetVisible(1);
             }
+        }
+
+        function CBackEditObjectResult(vl) {
+            var redirectWindow = window.open('/PropertyData.aspx?id=' + vl);
+            redirectWindow.location;
         }
 
     </script>

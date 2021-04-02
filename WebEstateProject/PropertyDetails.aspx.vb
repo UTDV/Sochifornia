@@ -128,25 +128,30 @@ Public Class PropertyDetails
             End If
 
 
-            'отображение служебной информации
+            'отображение служебной информации и кнопки редактирования
             If Request.IsAuthenticated = True Then
+
                 FormLayout.FindItemOrGroupByName("ServiceInfo").Visible = True
 
                 If Session("Role") = "60" Or Session("Role") = "69" Then
+
                     If Comission.Text.Length > 0 Then
                         FormLayout.FindItemOrGroupByName("Comiss").Visible = True
-
                     End If
 
                 End If
 
                 If UserGUID = Session("UserGUID") Then
+
                     If Posrednik.Text.Length > 0 Then
                         FormLayout.FindItemOrGroupByName("Posr").Visible = True
                     End If
 
                 End If
 
+                If Session("Status") = "64" And (UserGUID = Session("UserGUID") Or Session("Role") = "60") Then
+                    FormLayout.FindItemOrGroupByName("EditButtonItem").Visible = True
+                End If
 
             End If
 
@@ -191,6 +196,21 @@ Public Class PropertyDetails
         Catch ex As Exception
             e.Result = 0
         End Try
+
+    End Sub
+
+    'Получаем ID объекта
+    Protected Sub CBackEditObject_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
+
+        Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
+        Dim cmd As New SqlCommand("Select id from PropertyObjects where slug = @slug", c)
+        cmd.Parameters.AddWithValue("slug", Page.RouteData.Values("id"))
+        c.Open()
+        Dim objID As Integer = cmd.ExecuteScalar
+        c.Close()
+        cmd.Dispose()
+
+        e.Result = objID.ToString
 
     End Sub
 

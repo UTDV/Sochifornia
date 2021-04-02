@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class PropertyRegister
 
     '''<summary>
-    '''HiddenField элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents HiddenField As Global.DevExpress.Web.ASPxHiddenField
-
-    '''<summary>
     '''PropertyRegisterGrid элемент управления.
     '''</summary>
     '''<remarks>
@@ -113,20 +104,20 @@ Partial Public Class PropertyRegister
     Protected WithEvents PropertyRegisterDS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''FotoPopup элемент управления.
+    '''CBackCreateNewObject элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents FotoPopup As Global.DevExpress.Web.ASPxPopupControl
+    Protected WithEvents CBackCreateNewObject As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
-    '''FileManager элемент управления.
+    '''LoadingPanel элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents FileManager As Global.DevExpress.Web.ASPxFileManager
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 End Class
