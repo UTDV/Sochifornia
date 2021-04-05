@@ -237,16 +237,17 @@ Public Class PropertyData
                                                 Stove = @Stove,
                                                 Ipoteka = isnull(@Ipoteka,0),
                                                 ToSea = @ToSea,
-                                                Sale = isnull(@Sale,0),
+                                                --Sale = isnull(@Sale,0),
                                                 Description = @Description,
                                                 VIP = isnull(@VIP,0),
                                                 ElitProperty = isnull(@ElitProperty,0),
                                                 ActualUntil = @ActualUntil,
-                                                Hide = isnull(@Hide,0),
+                                                --Hide = isnull(@Hide,0),
                                                 LastUpdate = getdate(),
                                                 Slug = @Slug,
                                                 Posrednik = @Posrednik,
-                                                Comission = @Comission
+                                                Comission = @Comission,
+                                                AdStatus = iif(@ActualUntil < convert(date, getdate()), 76, @AdStatus)
                                             where ID = @ID
 
 
@@ -293,16 +294,17 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("Stove", IIf(StoveCB.Value = Nothing, DBNull.Value, StoveCB.Value))
             cmd.Parameters.AddWithValue("Ipoteka", IIf(IpotekaCheckBox.Value = Nothing, DBNull.Value, IpotekaCheckBox.Value))
             cmd.Parameters.AddWithValue("ToSea", IIf(ToSeaSpin.Value = Nothing, DBNull.Value, ToSeaSpin.Value))
-            cmd.Parameters.AddWithValue("Sale", IIf(SaleCheckBox.Value = Nothing, DBNull.Value, SaleCheckBox.Value))
+            'cmd.Parameters.AddWithValue("Sale", IIf(SaleCheckBox.Value = Nothing, DBNull.Value, SaleCheckBox.Value))
             cmd.Parameters.AddWithValue("Description", DescriptionMemo.Text)
             cmd.Parameters.AddWithValue("VIP", IIf(VIPCheckBox.Value = Nothing, DBNull.Value, VIPCheckBox.Value))
             cmd.Parameters.AddWithValue("ElitProperty", IIf(ElitPropertyCheckBox.Value = Nothing, DBNull.Value, ElitPropertyCheckBox.Value))
             cmd.Parameters.AddWithValue("ActualUntil", ActualUntilDE.Value)
-            cmd.Parameters.AddWithValue("Hide", IIf(HideCheckBox.Value = Nothing, DBNull.Value, HideCheckBox.Value))
+            'cmd.Parameters.AddWithValue("Hide", IIf(HideCheckBox.Value = Nothing, DBNull.Value, HideCheckBox.Value))
             cmd.Parameters.AddWithValue("Price", PriceSpin.Value)
             cmd.Parameters.AddWithValue("Slug", slugTxt)
             cmd.Parameters.AddWithValue("Posrednik", IIf(PosrednikCB.Value = Nothing, DBNull.Value, PosrednikCB.Value))
             cmd.Parameters.AddWithValue("Comission", IIf(ComissionTB.Value = Nothing, DBNull.Value, ComissionTB.Text))
+            cmd.Parameters.AddWithValue("AdStatus", AdStatusCB.Value)
 
             c.Open()
             Dim res As Integer = cmd.ExecuteScalar

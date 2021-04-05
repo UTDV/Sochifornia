@@ -86,8 +86,8 @@ Public Class PropertyDetails
                 CreatorPhone.NavigateUrl = "tel:+" + RDR("CreatorPhone").ToString
                 HiddenField("CreatorEmail") = RDR("CreatorEmail").ToString
 
-                If RDR("ActualStatus").ToString <> "Актуально" Then
-                    ActualStatusHeadline.HeaderText = RDR("ActualStatus").ToString.ToUpper
+                If RDR("ADStatus").ToString <> "Опубликовано" Then
+                    ActualStatusHeadline.HeaderText = RDR("ADStatus").ToString.ToUpper
                 End If
             End If
             RDR.Close()

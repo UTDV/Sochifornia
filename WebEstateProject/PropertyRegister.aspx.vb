@@ -236,8 +236,8 @@ Public Class PropertyRegister
 
             Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
-            Dim cmd As New SqlCommand("insert into [dbo].[PropertyObjects] (Creator, GUID, Ipoteka, Sale, VIP, ElitProperty, Hide, LastUpdate, ActualUntil)
-                                   values (@Creator, @GUID, 0, 0, 0, 0, 0, getdate(), convert(date, dateadd(m, 1, getdate())))
+            Dim cmd As New SqlCommand("insert into [dbo].[PropertyObjects] (Creator, GUID, Ipoteka, VIP, ElitProperty, LastUpdate, ActualUntil, AdStatus)
+                                   values (@Creator, @GUID, 0, 0, 0, getdate(), convert(date, dateadd(m, 1, getdate())), 72)
 
                                    select ID from [dbo].[PropertyObjects] where GUID = @GUID
                                    ", c)

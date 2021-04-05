@@ -41,6 +41,15 @@ Partial Public Class PropertyData
     Protected WithEvents DescriptionMemo As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
+    '''AdStatusCB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents AdStatusCB As Global.DevExpress.Web.ASPxComboBox
+
+    '''<summary>
     '''NameMemo элемент управления.
     '''</summary>
     '''<remarks>
@@ -248,24 +257,6 @@ Partial Public Class PropertyData
     Protected WithEvents ElitPropertyCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
-    '''SaleCheckBox элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents SaleCheckBox As Global.DevExpress.Web.ASPxCheckBox
-
-    '''<summary>
-    '''HideCheckBox элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents HideCheckBox As Global.DevExpress.Web.ASPxCheckBox
-
-    '''<summary>
     '''SaveButton элемент управления.
     '''</summary>
     '''<remarks>
@@ -273,6 +264,15 @@ Partial Public Class PropertyData
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents SaveButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
+    '''AdStatusDS элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents AdStatusDS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''PosrednikDS элемент управления.

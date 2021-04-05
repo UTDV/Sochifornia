@@ -4,6 +4,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+
+
+
     <dx:ASPxFormLayout ID="PropertyDataForm" ClientInstanceName="PropertyDataForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingTop="10" DataSourceID="PropertyDataDS" >
         <SettingsAdaptivity SwitchToSingleColumnAtWindowInnerWidth="850" >            
             <GridSettings >
@@ -96,6 +99,19 @@
                 </SpanRules>
                 <Items>
 
+                    <dx:LayoutItem FieldName="AdStatus" Caption="Объявление">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxComboBox ID="AdStatusCB" ClientInstanceName="AdStatusCB" runat="server" Width="100%" DataSourceID="AdStatusDS" ValueField="ID" TextField="MetaName" 
+                                    AllowNull="false" Border-BorderWidth="3"   >
+                                  <ClientSideEvents ValueChanged="function(s,e){ AdStatusColor(s.GetText()); }" Init="function(s,e){ AdStatusColor(s.GetText()); }" />
+                                </dx:ASPxComboBox>
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
                     <dx:LayoutItem FieldName="Name" Caption="Название">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
@@ -172,7 +188,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem FieldName="Status" Caption="Статус">
+                    <dx:LayoutItem FieldName="Status" Caption="Статус объекта">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -306,7 +322,9 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
-                                <dx:ASPxDateEdit ID="ActualUntilDE" ClientInstanceName="ActualUntilDE" runat="server" Width="100%" NullText="По умолчанию +1 месяц" AllowNull="false"></dx:ASPxDateEdit>
+                                <dx:ASPxDateEdit ID="ActualUntilDE" ClientInstanceName="ActualUntilDE" runat="server" Width="100%" NullText="По умолчанию +1 месяц" AllowNull="false">
+                                    <ClientSideEvents DateChanged="function(s,e){ ActualUntilChange(); }" />
+                                </dx:ASPxDateEdit>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -369,7 +387,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem FieldName="Sale" Caption="Продано">
+<%--                    <dx:LayoutItem FieldName="Sale" Caption="Продано">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -387,7 +405,7 @@
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
+                    </dx:LayoutItem>--%>
 
                     <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" ParentContainerStyle-Paddings-PaddingTop="20">
                         <LayoutItemNestedControlCollection>
@@ -409,6 +427,18 @@
 
         </Items>
     </dx:ASPxFormLayout>
+
+
+    <asp:SqlDataSource ID="AdStatusDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
+        SelectCommand=" SELECT ID, MetaName
+                        FROM [dbo].[PropertyMetaNames]
+                        where MetaCategory = @Category
+                          and NoShow = 0 
+                        order by OrderBy" >
+        <SelectParameters>
+            <asp:Parameter Name="Category" DefaultValue="Статус объявления"  DbType="String"  />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="PosrednikDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
         SelectCommand=" SELECT ID, FirstName, LastName, Phone
@@ -531,6 +561,10 @@
 
     <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" Text="Сохранение..." />
 
+
+
+
+
     <script type="text/javascript">
 
         function SelectionChanged() {
@@ -559,6 +593,47 @@
                 CBackSave.PerformCallback();
             }           
 
+        }
+
+        //Корректировка цвета в зависимости от статуса объявления
+        function AdStatusColor(vl) {
+
+            var cmbElement = AdStatusCB.GetMainElement();
+
+            if (vl == 'Опубликовано') {
+                cmbElement.style.borderColor = '#1DD300	';
+            }
+            else if (vl == 'Черновик') {
+                cmbElement.style.borderColor = 'Gray';
+            }
+            else if (vl == 'Продано') {
+                cmbElement.style.borderColor = '#FFE400';
+            }
+            else {
+                cmbElement.style.borderColor = '#FF3100	';
+            }
+        }
+
+        //Корректирвока статуса объявления в зависимости от изменения актуальности
+        function ActualUntilChange() {
+
+            var now = new Date().toLocaleDateString();
+            var dt = ActualUntilDE.GetValue().toLocaleDateString();
+
+            if (dt < now) {
+                AdStatusCB.SetValue(76);                
+            }
+            else {
+                if (AdStatusCB.GetValue() != 73) {
+                    if (confirm('Исправить статус объявления на ОПУБЛИКОВАН?')) {
+                        AdStatusCB.SetValue(73);
+                    }
+                    else {
+                        AdStatusCB.SetValue(72);
+                    }
+                }               
+            }
+            AdStatusColor(AdStatusCB.GetText());
         }
 
     </script>
