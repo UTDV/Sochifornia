@@ -589,8 +589,17 @@
         function SaveButtonClick() {
 
             if (DescriptionMemo.isValid && NameMemo.isValid && TypeCB.isValid && DistrictCB.isValid && PriceSpin.isValid && ApartmentAreaSpin.isValid && StatusCB.isValid && ConditionCB.isValid && RegistrationCB.isValid) {
-                LoadingPanel.Show();
-                CBackSave.PerformCallback();
+
+                var n = new Date().toLocaleDateString();
+                var d = ActualUntilDE.GetValue().toLocaleDateString();
+
+                if (AdStatusCB.GetText() == 'Опубликовано' && d < n) {
+                    alert('Невозможно опубликовать объявление: истек срок актуальности');
+                }
+                else {
+                    LoadingPanel.Show();
+                    CBackSave.PerformCallback();
+                }                
             }           
 
         }
@@ -635,6 +644,9 @@
             }
             AdStatusColor(AdStatusCB.GetText());
         }
+
+
+
 
     </script>
 

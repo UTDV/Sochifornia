@@ -229,6 +229,8 @@
     <Content Include="Content\Fonts\caveat-v10-latin_cyrillic-regular.woff2" />
     <Content Include="DeepWeb.Master" />
     <None Include="My Project\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="My Project\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

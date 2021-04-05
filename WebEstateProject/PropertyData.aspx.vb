@@ -247,7 +247,7 @@ Public Class PropertyData
                                                 Slug = @Slug,
                                                 Posrednik = @Posrednik,
                                                 Comission = @Comission,
-                                                AdStatus = iif(@ActualUntil < convert(date, getdate()), 76, @AdStatus)
+                                                AdStatus = @AdStatus
                                             where ID = @ID
 
 
