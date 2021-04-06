@@ -140,15 +140,6 @@ Partial Public Class PropertyData
     Protected WithEvents StoveCB As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
-    '''StreetTB элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents StreetTB As Global.DevExpress.Web.ASPxTextBox
-
-    '''<summary>
     '''WindowViewCB элемент управления.
     '''</summary>
     '''<remarks>
@@ -201,6 +192,69 @@ Partial Public Class PropertyData
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents LandAreaSpin As Global.DevExpress.Web.ASPxSpinEdit
+
+    '''<summary>
+    '''CountryTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CountryTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''RegionTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents RegionTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''RegionDistrictTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents RegionDistrictTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''LocalityNameTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents LocalityNameTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''StreetNameTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents StreetNameTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''HouseTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents HouseTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''ApartmentTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ApartmentTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''ActualUntilDE элемент управления.

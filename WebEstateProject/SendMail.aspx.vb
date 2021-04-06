@@ -10,6 +10,10 @@ Public Class SendMail
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        'Обновляем статусы объявлений с истекшим сроком актуальности
+        JOB.UpdateActualStatus()
+
+
         'Ищем активных пользователей
         Dim cMail As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
         Dim cmdMail As New SqlCommand("SELECT [Email]

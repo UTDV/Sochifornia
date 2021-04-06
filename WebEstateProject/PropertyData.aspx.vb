@@ -224,7 +224,7 @@ Public Class PropertyData
                                                 Type = @Type,
                                                 Complex = @Complex,
                                                 District = @District,
-                                                Street = @Street,
+                                                --Street = @Street,
                                                 Rooms = @Rooms,
                                                 ApartmentArea = @ApartmentArea,
                                                 LandArea = @LandArea,
@@ -270,6 +270,16 @@ Public Class PropertyData
                                                 values (@Creator, @ID, 54, @Price)
                                             end
 
+                                            delete from [dbo].[PropertyObjectsMetaData] where ObjectID = @ID and MetaNameID in (77,78,79,80,81,82,83)
+                                            insert into [dbo].[PropertyObjectsMetaData] (Creator, ObjectID, MetaNameID, MetaData)
+                                            values (@Creator, @ID, 77, @Country), 
+                                                   (@Creator, @ID, 78, @Region),
+                                                   (@Creator, @ID, 79, @RegionDistrict),
+                                                   (@Creator, @ID, 80, @LocalityName),
+                                                   (@Creator, @ID, 81, @StreetName),
+                                                   (@Creator, @ID, 82, @Apartment),
+                                                   (@Creator, @ID, 83, @House)
+
                                             select 1
                                         end
                                     ", c)
@@ -281,7 +291,7 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("Type", TypeCB.Value)
             cmd.Parameters.AddWithValue("Complex", IIf(ComplexTB.Value = Nothing, DBNull.Value, ComplexTB.Text))
             cmd.Parameters.AddWithValue("District", DistrictCB.Value)
-            cmd.Parameters.AddWithValue("Street", IIf(StreetTB.Value = Nothing, DBNull.Value, StreetTB.Text))
+            'cmd.Parameters.AddWithValue("Street", IIf(StreetTB.Value = Nothing, DBNull.Value, StreetTB.Text))
             cmd.Parameters.AddWithValue("Rooms", IIf(RoomsSpin.Value = Nothing, DBNull.Value, RoomsSpin.Value))
             cmd.Parameters.AddWithValue("ApartmentArea", ApartmentAreaSpin.Value)
             cmd.Parameters.AddWithValue("LandArea", IIf(LandAreaSpin.Value = Nothing, DBNull.Value, LandAreaSpin.Value))
@@ -305,6 +315,13 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("Posrednik", IIf(PosrednikCB.Value = Nothing, DBNull.Value, PosrednikCB.Value))
             cmd.Parameters.AddWithValue("Comission", IIf(ComissionTB.Value = Nothing, DBNull.Value, ComissionTB.Text))
             cmd.Parameters.AddWithValue("AdStatus", AdStatusCB.Value)
+            cmd.Parameters.AddWithValue("Country", IIf(CountryTB.Value = Nothing, DBNull.Value, CountryTB.Text))
+            cmd.Parameters.AddWithValue("Region", IIf(RegionTB.Value = Nothing, DBNull.Value, RegionTB.Text))
+            cmd.Parameters.AddWithValue("RegionDistrict", IIf(RegionDistrictTB.Value = Nothing, DBNull.Value, RegionDistrictTB.Text))
+            cmd.Parameters.AddWithValue("LocalityName", IIf(LocalityNameTB.Value = Nothing, DBNull.Value, LocalityNameTB.Text))
+            cmd.Parameters.AddWithValue("StreetName", IIf(StreetNameTB.Value = Nothing, DBNull.Value, StreetNameTB.Text))
+            cmd.Parameters.AddWithValue("House", IIf(HouseTB.Value = Nothing, DBNull.Value, HouseTB.Text))
+            cmd.Parameters.AddWithValue("Apartment", IIf(ApartmentTB.Value = Nothing, DBNull.Value, ApartmentTB.Text))
 
             c.Open()
             Dim res As Integer = cmd.ExecuteScalar

@@ -7,7 +7,7 @@
 
 
 
-    <dx:ASPxFormLayout ID="PropertyDataForm" ClientInstanceName="PropertyDataForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingTop="10" DataSourceID="PropertyDataDS" >
+    <dx:ASPxFormLayout ID="PropertyDataForm" ClientInstanceName="PropertyDataForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingBottom="20" DataSourceID="PropertyDataDS" >
         <SettingsAdaptivity SwitchToSingleColumnAtWindowInnerWidth="850" >            
             <GridSettings >
                 <Breakpoints>
@@ -34,7 +34,7 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="320" 
+                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="400" 
                                             OnCustomCallback="FileManager_CustomCallback" OnFilesUploaded="FileManager_FilesUploaded" OnItemsDeleted="FileManager_ItemsDeleted" 
                                             OnFileUploading="FileManager_FileUploading" >
                                             
@@ -76,7 +76,7 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="5" Border-BorderStyle="None">
+                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="7" Border-BorderStyle="None">
                                             <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
                                                 RequiredField-IsRequired="true" RequiredField-ErrorText="Заполните описание" ErrorFrameStyle-Font-Size="Smaller"/>                                            
                                         </dx:ASPxMemo>
@@ -237,7 +237,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem FieldName="Street" Caption="Улица">
+<%--                    <dx:LayoutItem FieldName="Street" Caption="Улица">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -245,7 +245,7 @@
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
+                    </dx:LayoutItem>--%>
 
                     <dx:LayoutItem FieldName="WindowView" Caption="Вид из окна">
                         <LayoutItemNestedControlCollection>
@@ -277,17 +277,6 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                </Items>
-            </dx:LayoutGroup>
-
-            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="29%">
-                <SpanRules>
-                    <dx:SpanRule BreakpointName="L" ColumnSpan="1" />
-                    <dx:SpanRule BreakpointName="S" ColumnSpan="1" />
-                    <dx:SpanRule BreakpointName="M" ColumnSpan="1" />
-                </SpanRules>
-                <Items>
-
                     <dx:LayoutItem FieldName="Floor" Caption="Этаж">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
@@ -317,6 +306,131 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
+
+                </Items>
+            </dx:LayoutGroup>
+
+            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="29%">
+                <SpanRules>
+                    <dx:SpanRule BreakpointName="L" ColumnSpan="1" />
+                    <dx:SpanRule BreakpointName="S" ColumnSpan="1" />
+                    <dx:SpanRule BreakpointName="M" ColumnSpan="1" />
+                </SpanRules>
+                <Items>
+
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Адрес объекта">
+                        <Items>
+
+                            <dx:LayoutItem ShowCaption="False">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <label for="address">Начните вводить адрес для поиска:</label><br>
+                                        <input id="address" name="address" type="text" style="line-height:25px"  />
+
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css" rel="stylesheet" />
+                                        <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js"></script>
+
+
+                                        <script>
+
+                                            $("#address").suggestions({
+                                                token: "ef658f0261b64dfea6077ff246d9337cdaab6a5a",
+                                                type: "ADDRESS",
+                                                /* Вызывается, когда пользователь выбирает одну из подсказок */
+                                                onSelect: function (suggestion) {
+                                                    //console.log(suggestion.data.country);
+                                                    CountryTB.SetText(suggestion.data.country);
+                                                    RegionTB.SetText(suggestion.data.region_with_type);
+                                                    RegionDistrictTB.SetText(suggestion.data.area_with_type);
+                                                    if (suggestion.data.settlement == null) {
+                                                        LocalityNameTB.SetText(suggestion.data.city);
+                                                    }
+                                                    else {
+                                                        LocalityNameTB.SetText(suggestion.data.settlement);
+                                                    }
+                                                    StreetNameTB.SetText(suggestion.data.street_with_type);
+
+                                                    if (suggestion.data.block == null) {
+                                                        HouseTB.SetText(suggestion.data.house);
+                                                    }
+                                                    else {
+                                                        HouseTB.SetText(suggestion.data.house + ' ' + suggestion.data.block_type_full + ' ' + suggestion.data.block);
+                                                    }
+                                                    
+                                                    ApartmentTB.SetText(suggestion.data.flat);
+
+                                                    address.value = '';
+                                                }
+                                            });
+                                        </script>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Страна" FieldName="Country">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="CountryTB" ClientInstanceName="CountryTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Субъект РФ" FieldName="Region">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="RegionTB" ClientInstanceName="RegionTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Район субъекта РФ" FieldName="RegionDistrict">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="RegionDistrictTB" ClientInstanceName="RegionDistrictTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Нас.пункт" FieldName="LocalityName">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="LocalityNameTB" ClientInstanceName="LocalityNameTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Улица" FieldName="StreetName">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="StreetNameTB" ClientInstanceName="StreetNameTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Дом" FieldName="House">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="HouseTB" ClientInstanceName="HouseTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Квартира" FieldName="Apartment">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="ApartmentTB" ClientInstanceName="ApartmentTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                        </Items>
+                    </dx:LayoutGroup>
+
+
+                    
 
                     <dx:LayoutItem FieldName="ActualUntil" Caption="Актуально до">
                         <LayoutItemNestedControlCollection>
@@ -407,6 +521,11 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>--%>
 
+                    
+
+                    
+
+
                     <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" ParentContainerStyle-Paddings-PaddingTop="20">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
@@ -418,6 +537,7 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
+
 
                 </Items>
             </dx:LayoutGroup>
@@ -523,17 +643,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="PropertyDataDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
-        SelectCommand="select p.*, price.MetaData Price
-                       from dbo.PropertyObjects p LEFT JOIN [dbo].[PropertyObjectsMetaData] price ON price.ObjectID = p.ID
-                                                                                        AND price.MetaNameID = 54
-                                                                                        AND price.Created =
-																					                        (
-																						                        SELECT MAX(Created)
-																						                        FROM [dbo].[PropertyObjectsMetaData] maxprice
-																						                        WHERE maxprice.ObjectID = price.ObjectID
-																							                          AND maxprice.MetaNameID = price.MetaNameID
-																					                        )
-                       where p.id = @ID">
+        SelectCommand="[dbo].[GetPropertyObjectDataForUpdate] @ID">
         <SelectParameters>
             <asp:QueryStringParameter Name="ID" QueryStringField="id" />
         </SelectParameters>
