@@ -436,15 +436,15 @@ Public Class PropertyData
                 End If
                 offer.Add(New XElement(ns + "deal-status", dealStatus))
 
-                Dim area As XElement = New XElement("area")
+                Dim area As XElement = New XElement(ns + "area")
                 area.Add(New XElement(ns + "value", Math.Round(ApartmentAreaSpin.Value, 0)))
                 area.Add(New XElement(ns + "unit", "кв. м"))
                 offer.Add(area)
 
 
                 For Each foundFile In Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id")))
-                    'offer.Add(New XElement("image", Path.GetFileName(foundFile)))
-                    offer.Add(New XElement(ns + "image", foundFile))
+                    offer.Add(New XElement(ns + "image", "sochifornia.realty\Content\Foto\" & Request.QueryString("id") & "\" & Path.GetFileName(foundFile)))
+                    'offer.Add(New XElement(ns + "image", foundFile))
                 Next
 
 

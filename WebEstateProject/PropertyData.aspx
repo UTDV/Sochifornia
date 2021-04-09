@@ -750,8 +750,8 @@
 
             if (DescriptionMemo.isValid && NameMemo.isValid && TypeCB.isValid && DistrictCB.isValid && PriceSpin.isValid && ApartmentAreaSpin.isValid && StatusCB.isValid && ConditionCB.isValid && RegistrationCB.isValid) {
 
-                var n = new Date().toLocaleDateString();
-                var d = ActualUntilDE.GetValue().toLocaleDateString();
+                var n = new Date();
+                var d = ActualUntilDE.GetValue();
 
                 if (AdStatusCB.GetText() == 'Опубликовано' && d < n) {
                     alert('Невозможно опубликовать объявление: истек срок актуальности');
@@ -795,8 +795,8 @@
         //Корректирвока статуса объявления в зависимости от изменения актуальности
         function ActualUntilChange() {
 
-            var now = new Date().toLocaleDateString();
-            var dt = ActualUntilDE.GetValue().toLocaleDateString();
+            var now = new Date();
+            var dt = ActualUntilDE.GetValue();
 
             if (dt < now) {
                 AdStatusCB.SetValue(76);                
