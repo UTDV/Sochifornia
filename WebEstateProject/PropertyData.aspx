@@ -11,7 +11,6 @@
         <SettingsAdaptivity SwitchToSingleColumnAtWindowInnerWidth="850" >            
             <GridSettings >
                 <Breakpoints>
-                    <dx:LayoutBreakpoint MaxWidth="3000" ColumnCount="3" Name="L" />
                     <dx:LayoutBreakpoint MaxWidth="1200" ColumnCount="2" Name="M" />
                     <dx:LayoutBreakpoint MaxWidth="800" ColumnCount="1" Name="S" />
                 </Breakpoints>
@@ -19,22 +18,21 @@
         </SettingsAdaptivity>
         <Items>
 
-            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="39%">
+            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="35%">
                 <SpanRules>
-                    <dx:SpanRule BreakpointName="L" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="S" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="M" ColumnSpan="2" />
                 </SpanRules>
                 <Items>
 
-                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Фото" >
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Фото">
                         <Items>
 
                             <dx:LayoutItem ShowCaption="False">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="400" 
+                                        <dx:ASPxFileManager ID="FileManager" ClientInstanceName="FileManager" runat="server" Width="100%" Height="350" 
                                             OnCustomCallback="FileManager_CustomCallback" OnFilesUploaded="FileManager_FilesUploaded" OnItemsDeleted="FileManager_ItemsDeleted" 
                                             OnFileUploading="FileManager_FileUploading" >
                                             
@@ -42,7 +40,7 @@
                                             
                                             <ClientSideEvents SelectionChanged="function(s,e){ SelectionChanged(); }"
                                                 CustomCommand="function(s,e){ if(e.commandName == 'CstmBtn'){ FileManager.PerformCallback(FileManager.GetSelectedFile().imageSrc); } }"
-                                                EndCallback="function(s,e){ SelectionChanged(); }" />
+                                                EndCallback="function(s,e){ SelectionChanged(); }"  />
 
                                             <Settings ThumbnailFolder="~\Content\Thumb\PropertyRegisterThumb" AllowedFileExtensions=".jpg,.jpeg,.png" EnableMultiSelect="true" />
                                             <SettingsFolders Visible="false" />
@@ -76,7 +74,7 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="7" Border-BorderStyle="None">
+                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="5" Border-BorderStyle="None">
                                             <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
                                                 RequiredField-IsRequired="true" RequiredField-ErrorText="Заполните описание" ErrorFrameStyle-Font-Size="Smaller"/>                                            
                                         </dx:ASPxMemo>
@@ -88,16 +86,63 @@
                         </Items>
                     </dx:LayoutGroup>
 
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Опубликовать у партнеров">
+                        <Items>
+
+                            <dx:LayoutItem Caption="Yandex" FieldName="YandexFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="YandexFeedCheckBox" ClientInstanceName="YandexFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(YandexFeedCheckBox.GetValue() == true) { if(CheckYandex() == 0){ YandexFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                        </Items>
+                    </dx:LayoutGroup>
+
                 </Items>
             </dx:LayoutGroup>                       
 
-            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="29%" >
+            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="32%" >
                 <SpanRules>
-                    <dx:SpanRule BreakpointName="L" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="S" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="M" ColumnSpan="1" />
                 </SpanRules>
                 <Items>
+
+                    <dx:LayoutItem FieldName="Created" ShowCaption="False" ClientVisible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxDateEdit ID="CreatedDE" runat="server" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="AgentName" ShowCaption="False" ClientVisible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxTextBox ID="AgentNameTB" ClientInstanceName="AgentNameTB" runat="server" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="AgentPhone" ShowCaption="False" ClientVisible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxTextBox ID="AgentPhoneTB" ClientInstanceName="AgentPhoneTB" runat="server" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
 
                     <dx:LayoutItem FieldName="AdStatus" Caption="Объявление">
                         <LayoutItemNestedControlCollection>
@@ -310,9 +355,8 @@
                 </Items>
             </dx:LayoutGroup>
 
-            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="29%">
+            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="1" Width="32%">
                 <SpanRules>
-                    <dx:SpanRule BreakpointName="L" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="S" ColumnSpan="1" />
                     <dx:SpanRule BreakpointName="M" ColumnSpan="1" />
                 </SpanRules>
@@ -343,7 +387,14 @@
                                                     //console.log(suggestion.data.country);
                                                     CountryTB.SetText(suggestion.data.country);
                                                     RegionTB.SetText(suggestion.data.region_with_type);
-                                                    RegionDistrictTB.SetText(suggestion.data.area_with_type);
+
+                                                    if (suggestion.data.area_with_type == null) {
+                                                        RegionDistrictTB.SetText('нет');
+                                                    }
+                                                    else {
+                                                        RegionDistrictTB.SetText(suggestion.data.area_with_type);
+                                                    }                                                                                                       
+
                                                     if (suggestion.data.settlement == null) {
                                                         LocalityNameTB.SetText(suggestion.data.city);
                                                     }
@@ -353,13 +404,15 @@
                                                     StreetNameTB.SetText(suggestion.data.street_with_type);
 
                                                     if (suggestion.data.block == null) {
-                                                        HouseTB.SetText(suggestion.data.house);
+                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house);
                                                     }
                                                     else {
-                                                        HouseTB.SetText(suggestion.data.house + ' ' + suggestion.data.block_type_full + ' ' + suggestion.data.block);
+                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house + ' ' + suggestion.data.block_type_full + ' ' + suggestion.data.block);
                                                     }
                                                     
                                                     ApartmentTB.SetText(suggestion.data.flat);
+
+                                                    console.log(suggestion.data.area_with_type);
 
                                                     address.value = '';
                                                 }
@@ -491,7 +544,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem FieldName="ElitProperty" Caption="Элетная недвижимость">
+                    <dx:LayoutItem FieldName="ElitProperty" Caption="Элитная недвижимость">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -520,9 +573,6 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>--%>
-
-                    
-
                     
 
 
@@ -707,8 +757,17 @@
                     alert('Невозможно опубликовать объявление: истек срок актуальности');
                 }
                 else {
-                    LoadingPanel.Show();
-                    CBackSave.PerformCallback();
+                    if (AdStatusCB.GetValue() == 73 && YandexFeedCheckBox.GetValue() == true) { //если объявление в статусе Опубликовано + опубликовать на Yandex
+                        if (CheckYandex() == 1) {
+                            LoadingPanel.Show();
+                            CBackSave.PerformCallback();
+                        }                        
+                    }
+                    else {
+                        LoadingPanel.Show();
+                        CBackSave.PerformCallback();
+                    }
+                    
                 }                
             }           
 
@@ -755,6 +814,48 @@
             AdStatusColor(AdStatusCB.GetText());
         }
 
+
+        function CheckYandex() {
+            if (TypeCB.GetValue() != 1) {
+                alert('Публикация на Yandex возможна только для Вторичного рынка');
+                return 0;
+            }
+            else if (CountryTB.GetText() == '' || RegionTB.GetText() == '' || RegionDistrictTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '' || ApartmentTB.GetText() == '') {
+                alert('Для публикации на Yandex необходимо заполнить все поля в Адресе объекта');
+                return 0;
+            }
+            else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '') {
+                alert('Для публикации на Yandex необходимы данные агента. Обратитесь к разработчику');
+                return 0;
+            }
+            else if (PriceSpin.GetValue() == null) {
+                alert('Для публикации на Yandex необходимо указать стоимость объекта');
+                return 0;
+            }
+            else if (RegistrationCB.GetValue() != 47) {
+                alert('Публикация на Yandex возможна только для объявлений с оформлением ПРАВО СОБСТВЕННОСТИ (ПРЯМАЯ ПРОДАЖА)');
+                return 0;
+            }
+            else if (ApartmentAreaSpin.GetValue() == null) {
+                alert('Для публикации на Yandex необходимо указать площадь объекта');
+                return 0;
+            }
+            else if (RoomsSpin.GetValue() == null) {
+                alert('Для публикации на Yandex необходимо указать количество комнат');
+                return 0;
+            }
+            else if (FloorSpin.GetValue() == null) {
+                alert('Для публикации на Yandex необходимо указать этаж');
+                return 0;
+            }
+            else if (FileManager.GetItems().length < 4) {
+                alert('Для публикации на Yandex необходимо загрузить минимум 4 фотографии объекта');
+                return 0;
+            }
+            else {
+                return 1
+            }
+        }
 
 
 

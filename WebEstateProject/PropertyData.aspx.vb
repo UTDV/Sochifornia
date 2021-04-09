@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
 
+
 Public Class PropertyData
     Inherits System.Web.UI.Page
 
@@ -201,6 +202,7 @@ Public Class PropertyData
     'Сохранение данных
     Protected Sub CBackSave_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
 
+
         Try
 
             'здесь добавление slug
@@ -247,7 +249,8 @@ Public Class PropertyData
                                                 Slug = @Slug,
                                                 Posrednik = @Posrednik,
                                                 Comission = @Comission,
-                                                AdStatus = @AdStatus
+                                                AdStatus = @AdStatus,
+                                                YandexFeed = @YandexFeed
                                             where ID = @ID
 
 
@@ -257,11 +260,11 @@ Public Class PropertyData
                                               from dbo.PropertyObjectsMetaData price
                                               where price.ObjectID = @ID
                                                 and price.MetaNameID = 54
-	                                            and price.Created = (select max(maxprice.Created)
-					                                                 from dbo.PropertyObjectsMetaData maxprice
-						                                             where maxprice.ObjectID = price.ObjectID
-						                                               and maxprice.MetaNameID = price.MetaNameID
-					                                                )
+                                             and price.Created = (select max(maxprice.Created)
+                                                      from dbo.PropertyObjectsMetaData maxprice
+                                                   where maxprice.ObjectID = price.ObjectID
+                                                     and maxprice.MetaNameID = price.MetaNameID
+                                                     )
 
 
                                             if TRY_CONVERT(float, @Price) != @OldPrice or @OldPrice is null
@@ -289,39 +292,40 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("ID", Request.QueryString("id"))
             cmd.Parameters.AddWithValue("Name", NameMemo.Text)
             cmd.Parameters.AddWithValue("Type", TypeCB.Value)
-            cmd.Parameters.AddWithValue("Complex", IIf(ComplexTB.Value = Nothing, DBNull.Value, ComplexTB.Text))
+            cmd.Parameters.AddWithValue("Complex", IIf(ComplexTB.Value Is Nothing, DBNull.Value, ComplexTB.Text))
             cmd.Parameters.AddWithValue("District", DistrictCB.Value)
             'cmd.Parameters.AddWithValue("Street", IIf(StreetTB.Value = Nothing, DBNull.Value, StreetTB.Text))
-            cmd.Parameters.AddWithValue("Rooms", IIf(RoomsSpin.Value = Nothing, DBNull.Value, RoomsSpin.Value))
+            cmd.Parameters.AddWithValue("Rooms", IIf(RoomsSpin.Value Is Nothing, DBNull.Value, RoomsSpin.Value))
             cmd.Parameters.AddWithValue("ApartmentArea", ApartmentAreaSpin.Value)
-            cmd.Parameters.AddWithValue("LandArea", IIf(LandAreaSpin.Value = Nothing, DBNull.Value, LandAreaSpin.Value))
-            cmd.Parameters.AddWithValue("Floor", IIf(FloorSpin.Value = Nothing, DBNull.Value, FloorSpin.Value))
-            cmd.Parameters.AddWithValue("TotalFloor", IIf(TotalFloorSpin.Value = Nothing, DBNull.Value, TotalFloorSpin.Value))
+            cmd.Parameters.AddWithValue("LandArea", IIf(LandAreaSpin.Value Is Nothing, DBNull.Value, LandAreaSpin.Value))
+            cmd.Parameters.AddWithValue("Floor", IIf(FloorSpin.Value Is Nothing, DBNull.Value, FloorSpin.Value))
+            cmd.Parameters.AddWithValue("TotalFloor", IIf(TotalFloorSpin.Value Is Nothing, DBNull.Value, TotalFloorSpin.Value))
             cmd.Parameters.AddWithValue("Status", StatusCB.Value)
             cmd.Parameters.AddWithValue("Condition", ConditionCB.Value)
             cmd.Parameters.AddWithValue("Registration", RegistrationCB.Value)
-            cmd.Parameters.AddWithValue("WindowView", IIf(WindowViewCB.Value = Nothing, DBNull.Value, WindowViewCB.Value))
-            cmd.Parameters.AddWithValue("Stove", IIf(StoveCB.Value = Nothing, DBNull.Value, StoveCB.Value))
-            cmd.Parameters.AddWithValue("Ipoteka", IIf(IpotekaCheckBox.Value = Nothing, DBNull.Value, IpotekaCheckBox.Value))
-            cmd.Parameters.AddWithValue("ToSea", IIf(ToSeaSpin.Value = Nothing, DBNull.Value, ToSeaSpin.Value))
+            cmd.Parameters.AddWithValue("WindowView", IIf(WindowViewCB.Value Is Nothing, DBNull.Value, WindowViewCB.Value))
+            cmd.Parameters.AddWithValue("Stove", IIf(StoveCB.Value Is Nothing, DBNull.Value, StoveCB.Value))
+            cmd.Parameters.AddWithValue("Ipoteka", IIf(IpotekaCheckBox.Value Is Nothing, DBNull.Value, IpotekaCheckBox.Value))
+            cmd.Parameters.AddWithValue("ToSea", IIf(ToSeaSpin.Value Is Nothing, DBNull.Value, ToSeaSpin.Value))
             'cmd.Parameters.AddWithValue("Sale", IIf(SaleCheckBox.Value = Nothing, DBNull.Value, SaleCheckBox.Value))
             cmd.Parameters.AddWithValue("Description", DescriptionMemo.Text)
-            cmd.Parameters.AddWithValue("VIP", IIf(VIPCheckBox.Value = Nothing, DBNull.Value, VIPCheckBox.Value))
-            cmd.Parameters.AddWithValue("ElitProperty", IIf(ElitPropertyCheckBox.Value = Nothing, DBNull.Value, ElitPropertyCheckBox.Value))
+            cmd.Parameters.AddWithValue("VIP", IIf(VIPCheckBox.Value Is Nothing, DBNull.Value, VIPCheckBox.Value))
+            cmd.Parameters.AddWithValue("ElitProperty", IIf(ElitPropertyCheckBox.Value Is Nothing, DBNull.Value, ElitPropertyCheckBox.Value))
             cmd.Parameters.AddWithValue("ActualUntil", ActualUntilDE.Value)
             'cmd.Parameters.AddWithValue("Hide", IIf(HideCheckBox.Value = Nothing, DBNull.Value, HideCheckBox.Value))
             cmd.Parameters.AddWithValue("Price", PriceSpin.Value)
             cmd.Parameters.AddWithValue("Slug", slugTxt)
-            cmd.Parameters.AddWithValue("Posrednik", IIf(PosrednikCB.Value = Nothing, DBNull.Value, PosrednikCB.Value))
-            cmd.Parameters.AddWithValue("Comission", IIf(ComissionTB.Value = Nothing, DBNull.Value, ComissionTB.Text))
+            cmd.Parameters.AddWithValue("Posrednik", IIf(PosrednikCB.Value Is Nothing, DBNull.Value, PosrednikCB.Value))
+            cmd.Parameters.AddWithValue("Comission", IIf(ComissionTB.Value Is Nothing, DBNull.Value, ComissionTB.Text))
             cmd.Parameters.AddWithValue("AdStatus", AdStatusCB.Value)
-            cmd.Parameters.AddWithValue("Country", IIf(CountryTB.Value = Nothing, DBNull.Value, CountryTB.Text))
-            cmd.Parameters.AddWithValue("Region", IIf(RegionTB.Value = Nothing, DBNull.Value, RegionTB.Text))
-            cmd.Parameters.AddWithValue("RegionDistrict", IIf(RegionDistrictTB.Value = Nothing, DBNull.Value, RegionDistrictTB.Text))
-            cmd.Parameters.AddWithValue("LocalityName", IIf(LocalityNameTB.Value = Nothing, DBNull.Value, LocalityNameTB.Text))
-            cmd.Parameters.AddWithValue("StreetName", IIf(StreetNameTB.Value = Nothing, DBNull.Value, StreetNameTB.Text))
-            cmd.Parameters.AddWithValue("House", IIf(HouseTB.Value = Nothing, DBNull.Value, HouseTB.Text))
-            cmd.Parameters.AddWithValue("Apartment", IIf(ApartmentTB.Value = Nothing, DBNull.Value, ApartmentTB.Text))
+            cmd.Parameters.AddWithValue("Country", IIf(CountryTB.Value Is Nothing, DBNull.Value, CountryTB.Text))
+            cmd.Parameters.AddWithValue("Region", IIf(RegionTB.Value Is Nothing, DBNull.Value, RegionTB.Text))
+            cmd.Parameters.AddWithValue("RegionDistrict", IIf(RegionDistrictTB.Value Is Nothing, DBNull.Value, RegionDistrictTB.Text))
+            cmd.Parameters.AddWithValue("LocalityName", IIf(LocalityNameTB.Value Is Nothing, DBNull.Value, LocalityNameTB.Text))
+            cmd.Parameters.AddWithValue("StreetName", IIf(StreetNameTB.Value Is Nothing, DBNull.Value, StreetNameTB.Text))
+            cmd.Parameters.AddWithValue("House", IIf(HouseTB.Value Is Nothing, DBNull.Value, HouseTB.Text))
+            cmd.Parameters.AddWithValue("Apartment", IIf(ApartmentTB.Value Is Nothing, DBNull.Value, ApartmentTB.Text))
+            cmd.Parameters.AddWithValue("YandexFeed", IIf(YandexFeedCheckBox.Value Is Nothing, 0, YandexFeedCheckBox.Value))
 
             c.Open()
             Dim res As Integer = cmd.ExecuteScalar
@@ -329,11 +333,148 @@ Public Class PropertyData
             cmd.Dispose()
             c.Dispose()
 
+
+
+            If res = 1 Then
+
+                'Только для вторичной недвижимости
+                If TypeCB.Value = 1 Then
+
+                    YandexFeedUpdate(YandexFeedCheckBox.Value, AdStatusCB.Value)
+
+                End If
+
+            End If
+
+
+
             e.Result = res
 
         Catch ex As Exception
             e.Result = 0
         End Try
+
+
+    End Sub
+
+
+
+    Public Sub YandexFeedUpdate(ByVal isYandexPublic As Boolean, ByVal AdStatus As Integer)
+
+
+        Dim spath As String = MapPath("~/Content/XMLFeed/YandexFeed.xml")
+
+        Dim doc As XDocument = XDocument.Load(spath)
+        Dim ns As XNamespace = XNamespace.Get("http://webmaster.yandex.ru/schemas/feed/realty/2010-06")
+        Dim i As Integer = 0
+
+        'Ищем есть ли объект в файле
+        Dim offers As IEnumerable(Of XElement) = From el In doc.Root.Elements() Where el.Name.Namespace = ns And el.@<internal-id> = Request.QueryString("id") Select el
+
+        For Each el As XElement In offers
+            i += 1
+        Next
+
+        If isYandexPublic = True And AdStatus = 73 Then 'Добавление/обновление объекта (только для объявлений в статусе ОПУБЛИКОВАНО)
+
+            If IsNothing(CountryTB.Value) = False And
+                IsNothing(RegionTB.Value) = False And
+                IsNothing(RegionDistrictTB.Value) = False And
+                IsNothing(LocalityNameTB.Value) = False And
+                IsNothing(StreetNameTB.Value) = False And
+                IsNothing(HouseTB.Value) = False And
+                IsNothing(ApartmentTB.Value) = False And
+                IsNothing(AgentNameTB.Value) = False And
+                IsNothing(AgentPhoneTB.Value) = False And
+                IsNothing(PriceSpin.Value) = False And
+                IsNothing(ApartmentAreaSpin.Value) = False And
+                IsNothing(RoomsSpin.Value) = False And
+                IsNothing(FloorSpin.Value) = False And
+                RegistrationCB.Value = 47 And
+                Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count > 0 Then
+
+
+                If i > 0 Then
+                    offers.Remove()
+                End If
+
+
+                Dim offer As XElement = New XElement(ns + "offer")
+
+                offer.SetAttributeValue("internal-id", Request.QueryString("id"))
+
+                offer.Add(New XElement(ns + "type", "продажа"))
+                offer.Add(New XElement(ns + "property-type", "жилая"))
+                offer.Add(New XElement(ns + "category", "квартира"))
+                offer.Add(New XElement(ns + "creation-date", New DateTimeOffset(CDate(CreatedDE.Value), New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK")))
+
+                Dim location As XElement = New XElement(ns + "location")
+                location.Add(New XElement(ns + "country", CountryTB.Text))
+                location.Add(New XElement(ns + "region", RegionTB.Text))
+                location.Add(New XElement(ns + "district", RegionDistrictTB.Text))
+                location.Add(New XElement(ns + "locality-name", LocalityNameTB.Text))
+                location.Add(New XElement(ns + "address", StreetNameTB.Text & ", " & HouseTB.Text))
+                location.Add(New XElement(ns + "apartment", ApartmentTB.Text))
+                offer.Add(location)
+
+                Dim sAgent As XElement = New XElement(ns + "sales-agent")
+                sAgent.Add(New XElement(ns + "name", AgentNameTB.Text))
+                sAgent.Add(New XElement(ns + "phone", AgentPhoneTB.Text))
+                sAgent.Add(New XElement(ns + "category", "агентство"))
+                offer.Add(sAgent)
+
+                Dim price As XElement = New XElement(ns + "price")
+                price.Add(New XElement(ns + "value", Math.Round(PriceSpin.Value, 0)))
+                price.Add(New XElement(ns + "currency", "RUB"))
+                offer.Add(price)
+
+                Dim dealStatus As String = ""
+                If RegistrationCB.Value = 47 Then
+                    dealStatus = "прямая продажа"
+                ElseIf RegistrationCB.Value = 48 Then
+                    dealStatus = "переуступка"
+                End If
+                offer.Add(New XElement(ns + "deal-status", dealStatus))
+
+                Dim area As XElement = New XElement("area")
+                area.Add(New XElement(ns + "value", Math.Round(ApartmentAreaSpin.Value, 0)))
+                area.Add(New XElement(ns + "unit", "кв. м"))
+                offer.Add(area)
+
+
+                For Each foundFile In Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id")))
+                    'offer.Add(New XElement("image", Path.GetFileName(foundFile)))
+                    offer.Add(New XElement(ns + "image", foundFile))
+                Next
+
+
+                If RoomsSpin.Value = 0 Then
+                    offer.Add(New XElement(ns + "studio", "да"))
+                ElseIf RoomsSpin.Value > 0 Then
+                    offer.Add(New XElement(ns + "rooms", RoomsSpin.Value))
+                End If
+
+                offer.Add(New XElement(ns + "floor", FloorSpin.Value))
+
+                doc.Root.Add(offer)
+
+                doc.Root.Element(ns + "generation-date").SetValue(New DateTimeOffset(Now, New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK"))
+
+                doc.Save(spath)
+
+
+
+            End If
+
+        ElseIf (isYandexPublic = False Or AdStatus <> 73) And i > 0 Then 'Если объект есть в файле и его нужно убрать - удаляем
+
+            offers.Remove()
+            doc.Root.Element(ns + "generation-date").SetValue(New DateTimeOffset(Now, New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK"))
+            doc.Save(spath)
+
+        End If
+
+
 
 
     End Sub

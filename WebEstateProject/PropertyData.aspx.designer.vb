@@ -41,6 +41,42 @@ Partial Public Class PropertyData
     Protected WithEvents DescriptionMemo As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
+    '''YandexFeedCheckBox элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents YandexFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
+
+    '''<summary>
+    '''CreatedDE элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CreatedDE As Global.DevExpress.Web.ASPxDateEdit
+
+    '''<summary>
+    '''AgentNameTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents AgentNameTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''AgentPhoneTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents AgentPhoneTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
     '''AdStatusCB элемент управления.
     '''</summary>
     '''<remarks>
