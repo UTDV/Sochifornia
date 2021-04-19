@@ -94,7 +94,19 @@
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
                                         <dx:ASPxCheckBox ID="YandexFeedCheckBox" ClientInstanceName="YandexFeedCheckBox" runat="server" AllowGrayed="false">
-                                            <ClientSideEvents CheckedChanged="function(s,e){ if(YandexFeedCheckBox.GetValue() == true) { if(CheckYandex() == 0){ YandexFeedCheckBox.SetValue(false); } } }" />
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(YandexFeedCheckBox.GetValue() == true) { if(CheckFeed(0) == 0){ YandexFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="ЦИАН" FieldName="CianFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="CianFeedCheckBox" ClientInstanceName="CianFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(CianFeedCheckBox.GetValue() == true) { if(CheckFeed(1) == 0){ CianFeedCheckBox.SetValue(false); } } }" />
                                         </dx:ASPxCheckBox>
 
                                     </dx:LayoutItemNestedControlContainer>
@@ -139,6 +151,16 @@
                             <dx:LayoutItemNestedControlContainer runat="server">
 
                                 <dx:ASPxTextBox ID="AgentPhoneTB" ClientInstanceName="AgentPhoneTB" runat="server" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="AgentEmail" ShowCaption="False" ClientVisible="false">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxTextBox ID="AgentEmailTB" ClientInstanceName="AgentEmailTB" runat="server" />
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -751,17 +773,32 @@
             if (DescriptionMemo.isValid && NameMemo.isValid && TypeCB.isValid && DistrictCB.isValid && PriceSpin.isValid && ApartmentAreaSpin.isValid && StatusCB.isValid && ConditionCB.isValid && RegistrationCB.isValid) {
 
                 var n = new Date();
+                n.setHours(0, 0, 0, 0);
                 var d = ActualUntilDE.GetValue();
 
                 if (AdStatusCB.GetText() == 'Опубликовано' && d < n) {
                     alert('Невозможно опубликовать объявление: истек срок актуальности');
                 }
                 else {
-                    if (AdStatusCB.GetValue() == 73 && YandexFeedCheckBox.GetValue() == true) { //если объявление в статусе Опубликовано + опубликовать на Yandex
-                        if (CheckYandex() == 1) {
+                    if (AdStatusCB.GetValue() == 73 && (YandexFeedCheckBox.GetValue() == true || CianFeedCheckBox.GetValue() == true)) { //если объявление в статусе Опубликовано + опубликовать на Yandex/Cian
+
+                        var res = 0;
+                        var feed = 0;
+                        let arr = { 0: YandexFeedCheckBox.GetValue(), 1: CianFeedCheckBox.GetValue(), length: 2 };
+                        for (let i = 0; i < arr.length; i++) {
+                            if (arr[i] == true) {
+                                feed = feed + 1;
+                                if (CheckFeed(i) == 1) {
+                                    res = res + 1;
+                                }
+                            }
+                        }
+
+                        if (res == feed) {
                             LoadingPanel.Show();
                             CBackSave.PerformCallback();
-                        }                        
+                        }
+
                     }
                     else {
                         LoadingPanel.Show();
@@ -796,6 +833,7 @@
         function ActualUntilChange() {
 
             var now = new Date();
+            n.setHours(0, 0, 0, 0);
             var dt = ActualUntilDE.GetValue();
 
             if (dt < now) {
@@ -815,48 +853,103 @@
         }
 
 
-        function CheckYandex() {
-            if (TypeCB.GetValue() != 1) {
-                alert('Публикация на Yandex возможна только для Вторичного рынка');
-                return 0;
-            }
-            else if (CountryTB.GetText() == '' || RegionTB.GetText() == '' || RegionDistrictTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '' || ApartmentTB.GetText() == '') {
-                alert('Для публикации на Yandex необходимо заполнить все поля в Адресе объекта');
-                return 0;
-            }
-            else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '') {
-                alert('Для публикации на Yandex необходимы данные агента. Обратитесь к разработчику');
-                return 0;
-            }
-            else if (PriceSpin.GetValue() == null) {
-                alert('Для публикации на Yandex необходимо указать стоимость объекта');
-                return 0;
-            }
-            else if (RegistrationCB.GetValue() != 47) {
-                alert('Публикация на Yandex возможна только для объявлений с оформлением ПРАВО СОБСТВЕННОСТИ (ПРЯМАЯ ПРОДАЖА)');
-                return 0;
-            }
-            else if (ApartmentAreaSpin.GetValue() == null) {
-                alert('Для публикации на Yandex необходимо указать площадь объекта');
-                return 0;
-            }
-            else if (RoomsSpin.GetValue() == null) {
-                alert('Для публикации на Yandex необходимо указать количество комнат');
-                return 0;
-            }
-            else if (FloorSpin.GetValue() == null) {
-                alert('Для публикации на Yandex необходимо указать этаж');
-                return 0;
-            }
-            else if (FileManager.GetItems().length < 4) {
-                alert('Для публикации на Yandex необходимо загрузить минимум 4 фотографии объекта');
-                return 0;
-            }
-            else {
-                return 1
-            }
-        }
+        // Проверка данных для Feed
+        function CheckFeed(TypeFeed) {
 
+            if (TypeFeed == 0) { // Проверка для Yandex
+                if (TypeCB.GetValue() != 1) {
+                    alert('Публикация на Yandex возможна только для Вторичного рынка');
+                    return 0;
+                }
+                else if (CountryTB.GetText() == '' || RegionTB.GetText() == '' || RegionDistrictTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '' || ApartmentTB.GetText() == '') {
+                    alert('Для публикации на Yandex необходимо заполнить все поля в Адресе объекта');
+                    return 0;
+                }
+                else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '') {
+                    alert('Для публикации на Yandex необходимы данные агента. Обратитесь к разработчику');
+                    return 0;
+                }
+                else if (PriceSpin.GetValue() == null) {
+                    alert('Для публикации на Yandex необходимо указать стоимость объекта');
+                    return 0;
+                }
+                else if (RegistrationCB.GetValue() != 47) {
+                    alert('Публикация на Yandex возможна только для объявлений с оформлением ПРАВО СОБСТВЕННОСТИ (ПРЯМАЯ ПРОДАЖА)');
+                    return 0;
+                }
+                else if (ApartmentAreaSpin.GetValue() == null) {
+                    alert('Для публикации на Yandex необходимо указать площадь объекта');
+                    return 0;
+                }
+                else if (RoomsSpin.GetValue() == null) {
+                    alert('Для публикации на Yandex необходимо указать количество комнат');
+                    return 0;
+                }
+                else if (FloorSpin.GetValue() == null) {
+                    alert('Для публикации на Yandex необходимо указать этаж');
+                    return 0;
+                }
+                else if (FileManager.GetItems().length < 4) {
+                    alert('Для публикации на Yandex необходимо загрузить минимум 4 фотографии объекта');
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
+            }
+            else if (TypeFeed == 1) { // Проверка для ЦИАН
+
+                if (TypeCB.GetValue() != 1) {
+                    alert('Публикация на ЦИАН возможна только для Вторичного рынка');
+                    return 0;
+                }
+                else if (RegionTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '') {
+                    alert('Для публикации на ЦИАН необходимо заполнить Адрес объекта (субъект РФ, нас.пункт, улица, дом)');
+                    return 0;
+                }
+                else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '' || AgentEmailTB.GetText() == '') {
+                    alert('Для публикации на ЦИАН необходимы данные агента. Обратитесь к разработчику');
+                    return 0;
+                }
+                else if (PriceSpin.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать стоимость объекта');
+                    return 0;
+                }
+                else if (RegistrationCB.GetValue() != 47) {
+                    alert('Публикация на ЦИАН возможна только для объявлений с оформлением ПРАВО СОБСТВЕННОСТИ (ПРЯМАЯ ПРОДАЖА)');
+                    return 0;
+                }
+                else if (ApartmentAreaSpin.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать площадь объекта');
+                    return 0;
+                }
+                else if (RoomsSpin.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать количество комнат');
+                    return 0;
+                }
+                else if (FloorSpin.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать этаж');
+                    return 0;
+                }
+                else if (TotalFloorSpin.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать общее количество этажей в доме');
+                    return 0;
+                }
+                else if (DescriptionMemo.GetValue() == null) {
+                    alert('Для публикации на ЦИАН необходимо указать описание объекта');
+                    return 0;
+                }
+                else if (FileManager.GetItems().length < 1) {
+                    alert('Для публикации на ЦИАН необходимо загрузить минимум 1 фотографию объекта');
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
+            }
+
+
+        }
 
 
     </script>

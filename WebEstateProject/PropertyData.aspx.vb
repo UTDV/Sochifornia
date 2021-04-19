@@ -250,7 +250,8 @@ Public Class PropertyData
                                                 Posrednik = @Posrednik,
                                                 Comission = @Comission,
                                                 AdStatus = @AdStatus,
-                                                YandexFeed = @YandexFeed
+                                                YandexFeed = @YandexFeed, 
+                                                CianFeed = @CianFeed
                                             where ID = @ID
 
 
@@ -326,6 +327,7 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("House", IIf(HouseTB.Value Is Nothing, DBNull.Value, HouseTB.Text))
             cmd.Parameters.AddWithValue("Apartment", IIf(ApartmentTB.Value Is Nothing, DBNull.Value, ApartmentTB.Text))
             cmd.Parameters.AddWithValue("YandexFeed", IIf(YandexFeedCheckBox.Value Is Nothing, 0, YandexFeedCheckBox.Value))
+            cmd.Parameters.AddWithValue("CianFeed", IIf(CianFeedCheckBox.Value Is Nothing, 0, CianFeedCheckBox.Value))
 
             c.Open()
             Dim res As Integer = cmd.ExecuteScalar
@@ -341,6 +343,7 @@ Public Class PropertyData
                 If TypeCB.Value = 1 Then
 
                     YandexFeedUpdate(YandexFeedCheckBox.Value, AdStatusCB.Value)
+                    CianFeedUpdate(CianFeedCheckBox.Value, AdStatusCB.Value)
 
                 End If
 
@@ -358,6 +361,119 @@ Public Class PropertyData
     End Sub
 
 
+
+    Public Sub CianFeedUpdate(ByVal isCianPublic As Boolean, ByVal AdStatus As Integer)
+
+
+        Dim CianRooms As Integer
+        If RoomsSpin.Value = 0 Then
+            CianRooms = 9
+        ElseIf RoomsSpin.Value >= 1 And RoomsSpin.Value <= 5 Then
+            CianRooms = RoomsSpin.Value
+        ElseIf RoomsSpin.Value > 5 Then
+            CianRooms = 6
+        End If
+
+
+        Dim spath As String = MapPath("~/Content/XMLFeed/CianFeed.xml")
+
+        Dim doc As XDocument = XDocument.Load(spath)
+
+        Dim i As Integer = 0
+
+        'Ищем есть ли объект в файле
+        Dim objs As IEnumerable(Of XElement) = From el In doc.Root.Elements() Where el.<ExternalId>.Value = Request.QueryString("id") Select el
+
+        For Each el As XElement In objs
+            i += 1
+        Next
+
+
+        If isCianPublic = True And AdStatus = 73 Then
+
+
+            If IsNothing(RegionTB.Value) = False And
+                IsNothing(RegionDistrictTB.Value) = False And
+                IsNothing(LocalityNameTB.Value) = False And
+                IsNothing(StreetNameTB.Value) = False And
+                IsNothing(HouseTB.Value) = False And
+                IsNothing(AgentNameTB.Value) = False And
+                IsNothing(AgentPhoneTB.Value) = False And
+                IsNothing(AgentEmailTB.Value) = False And
+                IsNothing(PriceSpin.Value) = False And
+                IsNothing(ApartmentAreaSpin.Value) = False And
+                IsNothing(RoomsSpin.Value) = False And
+                IsNothing(FloorSpin.Value) = False And
+                IsNothing(TotalFloorSpin.Value) = False And
+                IsNothing(DescriptionMemo.Value) = False And
+                RegistrationCB.Value = 47 And
+                Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count > 0 Then
+
+                If i > 0 Then
+                    objs.Remove()
+                End If
+
+                Dim obj As XElement = New XElement("object")
+
+                obj.Add(New XElement("ExternalId", Request.QueryString("id")))
+                obj.Add(New XElement("Category", "flatSale"))
+                obj.Add(New XElement("Description", DescriptionMemo.Text))
+                obj.Add(New XElement("Address", RegionTB.Text & ", " & LocalityNameTB.Text & ", " & StreetNameTB.Text & ", " & HouseTB.Text))
+
+                Dim Phones As XElement = New XElement("Phones")
+                Dim PhoneSchema As XElement = New XElement("PhoneSchema")
+                PhoneSchema.Add(New XElement("CountryCode", "+7"))
+                PhoneSchema.Add(New XElement("Number", AgentPhoneTB.Text.Substring(2)))
+                Phones.Add(PhoneSchema)
+                obj.Add(Phones)
+
+                Dim SubAgent As XElement = New XElement("SubAgent")
+                SubAgent.Add(New XElement("Email", AgentEmailTB.Text))
+                SubAgent.Add(New XElement("Phone", AgentPhoneTB.Text))
+                SubAgent.Add(New XElement("FirstName", AgentNameTB.Text))
+                obj.Add(SubAgent)
+
+                obj.Add(New XElement("FlatRoomsCount", CianRooms))
+                obj.Add(New XElement("TotalArea", ApartmentAreaSpin.Value))
+                obj.Add(New XElement("FloorNumber", FloorSpin.Value))
+
+                Dim Building As XElement = New XElement("Building")
+                Building.Add(New XElement("FloorsCount", TotalFloorSpin.Value))
+                obj.Add(Building)
+
+                Dim BargainTerms As XElement = New XElement("BargainTerms")
+                BargainTerms.Add(New XElement("Price", PriceSpin.Value))
+                BargainTerms.Add(New XElement("Currency", "rur"))
+                BargainTerms.Add(New XElement("MortgageAllowed", IpotekaCheckBox.Value))
+                BargainTerms.Add(New XElement("SaleType", "free"))
+                obj.Add(BargainTerms)
+
+
+                Dim Photos As XElement = New XElement("Photos")
+                For Each foundFile In Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id")))
+                    Dim PhotoSchema As XElement = New XElement("PhotoSchema")
+                    PhotoSchema.Add(New XElement("FullUrl", "sochifornia.realty\Content\Foto\" & Request.QueryString("id") & "\" & Path.GetFileName(foundFile)))
+                    PhotoSchema.Add(New XElement("IsDefault", IIf(Path.GetFileNameWithoutExtension(foundFile) = "!Main", "true", "false")))
+                    Photos.Add(PhotoSchema)
+                Next
+                obj.Add(Photos)
+
+
+                doc.Root.Add(obj)
+
+                doc.Save(spath)
+
+            End If
+
+
+        ElseIf (isCianPublic = False Or AdStatus <> 73) And i > 0 Then 'Если объект есть в файле и его нужно убрать - удаляем
+
+                objs.Remove()
+            doc.Save(spath)
+
+        End If
+
+    End Sub
 
     Public Sub YandexFeedUpdate(ByVal isYandexPublic As Boolean, ByVal AdStatus As Integer)
 
@@ -391,7 +507,7 @@ Public Class PropertyData
                 IsNothing(RoomsSpin.Value) = False And
                 IsNothing(FloorSpin.Value) = False And
                 RegistrationCB.Value = 47 And
-                Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count > 0 Then
+                Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count >= 4 Then
 
 
                 If i > 0 Then
