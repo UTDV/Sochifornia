@@ -237,6 +237,7 @@ Public Class PropertyData
                                                 Registration = @Registration,
                                                 WindowView = @WindowView,
                                                 Stove = @Stove,
+                                                HouseType = @HouseType,
                                                 Ipoteka = isnull(@Ipoteka,0),
                                                 ToSea = @ToSea,
                                                 --Sale = isnull(@Sale,0),
@@ -251,7 +252,9 @@ Public Class PropertyData
                                                 Comission = @Comission,
                                                 AdStatus = @AdStatus,
                                                 YandexFeed = @YandexFeed, 
-                                                CianFeed = @CianFeed
+                                                CianFeed = @CianFeed, 
+                                                AvitoFeed = @AvitoFeed, 
+                                                DomClickFeed = @DomClickFeed
                                             where ID = @ID
 
 
@@ -306,6 +309,7 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("Registration", RegistrationCB.Value)
             cmd.Parameters.AddWithValue("WindowView", IIf(WindowViewCB.Value Is Nothing, DBNull.Value, WindowViewCB.Value))
             cmd.Parameters.AddWithValue("Stove", IIf(StoveCB.Value Is Nothing, DBNull.Value, StoveCB.Value))
+            cmd.Parameters.AddWithValue("HouseType", IIf(HouseTypeCB.Value Is Nothing, DBNull.Value, HouseTypeCB.Value))
             cmd.Parameters.AddWithValue("Ipoteka", IIf(IpotekaCheckBox.Value Is Nothing, DBNull.Value, IpotekaCheckBox.Value))
             cmd.Parameters.AddWithValue("ToSea", IIf(ToSeaSpin.Value Is Nothing, DBNull.Value, ToSeaSpin.Value))
             'cmd.Parameters.AddWithValue("Sale", IIf(SaleCheckBox.Value = Nothing, DBNull.Value, SaleCheckBox.Value))
@@ -328,6 +332,8 @@ Public Class PropertyData
             cmd.Parameters.AddWithValue("Apartment", IIf(ApartmentTB.Value Is Nothing, DBNull.Value, ApartmentTB.Text))
             cmd.Parameters.AddWithValue("YandexFeed", IIf(YandexFeedCheckBox.Value Is Nothing, 0, YandexFeedCheckBox.Value))
             cmd.Parameters.AddWithValue("CianFeed", IIf(CianFeedCheckBox.Value Is Nothing, 0, CianFeedCheckBox.Value))
+            cmd.Parameters.AddWithValue("AvitoFeed", IIf(AvitoFeedCheckBox.Value Is Nothing, 0, AvitoFeedCheckBox.Value))
+            cmd.Parameters.AddWithValue("DomClickFeed", IIf(DomClickFeedCheckBox.Value Is Nothing, 0, DomClickFeedCheckBox.Value))
 
             c.Open()
             Dim res As Integer = cmd.ExecuteScalar
@@ -344,6 +350,8 @@ Public Class PropertyData
 
                     YandexFeedUpdate(YandexFeedCheckBox.Value, AdStatusCB.Value)
                     CianFeedUpdate(CianFeedCheckBox.Value, AdStatusCB.Value)
+                    AvitoFeedUpdate(AvitoFeedCheckBox.Value, AdStatusCB.Value)
+                    DomClickUpdate(DomClickFeedCheckBox.Value, AdStatusCB.Value)
 
                 End If
 
@@ -360,6 +368,93 @@ Public Class PropertyData
 
     End Sub
 
+
+
+    Public Sub AvitoFeedUpdate(ByVal isAvitoPublic As Boolean, ByVal AdStatus As Integer)
+
+        Dim spath As String = MapPath("~/Content/XMLFeed/AvitoFeed.xml")
+        Dim doc As XDocument = XDocument.Load(spath)
+
+        Dim i As Integer = 0
+
+        'Ищем есть ли объект в файле
+        Dim objs As IEnumerable(Of XElement) = From el In doc.Root.Elements() Where el.<Id>.Value = Request.QueryString("id") Select el
+
+        For Each el As XElement In objs
+            i += 1
+        Next
+
+        If isAvitoPublic = True And AdStatus = 73 Then
+
+
+            If IsNothing(RegionTB.Value) = False And
+                IsNothing(LocalityNameTB.Value) = False And
+                IsNothing(StreetNameTB.Value) = False And
+                IsNothing(HouseTB.Value) = False And
+                IsNothing(CountryTB.Value) = False And
+                IsNothing(AgentNameTB.Value) = False And
+                IsNothing(AgentPhoneTB.Value) = False And
+                IsNothing(PriceSpin.Value) = False And
+                IsNothing(ApartmentAreaSpin.Value) = False And
+                IsNothing(RoomsSpin.Value) = False And
+                IsNothing(FloorSpin.Value) = False And
+                IsNothing(TotalFloorSpin.Value) = False And
+                IsNothing(DescriptionMemo.Value) = False And
+                IsNothing(StatusCB.Value) = False And
+                IsNothing(HouseTypeCB.Value) = False Then
+
+
+                If i > 0 Then
+                    objs.Remove()
+                End If
+
+                Dim Ad As XElement = New XElement("Ad")
+
+                Ad.Add(New XElement("Id", Request.QueryString("id")))
+                Ad.Add(New XElement("ManagerName", AgentNameTB.Text))
+                Ad.Add(New XElement("ContactPhone", AgentPhoneTB.Text))
+                Ad.Add(New XElement("Address", CountryTB.Text & ", " & RegionTB.Text & ", " & LocalityNameTB.Text & ", " & StreetNameTB.Text & ", " & HouseTB.Text))
+                Ad.Add(New XElement("Description", DescriptionMemo.Text))
+                Ad.Add(New XElement("Category", "Квартиры"))
+                Ad.Add(New XElement("OperationType", "Продам"))
+                Ad.Add(New XElement("Price", Math.Round(PriceSpin.Value, 0)))
+                Ad.Add(New XElement("Rooms", IIf(RoomsSpin.Value = 0, "Студия", RoomsSpin.Value.ToString)))
+                Ad.Add(New XElement("Square", ApartmentAreaSpin.Value))
+                Ad.Add(New XElement("Floor", FloorSpin.Value))
+                Ad.Add(New XElement("Floors", TotalFloorSpin.Value))
+                Ad.Add(New XElement("HouseType", HouseTypeCB.Text))
+                Ad.Add(New XElement("MarketType", "Вторичка"))
+                Ad.Add(New XElement("PropertyRights", "Посредник"))
+                Ad.Add(New XElement("Status", IIf(StatusCB.Value = 41, "Апартаменты", "Квартира")))
+
+
+                If Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count > 0 Then
+
+                    Dim Images As XElement = New XElement("Images")
+                    For Each foundFile In Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id")))
+                        Dim Image As XElement = New XElement("Image")
+                        Image.SetAttributeValue("url", "sochifornia.realty\Content\Foto\" & Request.QueryString("id") & "\" & Path.GetFileName(foundFile))
+                        Images.Add(Image)
+                    Next
+                    Ad.Add(Images)
+
+                End If
+
+                doc.Root.Add(Ad)
+
+                doc.Save(spath)
+
+            End If
+
+        ElseIf (isAvitoPublic = False Or AdStatus <> 73) And i > 0 Then 'Если объект есть в файле и его нужно убрать - удаляем
+
+            objs.Remove()
+            doc.Save(spath)
+
+        End If
+
+
+    End Sub
 
 
     Public Sub CianFeedUpdate(ByVal isCianPublic As Boolean, ByVal AdStatus As Integer)
@@ -393,7 +488,6 @@ Public Class PropertyData
 
 
             If IsNothing(RegionTB.Value) = False And
-                IsNothing(RegionDistrictTB.Value) = False And
                 IsNothing(LocalityNameTB.Value) = False And
                 IsNothing(StreetNameTB.Value) = False And
                 IsNothing(HouseTB.Value) = False And
@@ -469,6 +563,121 @@ Public Class PropertyData
         ElseIf (isCianPublic = False Or AdStatus <> 73) And i > 0 Then 'Если объект есть в файле и его нужно убрать - удаляем
 
                 objs.Remove()
+            doc.Save(spath)
+
+        End If
+
+    End Sub
+
+    Public Sub DomClickUpdate(ByVal isDomClickPublic As Boolean, ByVal AdStatus As Integer)
+
+        Dim spath As String = MapPath("~/Content/XMLFeed/DomClickFeed.xml")
+
+        Dim doc As XDocument = XDocument.Load(spath)
+        Dim ns As XNamespace = XNamespace.Get("http://webmaster.yandex.ru/schemas/feed/realty/2010-06")
+        Dim i As Integer = 0
+
+        'Ищем есть ли объект в файле
+        Dim offers As IEnumerable(Of XElement) = From el In doc.Root.Elements() Where el.Name.Namespace = ns And el.@<internal-id> = Request.QueryString("id") Select el
+
+        For Each el As XElement In offers
+            i += 1
+        Next
+
+        If isDomClickPublic = True And AdStatus = 73 Then 'Добавление/обновление объекта (только для объявлений в статусе ОПУБЛИКОВАНО)
+
+            If IsNothing(CountryTB.Value) = False And
+                IsNothing(RegionTB.Value) = False And
+                IsNothing(RegionDistrictTB.Value) = False And
+                IsNothing(LocalityNameTB.Value) = False And
+                IsNothing(StreetNameTB.Value) = False And
+                IsNothing(HouseTB.Value) = False And
+                IsNothing(ApartmentTB.Value) = False And
+                IsNothing(AgentNameTB.Value) = False And
+                IsNothing(AgentPhoneTB.Value) = False And
+                IsNothing(PriceSpin.Value) = False And
+                IsNothing(ApartmentAreaSpin.Value) = False And
+                IsNothing(RoomsSpin.Value) = False And
+                IsNothing(FloorSpin.Value) = False And
+                RegistrationCB.Value = 47 And
+                Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id"))).Count >= 3 Then
+
+
+                If i > 0 Then
+                    offers.Remove()
+                End If
+
+
+                Dim offer As XElement = New XElement(ns + "offer")
+
+                offer.SetAttributeValue("internal-id", Request.QueryString("id"))
+
+                offer.Add(New XElement(ns + "type", "продажа"))
+                offer.Add(New XElement(ns + "property-type", "жилая"))
+                offer.Add(New XElement(ns + "category", "квартира"))
+                offer.Add(New XElement(ns + "creation-date", New DateTimeOffset(CDate(CreatedDE.Value), New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK")))
+
+                Dim location As XElement = New XElement(ns + "location")
+                location.Add(New XElement(ns + "country", CountryTB.Text))
+                location.Add(New XElement(ns + "region", RegionTB.Text))
+                location.Add(New XElement(ns + "district", RegionDistrictTB.Text))
+                location.Add(New XElement(ns + "locality-name", LocalityNameTB.Text))
+                location.Add(New XElement(ns + "address", StreetNameTB.Text & ", " & HouseTB.Text))
+                location.Add(New XElement(ns + "apartment", ApartmentTB.Text))
+                offer.Add(location)
+
+                Dim sAgent As XElement = New XElement(ns + "sales-agent")
+                sAgent.Add(New XElement(ns + "name", AgentNameTB.Text))
+                sAgent.Add(New XElement(ns + "phone", AgentPhoneTB.Text))
+                sAgent.Add(New XElement(ns + "category", "агентство"))
+                offer.Add(sAgent)
+
+                Dim price As XElement = New XElement(ns + "price")
+                price.Add(New XElement(ns + "value", Math.Round(PriceSpin.Value, 0)))
+                price.Add(New XElement(ns + "currency", "RUB"))
+                offer.Add(price)
+
+                Dim dealStatus As String = ""
+                If RegistrationCB.Value = 47 Then
+                    dealStatus = "прямая продажа"
+                ElseIf RegistrationCB.Value = 48 Then
+                    dealStatus = "переуступка"
+                End If
+                offer.Add(New XElement(ns + "deal-status", dealStatus))
+
+                Dim area As XElement = New XElement(ns + "area")
+                area.Add(New XElement(ns + "value", Math.Round(ApartmentAreaSpin.Value, 0)))
+                area.Add(New XElement(ns + "unit", "кв. м"))
+                offer.Add(area)
+
+
+                For Each foundFile In Directory.GetFiles(MapPath("~\Content\Foto\" & Request.QueryString("id")))
+                    offer.Add(New XElement(ns + "image", "sochifornia.realty\Content\Foto\" & Request.QueryString("id") & "\" & Path.GetFileName(foundFile)))
+                Next
+
+
+                If RoomsSpin.Value = 0 Then
+                    offer.Add(New XElement(ns + "studio", "да"))
+                ElseIf RoomsSpin.Value > 0 Then
+                    offer.Add(New XElement(ns + "rooms", RoomsSpin.Value))
+                End If
+
+                offer.Add(New XElement(ns + "floor", FloorSpin.Value))
+
+                doc.Root.Add(offer)
+
+                doc.Root.Element(ns + "generation-date").SetValue(New DateTimeOffset(Now, New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK"))
+
+                doc.Save(spath)
+
+
+
+            End If
+
+        ElseIf (isDomClickPublic = False Or AdStatus <> 73) And i > 0 Then 'Если объект есть в файле и его нужно убрать - удаляем
+
+            offers.Remove()
+            doc.Root.Element(ns + "generation-date").SetValue(New DateTimeOffset(Now, New TimeSpan(3, 0, 0)).ToString("yyyy-MM-ddTHH:mm:ssK"))
             doc.Save(spath)
 
         End If

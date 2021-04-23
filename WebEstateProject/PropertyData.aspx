@@ -67,54 +67,127 @@
                         </Items>
                     </dx:LayoutGroup>
 
-                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Описание" >
+
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Адрес объекта">
                         <Items>
 
-                            <dx:LayoutItem FieldName="Description" ShowCaption="False">
+                            <dx:LayoutItem ShowCaption="False">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="5" Border-BorderStyle="None">
-                                            <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
-                                                RequiredField-IsRequired="true" RequiredField-ErrorText="Заполните описание" ErrorFrameStyle-Font-Size="Smaller"/>                                            
-                                        </dx:ASPxMemo>
+                                        <label for="address">Начните вводить адрес для поиска:</label><br>
+                                        <input id="address" name="address" type="text" style="line-height:25px"  />
 
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css" rel="stylesheet" />
+                                        <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js"></script>
+
+
+                                        <script>
+
+                                            $("#address").suggestions({
+                                                token: "ef658f0261b64dfea6077ff246d9337cdaab6a5a",
+                                                type: "ADDRESS",
+                                                /* Вызывается, когда пользователь выбирает одну из подсказок */
+                                                onSelect: function (suggestion) {
+                                                    //console.log(suggestion.data.country);
+                                                    CountryTB.SetText(suggestion.data.country);
+                                                    RegionTB.SetText(suggestion.data.region_with_type);
+
+                                                    if (suggestion.data.area_with_type == null) {
+                                                        RegionDistrictTB.SetText('нет');
+                                                    }
+                                                    else {
+                                                        RegionDistrictTB.SetText(suggestion.data.area_with_type);
+                                                    }
+
+                                                    if (suggestion.data.settlement == null) {
+                                                        LocalityNameTB.SetText(suggestion.data.city);
+                                                    }
+                                                    else {
+                                                        LocalityNameTB.SetText(suggestion.data.settlement);
+                                                    }
+                                                    StreetNameTB.SetText(suggestion.data.street_with_type);
+
+                                                    if (suggestion.data.block == null) {
+                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house);
+                                                    }
+                                                    else {
+                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house + ' ' + suggestion.data.block_type_full + ' ' + suggestion.data.block);
+                                                    }
+
+                                                    ApartmentTB.SetText(suggestion.data.flat);
+
+                                                    console.log(suggestion.data.area_with_type);
+
+                                                    address.value = '';
+                                                }
+                                            });
+                                        </script>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Страна" FieldName="Country">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="CountryTB" ClientInstanceName="CountryTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Субъект РФ" FieldName="Region">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="RegionTB" ClientInstanceName="RegionTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Район субъекта РФ" FieldName="RegionDistrict">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="RegionDistrictTB" ClientInstanceName="RegionDistrictTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Нас.пункт" FieldName="LocalityName">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="LocalityNameTB" ClientInstanceName="LocalityNameTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Улица" FieldName="StreetName">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="StreetNameTB" ClientInstanceName="StreetNameTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Дом" FieldName="House">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="HouseTB" ClientInstanceName="HouseTB" runat="server" />
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Квартира" FieldName="Apartment">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                        <dx:ASPxTextBox ID="ApartmentTB" ClientInstanceName="ApartmentTB" runat="server" />
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
 
                         </Items>
                     </dx:LayoutGroup>
-
-                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Опубликовать у партнеров">
-                        <Items>
-
-                            <dx:LayoutItem Caption="Yandex" FieldName="YandexFeed">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-
-                                        <dx:ASPxCheckBox ID="YandexFeedCheckBox" ClientInstanceName="YandexFeedCheckBox" runat="server" AllowGrayed="false">
-                                            <ClientSideEvents CheckedChanged="function(s,e){ if(YandexFeedCheckBox.GetValue() == true) { if(CheckFeed(0) == 0){ YandexFeedCheckBox.SetValue(false); } } }" />
-                                        </dx:ASPxCheckBox>
-
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="ЦИАН" FieldName="CianFeed">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-
-                                        <dx:ASPxCheckBox ID="CianFeedCheckBox" ClientInstanceName="CianFeedCheckBox" runat="server" AllowGrayed="false">
-                                            <ClientSideEvents CheckedChanged="function(s,e){ if(CianFeedCheckBox.GetValue() == true) { if(CheckFeed(1) == 0){ CianFeedCheckBox.SetValue(false); } } }" />
-                                        </dx:ASPxCheckBox>
-
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                        </Items>
-                    </dx:LayoutGroup>
+                    
 
                 </Items>
             </dx:LayoutGroup>                       
@@ -374,6 +447,46 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
+                    <dx:LayoutItem FieldName="HouseType" Caption="Тип дома">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxComboBox ID="HouseTypeCB" ClientInstanceName="HouseTypeCB" runat="server" Width="100%" DataSourceID="HouseTypeDS" ValueField="ID" TextField="MetaName" AllowNull="true" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="Ipoteka" Caption="Ипотека">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxCheckBox ID="IpotekaCheckBox" ClientInstanceName="IpotekaCheckBox" runat="server" AllowGrayed="false" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="ElitProperty" Caption="Элитная недвижимость">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxCheckBox ID="ElitPropertyCheckBox" ClientInstanceName="ElitPropertyCheckBox" runat="server" AllowGrayed="false" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
+                    <dx:LayoutItem FieldName="VIP" Caption="VIP объявление">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+
+                                <dx:ASPxCheckBox ID="VIPCheckBox" ClientInstanceName="VIPCheckBox" runat="server" AllowGrayed="false" />
+
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+
                 </Items>
             </dx:LayoutGroup>
 
@@ -384,119 +497,19 @@
                 </SpanRules>
                 <Items>
 
-                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Адрес объекта">
+                    
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Описание" >
                         <Items>
 
-                            <dx:LayoutItem ShowCaption="False">
+                            <dx:LayoutItem FieldName="Description" ShowCaption="False">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                                        <label for="address">Начните вводить адрес для поиска:</label><br>
-                                        <input id="address" name="address" type="text" style="line-height:25px"  />
+                                        <dx:ASPxMemo ID="DescriptionMemo" ClientInstanceName="DescriptionMemo" runat="server" Width="100%" Rows="7" Border-BorderStyle="None">
+                                            <ValidationSettings ValidateOnLeave="true" ErrorDisplayMode="Text" Display="Dynamic" ErrorTextPosition="Bottom" 
+                                                RequiredField-IsRequired="true" RequiredField-ErrorText="Заполните описание" ErrorFrameStyle-Font-Size="Smaller"/>                                            
+                                        </dx:ASPxMemo>
 
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                                        <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css" rel="stylesheet" />
-                                        <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js"></script>
-
-
-                                        <script>
-
-                                            $("#address").suggestions({
-                                                token: "ef658f0261b64dfea6077ff246d9337cdaab6a5a",
-                                                type: "ADDRESS",
-                                                /* Вызывается, когда пользователь выбирает одну из подсказок */
-                                                onSelect: function (suggestion) {
-                                                    //console.log(suggestion.data.country);
-                                                    CountryTB.SetText(suggestion.data.country);
-                                                    RegionTB.SetText(suggestion.data.region_with_type);
-
-                                                    if (suggestion.data.area_with_type == null) {
-                                                        RegionDistrictTB.SetText('нет');
-                                                    }
-                                                    else {
-                                                        RegionDistrictTB.SetText(suggestion.data.area_with_type);
-                                                    }                                                                                                       
-
-                                                    if (suggestion.data.settlement == null) {
-                                                        LocalityNameTB.SetText(suggestion.data.city);
-                                                    }
-                                                    else {
-                                                        LocalityNameTB.SetText(suggestion.data.settlement);
-                                                    }
-                                                    StreetNameTB.SetText(suggestion.data.street_with_type);
-
-                                                    if (suggestion.data.block == null) {
-                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house);
-                                                    }
-                                                    else {
-                                                        HouseTB.SetText(suggestion.data.house_type + ' ' + suggestion.data.house + ' ' + suggestion.data.block_type_full + ' ' + suggestion.data.block);
-                                                    }
-                                                    
-                                                    ApartmentTB.SetText(suggestion.data.flat);
-
-                                                    console.log(suggestion.data.area_with_type);
-
-                                                    address.value = '';
-                                                }
-                                            });
-                                        </script>
-
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Страна" FieldName="Country">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="CountryTB" ClientInstanceName="CountryTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Субъект РФ" FieldName="Region">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="RegionTB" ClientInstanceName="RegionTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Район субъекта РФ" FieldName="RegionDistrict">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="RegionDistrictTB" ClientInstanceName="RegionDistrictTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Нас.пункт" FieldName="LocalityName">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="LocalityNameTB" ClientInstanceName="LocalityNameTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Улица" FieldName="StreetName">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="StreetNameTB" ClientInstanceName="StreetNameTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Дом" FieldName="House">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="HouseTB" ClientInstanceName="HouseTB" runat="server" />
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Квартира" FieldName="Apartment">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server">
-                                        <dx:ASPxTextBox ID="ApartmentTB" ClientInstanceName="ApartmentTB" runat="server" />
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
@@ -504,6 +517,59 @@
                         </Items>
                     </dx:LayoutGroup>
 
+                    <dx:LayoutGroup GroupBoxDecoration="Box" Caption="Опубликовать у партнеров">
+                        <Items>
+
+                            <dx:LayoutItem Caption="Yandex" FieldName="YandexFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="YandexFeedCheckBox" ClientInstanceName="YandexFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(YandexFeedCheckBox.GetValue() == true) { if(CheckFeed(0) == 0){ YandexFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="ЦИАН" FieldName="CianFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="CianFeedCheckBox" ClientInstanceName="CianFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(CianFeedCheckBox.GetValue() == true) { if(CheckFeed(1) == 0){ CianFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="Авито" FieldName="AvitoFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="AvitoFeedCheckBox" ClientInstanceName="AvitoFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(AvitoFeedCheckBox.GetValue() == true) { if(CheckFeed(2) == 0){ AvitoFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                            <dx:LayoutItem Caption="ДомКлик" FieldName="DomClickFeed">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer runat="server">
+
+                                        <dx:ASPxCheckBox ID="DomClickFeedCheckBox" ClientInstanceName="DomClickFeedCheckBox" runat="server" AllowGrayed="false">
+                                            <ClientSideEvents CheckedChanged="function(s,e){ if(DomClickFeedCheckBox.GetValue() == true) { if(CheckFeed(3) == 0){ DomClickFeedCheckBox.SetValue(false); } } }" />
+                                        </dx:ASPxCheckBox>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+
+                        </Items>
+                    </dx:LayoutGroup>
 
                     
 
@@ -546,35 +612,11 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem FieldName="Ipoteka" Caption="Ипотека">
-                        <LayoutItemNestedControlCollection>
-                            <dx:LayoutItemNestedControlContainer runat="server">
+                    
 
-                                <dx:ASPxCheckBox ID="IpotekaCheckBox" ClientInstanceName="IpotekaCheckBox" runat="server" AllowGrayed="false" />
+                    
 
-                            </dx:LayoutItemNestedControlContainer>
-                        </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
-
-                    <dx:LayoutItem FieldName="VIP" Caption="VIP объявление">
-                        <LayoutItemNestedControlCollection>
-                            <dx:LayoutItemNestedControlContainer runat="server">
-
-                                <dx:ASPxCheckBox ID="VIPCheckBox" ClientInstanceName="VIPCheckBox" runat="server" AllowGrayed="false" />
-
-                            </dx:LayoutItemNestedControlContainer>
-                        </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
-
-                    <dx:LayoutItem FieldName="ElitProperty" Caption="Элитная недвижимость">
-                        <LayoutItemNestedControlCollection>
-                            <dx:LayoutItemNestedControlContainer runat="server">
-
-                                <dx:ASPxCheckBox ID="ElitPropertyCheckBox" ClientInstanceName="ElitPropertyCheckBox" runat="server" AllowGrayed="false" />
-
-                            </dx:LayoutItemNestedControlContainer>
-                        </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
+                    
 
 <%--                    <dx:LayoutItem FieldName="Sale" Caption="Продано">
                         <LayoutItemNestedControlCollection>
@@ -645,6 +687,17 @@
                         order by OrderBy" >
         <SelectParameters>
             <asp:Parameter Name="Category" DefaultValue="Вид из окна"  DbType="String"  />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="HouseTypeDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>' 
+        SelectCommand=" SELECT ID, MetaName
+                        FROM [dbo].[PropertyMetaNames]
+                        where MetaCategory = @Category
+                          and NoShow = 0 
+                        order by OrderBy" >
+        <SelectParameters>
+            <asp:Parameter Name="Category" DefaultValue="Тип дома"  DbType="String"  />
         </SelectParameters>
     </asp:SqlDataSource>
 
@@ -780,11 +833,11 @@
                     alert('Невозможно опубликовать объявление: истек срок актуальности');
                 }
                 else {
-                    if (AdStatusCB.GetValue() == 73 && (YandexFeedCheckBox.GetValue() == true || CianFeedCheckBox.GetValue() == true)) { //если объявление в статусе Опубликовано + опубликовать на Yandex/Cian
+                    if (AdStatusCB.GetValue() == 73 && (YandexFeedCheckBox.GetValue() == true || CianFeedCheckBox.GetValue() == true || AvitoFeedCheckBox.GetValue() == true || DomClickFeedCheckBox.GetValue() == true)) { //если объявление в статусе Опубликовано + опубликовать на Yandex/Cian/Авито/домклик
 
                         var res = 0;
                         var feed = 0;
-                        let arr = { 0: YandexFeedCheckBox.GetValue(), 1: CianFeedCheckBox.GetValue(), length: 2 };
+                        let arr = { 0: YandexFeedCheckBox.GetValue(), 1: CianFeedCheckBox.GetValue(), 2: AvitoFeedCheckBox.GetValue(), 3: DomClickFeedCheckBox.GetValue(), length: 4 };
                         for (let i = 0; i < arr.length; i++) {
                             if (arr[i] == true) {
                                 feed = feed + 1;
@@ -948,7 +1001,107 @@
                 }
             }
 
+            else if (TypeFeed == 2) { // Проверка для АВИТО
 
+                if (TypeCB.GetValue() != 1) {
+                    alert('Публикация на АВИТО возможна только для Вторичного рынка');
+                    return 0;
+                }
+                else if (CountryTB.GetText() == '' || RegionTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '') {
+                    alert('Для публикации на АВИТО необходимо заполнить Адрес объекта (страна, субъект РФ, нас.пункт, улица, дом)');
+                    return 0;
+                }
+                else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '') {
+                    alert('Для публикации на АВИТО необходимы данные агента. Обратитесь к разработчику');
+                    return 0;
+                }
+                else if (PriceSpin.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать стоимость объекта');
+                    return 0;
+                }
+                else if (ApartmentAreaSpin.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать площадь объекта');
+                    return 0;
+                }
+                else if (RoomsSpin.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать количество комнат');
+                    return 0;
+                }
+                else if (FloorSpin.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать этаж');
+                    return 0;
+                }
+                else if (TotalFloorSpin.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать общее количество этажей в доме');
+                    return 0;
+                }
+                else if (DescriptionMemo.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать описание объекта');
+                    return 0;
+                }
+                else if (DescriptionMemo.GetText().length > 5000) {
+                    alert('Слишком длинное описание для публикации на АВИТО');
+                    return 0;
+                }
+                else if (StatusCB.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать статус объекта');
+                    return 0;
+                }
+                else if (HouseTypeCB.GetValue() == null) {
+                    alert('Для публикации на АВИТО необходимо указать тип дома');
+                    return 0;
+                }
+                else if (FileManager.GetItems().length > 40) {
+                    alert('Слишком много фото для публикации на АВИТО');
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
+
+            }
+
+            else if (TypeFeed == 3) { //Проверка для ДомКлик
+                if (TypeCB.GetValue() != 1) {
+                    alert('Публикация на ДомКлик возможна только для Вторичного рынка');
+                    return 0;
+                }
+                else if (CountryTB.GetText() == '' || RegionTB.GetText() == '' || RegionDistrictTB.GetText() == '' || LocalityNameTB.GetText() == '' || StreetNameTB.GetText() == '' || HouseTB.GetText() == '' || ApartmentTB.GetText() == '') {
+                    alert('Для публикации на ДомКлик необходимо заполнить все поля в Адресе объекта');
+                    return 0;
+                }
+                else if (AgentNameTB.GetText() == '' || AgentPhoneTB.GetText() == '') {
+                    alert('Для публикации на ДомКлик необходимы данные агента. Обратитесь к разработчику');
+                    return 0;
+                }
+                else if (PriceSpin.GetValue() == null) {
+                    alert('Для публикации на ДомКлик необходимо указать стоимость объекта');
+                    return 0;
+                }
+                else if (RegistrationCB.GetValue() != 47) {
+                    alert('Публикация на ДомКлик возможна только для объявлений с оформлением ПРАВО СОБСТВЕННОСТИ (ПРЯМАЯ ПРОДАЖА)');
+                    return 0;
+                }
+                else if (ApartmentAreaSpin.GetValue() == null) {
+                    alert('Для публикации на ДомКлик необходимо указать площадь объекта');
+                    return 0;
+                }
+                else if (RoomsSpin.GetValue() == null) {
+                    alert('Для публикации на ДомКлик необходимо указать количество комнат');
+                    return 0;
+                }
+                else if (FloorSpin.GetValue() == null) {
+                    alert('Для публикации на ДомКлик необходимо указать этаж');
+                    return 0;
+                }
+                else if (FileManager.GetItems().length < 3) {
+                    alert('Для публикации на ДомКлик необходимо загрузить минимум 3 фотографии объекта');
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
+            }
         }
 
 

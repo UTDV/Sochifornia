@@ -32,31 +32,67 @@ Partial Public Class PropertyData
     Protected WithEvents FileManager As Global.DevExpress.Web.ASPxFileManager
 
     '''<summary>
-    '''DescriptionMemo элемент управления.
+    '''CountryTB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents DescriptionMemo As Global.DevExpress.Web.ASPxMemo
+    Protected WithEvents CountryTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
-    '''YandexFeedCheckBox элемент управления.
+    '''RegionTB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents YandexFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
+    Protected WithEvents RegionTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
-    '''CianFeedCheckBox элемент управления.
+    '''RegionDistrictTB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents CianFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
+    Protected WithEvents RegionDistrictTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''LocalityNameTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents LocalityNameTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''StreetNameTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents StreetNameTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''HouseTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents HouseTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''ApartmentTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ApartmentTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''CreatedDE элемент управления.
@@ -248,67 +284,85 @@ Partial Public Class PropertyData
     Protected WithEvents LandAreaSpin As Global.DevExpress.Web.ASPxSpinEdit
 
     '''<summary>
-    '''CountryTB элемент управления.
+    '''HouseTypeCB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents CountryTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents HouseTypeCB As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
-    '''RegionTB элемент управления.
+    '''IpotekaCheckBox элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents RegionTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents IpotekaCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
-    '''RegionDistrictTB элемент управления.
+    '''ElitPropertyCheckBox элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents RegionDistrictTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents ElitPropertyCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
-    '''LocalityNameTB элемент управления.
+    '''VIPCheckBox элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents LocalityNameTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents VIPCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
-    '''StreetNameTB элемент управления.
+    '''DescriptionMemo элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents StreetNameTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents DescriptionMemo As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
-    '''HouseTB элемент управления.
+    '''YandexFeedCheckBox элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents HouseTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents YandexFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
-    '''ApartmentTB элемент управления.
+    '''CianFeedCheckBox элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents ApartmentTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents CianFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
+
+    '''<summary>
+    '''AvitoFeedCheckBox элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents AvitoFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
+
+    '''<summary>
+    '''DomClickFeedCheckBox элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents DomClickFeedCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
     '''ActualUntilDE элемент управления.
@@ -336,33 +390,6 @@ Partial Public Class PropertyData
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents ComissionTB As Global.DevExpress.Web.ASPxTextBox
-
-    '''<summary>
-    '''IpotekaCheckBox элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents IpotekaCheckBox As Global.DevExpress.Web.ASPxCheckBox
-
-    '''<summary>
-    '''VIPCheckBox элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents VIPCheckBox As Global.DevExpress.Web.ASPxCheckBox
-
-    '''<summary>
-    '''ElitPropertyCheckBox элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents ElitPropertyCheckBox As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
     '''SaveButton элемент управления.
@@ -399,6 +426,15 @@ Partial Public Class PropertyData
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents WindowViewDS As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''HouseTypeDS элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents HouseTypeDS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''StoveDS элемент управления.
