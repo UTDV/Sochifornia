@@ -9,7 +9,7 @@ Public Class RouteConfig
         routes.MapPageRoute("", "Default", "~/Default.aspx")
         'routes.MapPageRoute("", "Customers", "~/Customers.aspx")
         routes.MapPageRoute("Object", "object/{id}", "~/PropertyDetails.aspx")
-
+        routes.MapPageRoute("Novosti", "novosti/{slug}", "~/PostNewsDetails.aspx")
 
     End Sub
 

@@ -183,8 +183,10 @@
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="PropertyData.aspx" />
+    <Content Include="ObjectsCardView.aspx" />
     <Content Include="PostEditPage.aspx" />
+    <Content Include="PostNewsDetails.aspx" />
+    <Content Include="PostNewsList.aspx" />
     <Content Include="PostRegister.aspx" />
     <Content Include="PropertyDetails.aspx" />
     <Content Include="PropertyRegister.aspx" />
@@ -358,11 +360,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PropertyData.aspx.designer.vb">
-      <DependentUpon>PropertyData.aspx</DependentUpon>
+    <Compile Include="ObjectsCardView.aspx.designer.vb">
+      <DependentUpon>ObjectsCardView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PropertyData.aspx.vb">
-      <DependentUpon>PropertyData.aspx</DependentUpon>
+    <Compile Include="ObjectsCardView.aspx.vb">
+      <DependentUpon>ObjectsCardView.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PostEditPage.aspx.designer.vb">
@@ -370,6 +372,20 @@
     </Compile>
     <Compile Include="PostEditPage.aspx.vb">
       <DependentUpon>PostEditPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PostNewsDetails.aspx.designer.vb">
+      <DependentUpon>PostNewsDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostNewsDetails.aspx.vb">
+      <DependentUpon>PostNewsDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PostNewsList.aspx.designer.vb">
+      <DependentUpon>PostNewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostNewsList.aspx.vb">
+      <DependentUpon>PostNewsList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PostRegister.aspx.designer.vb">

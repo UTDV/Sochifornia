@@ -16,8 +16,10 @@
                         <dx:LayoutGroup Width="70%" ShowCaption="False">
                             <Items>
                                 <dx:LayoutItem FieldName="Header" Caption="Заголовок">
+                                    
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
+                                            
                                             <dx:ASPxTextBox runat="server" Width="100%" ID="Header_TB" ClientInstanceName="Header_TB">
                                                 <ClientSideEvents TextChanged="function (s,e) {CBack_TB.PerformCallback(Header_TB.GetText());}" />
                                             </dx:ASPxTextBox>

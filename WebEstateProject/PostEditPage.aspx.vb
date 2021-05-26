@@ -270,13 +270,13 @@ Public Class PostEditPage
         Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
         Dim fn = e.UploadedFile.FileName
         Dim g = Guid.NewGuid()
-        Dim url = MapPath("~\Content\PostsFoto\" & g.ToString)
+        Dim url = MapPath("~\Content\PostsFoto\" & g.ToString + ".png")
         e.UploadedFile.SaveAs(url)
 
         Dim cmd As New SqlCommand("Update Posts set  ImageUrl = @Url where Id = @ID", c)
 
         cmd.Parameters.AddWithValue("ID", Request.QueryString("id"))
-        cmd.Parameters.AddWithValue("Url", g.ToString)
+        cmd.Parameters.AddWithValue("Url", g.ToString + ".png")
         c.Open()
         cmd.ExecuteNonQuery()
         c.Close()
