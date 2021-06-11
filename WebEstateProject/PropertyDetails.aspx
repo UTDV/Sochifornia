@@ -287,7 +287,7 @@
             </dx:LayoutGroup>
 
             <dx:LayoutGroup Name="ServiceInfo" Caption="Служебная информация" GroupBoxDecoration="Box" ColumnSpan="2" RowSpan="1" ParentContainerStyle-Paddings-Padding="10"
-                GroupBoxStyle-Caption-Font-Size="12" SettingsItemCaptions-AllowWrapCaption="False" SettingsItemCaptions-VerticalAlign="Middle" Visible="false">
+                GroupBoxStyle-Caption-Font-Size="12" SettingsItemCaptions-AllowWrapCaption="False" SettingsItemCaptions-VerticalAlign="Middle" ClientVisible="false">
                 <CellStyle CssClass="FontClassSize" />
 
                 <Items>

@@ -131,7 +131,7 @@ Public Class PropertyDetails
             'отображение служебной информации и кнопки редактирования
             If Request.IsAuthenticated = True Then
 
-                FormLayout.FindItemOrGroupByName("ServiceInfo").Visible = True
+                FormLayout.FindItemOrGroupByName("ServiceInfo").ClientVisible = True
 
                 If Session("Role") = "60" Or Session("Role") = "69" Then
 
