@@ -50,15 +50,6 @@ Partial Public Class PostRegister
     Protected WithEvents PostCategory As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
-    '''CreateBtn элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents CreateBtn As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
     '''CancelBtn элемент управления.
     '''</summary>
     '''<remarks>
@@ -68,6 +59,15 @@ Partial Public Class PostRegister
     Protected WithEvents CancelBtn As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
+    '''CreateBtn элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CreateBtn As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
     '''PostCategoryDS элемент управления.
     '''</summary>
     '''<remarks>
@@ -75,4 +75,13 @@ Partial Public Class PostRegister
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents PostCategoryDS As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''CBackView элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackView As Global.DevExpress.Web.ASPxCallback
 End Class

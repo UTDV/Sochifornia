@@ -182,6 +182,12 @@ Public Class PostEditPage
 
         Try
             System.Threading.Thread.Sleep(500)
+
+
+            'Dim mStream As MemoryStream = New MemoryStream()
+            'HTML_TB.Export(DevExpress.Web.ASPxHtmlEditor.HtmlEditorExportFormat.Txt, mStream)
+            'Dim plainText As String = System.Text.Encoding.UTF8.GetString(mStream.ToArray())
+
             Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
             Dim cmd As New SqlCommand("Update Posts
                                         set Created = @Created

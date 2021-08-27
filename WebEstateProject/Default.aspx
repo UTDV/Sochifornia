@@ -29,14 +29,14 @@
 
     <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
 
-    <dx:ASPxFormLayout ID="FormLayout" runat="server" Width="100%" ColumnCount="3">
+    <dx:ASPxFormLayout ID="FormLayout" runat="server" Width="100%" ColumnCount="1" >
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="1400" />
         <Items>
 
-            <dx:EmptyLayoutItem ColumnSpan="1" Width="10%" />
+           <%-- <dx:EmptyLayoutItem ColumnSpan="1" Width="10%" />--%>
 
 
-            <dx:LayoutItem ShowCaption="False" Width="80%">
+            <dx:LayoutItem ShowCaption="False" Width="100%">
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
                         
@@ -457,7 +457,7 @@
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
 
-            <dx:EmptyLayoutItem ColumnSpan="1" Width="10%" />
+           <%-- <dx:EmptyLayoutItem ColumnSpan="1" Width="10%" />--%>
 
         </Items>
     </dx:ASPxFormLayout>

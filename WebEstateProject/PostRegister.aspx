@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/DeepWeb.Master" CodeBehind="PostRegister.aspx.vb" Inherits="WebEstateProject.PostRegister" %>
+﻿<%@ Page Title="Список публикаций" Language="vb" AutoEventWireup="false" MasterPageFile="~/DeepWeb.Master" CodeBehind="PostRegister.aspx.vb" Inherits="WebEstateProject.PostRegister" %>
 
 <%@ Register Assembly="DevExpress.Web.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
@@ -20,7 +20,7 @@
             if(e.item.name == 'New') {  fOpenPage(s,e);  } 
             if(e.item.name == 'Edit') { if(PostsRegisterGrid.GetFocusedRowIndex() == null || PostsRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { fOpenPage(s,e); } } 
             if(e.item.name == 'View') { if(PostsRegisterGrid.GetFocusedRowIndex() == null || PostsRegisterGrid.GetFocusedRowIndex() == -1) { alert('Выберите объект'); } else { fOpenPage(s,e); } } }"
-            RowDblClick="function (s,e) { fOpenPage(s,e); }" />
+            RowDblClick="function (s,e) {  }" />
 
         <SettingsBehavior AllowFocusedRow="true" EnableCustomizationWindow="true" ConfirmDelete="true" />
 
@@ -81,49 +81,59 @@
 
     <dx:ASPxPopupControl ID="PostCategoryPopup" ClientInstanceName="TypePopup" runat="server" Modal="true"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" HeaderText="Выберите тип страницы" AllowDragging="true"
-        AutoUpdatePosition="true" HeaderStyle-HorizontalAlign="Center" ShowCloseButton="true" CloseAction="CloseButton" >
+        AutoUpdatePosition="true" HeaderStyle-HorizontalAlign="Center" ShowCloseButton="false" CloseAction="None" >
         
 
-        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowCenter" MaxWidth="250px" />
+        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowCenter" MaxWidth="300px" />
 
         <ContentStyle Paddings-Padding="20px" />
 
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
 
-                <dx:ASPxComboBox ID ="PostCategory" runat ="server" ClientInstanceName ="PostCategory" DataSourceID ="PostCategoryDS" ValueField ="ID" TextField ="MetaName">
+                <dx:ASPxComboBox ID="PostCategory" ClientInstanceName="PostCategory" runat="server" DataSourceID="PostCategoryDS" 
+                    ValueField ="ID" TextField ="MetaName" Width="100%" CssClass="mb-3" />
 
-                </dx:ASPxComboBox>
-                <p />
-                <dx:ASPxButton ID ="CreateBtn" ClientInstanceName ="CreateBtn" runat ="server" AutoPostBack ="false" Text ="Создать">
-                    <ClientSideEvents Click ="function (s,e) {
+                <div class="row justify-content-around">
+
+                    <dx:ASPxButton ID="CancelBtn" ClientInstanceName="CancelBtn" runat="server" AutoPostBack="false" Text="Отмена" RenderMode="Secondary">
+                        <ClientSideEvents Click="function (s,e) { PostCategory.SetValue(''); TypePopup.HideWindow(); }" />
+                    </dx:ASPxButton>
+
+                    <dx:ASPxButton ID="CreateBtn" ClientInstanceName="CreateBtn" runat="server" AutoPostBack="false" Text="Создать" >
+                        <ClientSideEvents Click="function (s,e) {
+                            if(PostCategory.GetValue() != null) {
                                                                 var redirectWindow = window.open('PostEditPage.aspx?slug=new&type='+PostCategory.GetValue()); 
                                                                 PostCategory.SetValue('');
                                                                 TypePopup.HideWindow(); 
                                                                 redirectWindow.location;  
-                                                                    }" />
+                                                                    }
+                            }" />
 
-                </dx:ASPxButton>
-                <dx:ASPxButton ID ="CancelBtn" ClientInstanceName ="CancelBtn" runat ="server" AutoPostBack ="false" Text ="Отмена" RenderMode ="Secondary"  >
-                    <ClientSideEvents Click ="function (s,e) { PostCategory.SetValue(''); TypePopup.HideWindow(); }" />
-                </dx:ASPxButton>
-
+                    </dx:ASPxButton>
+                    
+                </div>
 
                 <asp:SqlDataSource ID="PostCategoryDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>'
                     SelectCommand=" SELECT ID, MetaName
-                        FROM [dbo].[PostsMetaNames]
-                        where MetaCategory = @Category 
-                          and NoShow = 0
-                        order by OrderBy">
+                                    FROM [dbo].[PostsMetaNames]
+                                    where MetaCategory = @Category 
+                                      and NoShow = 0
+                                    order by OrderBy">
                     <SelectParameters>
                         <asp:Parameter Name="Category" DefaultValue="Категория" DbType="String" />
                     </SelectParameters>
                 </asp:SqlDataSource>
+
             </dx:PopupControlContentControl>
         </ContentCollection>
 
 
     </dx:ASPxPopupControl>
+
+    <dx:ASPxCallback ID="CBackView" ClientInstanceName="CBackView" runat="server" OnCallback="CBackView_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e) { CBackViewResult(e.result); }" />
+    </dx:ASPxCallback>
 
     <script type="text/javascript">
 
@@ -133,15 +143,35 @@
             if (e.item.name == 'New') {
                 TypePopup.Show();
             }
-            else {
-                PostsRegisterGrid.GetRowValues(PostsRegisterGrid.GetFocusedRowIndex(), 'ID', fRedirect)
+            else if (e.item.name == 'Edit') {
+                PostsRegisterGrid.GetRowValues(PostsRegisterGrid.GetFocusedRowIndex(), 'ID', fEditRedirect)
+            }
+            else if (e.item.name == 'View') {
+                PostsRegisterGrid.GetRowValues(PostsRegisterGrid.GetFocusedRowIndex(), 'ID', fViewRedirect)
             }
 
         }
 
-        function fRedirect(vl) {
+        function fEditRedirect(vl) {
             var redirectWindow = window.open('PostEditPage.aspx?id=' + vl);
             redirectWindow.location;
+        }
+
+        function fViewRedirect(vl) {
+            CBackView.PerformCallback(vl);
+        }
+
+        function CBackViewResult(vl) {
+            if (vl == 'error') {
+                alert('Что-то пошло не так...');
+            }
+            else if (vl == 'noslug') {
+                alert('Не указан slug');
+            }
+            else {
+                var redirectWindow = window.open('novosti/' + vl + '?type=view');
+                redirectWindow.location;
+            }
         }
 
     </script>

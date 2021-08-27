@@ -107,7 +107,7 @@
 
 
                                             <dx:ASPxMenu ID="LKMenu" runat="server" Border-BorderStyle="None" BackColor="Transparent" CssClass="PrintButtonClass" 
-                                                AutoPostBack="false" >
+                                                AutoPostBack="false" SeparatorColor="Transparent" >
                                                 <ClientSideEvents ItemClick="function(s,e){ MenuItemClick(s,e); }" />
                                                 <Items>
                                                     <dx:MenuItem Name="AuthorizationBtn" Text="Вход" Image-Url="~/Content/Icons/Login.png" NavigateUrl="Users/LoginUser.aspx" />
@@ -118,6 +118,13 @@
                                                             <dx:MenuItem Text="Список публикаций" Name="PostsList" NavigateUrl="PostRegister.aspx" Visible="false" />
                                                             <dx:MenuItem Text="Список пользователей" Name="UsersList" NavigateUrl="Users/UsersList.aspx" Visible="false" />
                                                             <dx:MenuItem Text="Выход" Name="ExitButton" BeginGroup="true"  />
+                                                        </Items>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="">
+                                                        <Image Url="Content/Icons/HamburgerButton.png" />
+                                                        <Items>
+                                                            <dx:MenuItem Text="Объявления" NavigateUrl="Default.aspx" />
+                                                            <dx:MenuItem Text="Новости" NavigateUrl="PostNewsList.aspx" />
                                                         </Items>
                                                     </dx:MenuItem>
                                                 </Items>

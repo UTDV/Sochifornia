@@ -129,6 +129,7 @@ Public Class Site1
 
                 If userRole = "60" Then
                     LKMenu.Items.FindByName("UsersList").Visible = True
+                    LKMenu.Items.FindByName("PostsList").Visible = True
                 End If
 
             End If

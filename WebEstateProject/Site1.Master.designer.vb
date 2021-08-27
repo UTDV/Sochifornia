@@ -32,15 +32,6 @@ Partial Public Class Site1
     Protected WithEvents TopPanel As Global.DevExpress.Web.ASPxPanel
 
     '''<summary>
-    '''HeadFormLayout элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents HeadFormLayout As Global.DevExpress.Web.ASPxFormLayout
-
-    '''<summary>
     '''HeadLine элемент управления.
     '''</summary>
     '''<remarks>

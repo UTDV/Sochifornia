@@ -161,12 +161,14 @@
     <Content Include="Content\Fonts\caveat-v10-latin_cyrillic-700.svg" />
     <Content Include="Content\Fonts\caveat-v10-latin_cyrillic-regular.svg" />
     <Content Include="Content\Fonts\comfortaa-v29-latin_cyrillic-700.svg" />
+    <Content Include="Content\Foto\007\News\News.jpg" />
     <Content Include="Content\Foto\007\placeholder.png" />
     <Content Include="Content\Icons\CameraIcon.png" />
     <Content Include="Content\Icons\down.png" />
     <Content Include="Content\Icons\envelope.png" />
     <Content Include="Content\Icons\exit.png" />
     <Content Include="Content\Icons\EyeIcon.png" />
+    <Content Include="Content\Icons\HamburgerButton.png" />
     <Content Include="Content\Icons\Login.png" />
     <Content Include="Content\Icons\pencil.png" />
     <Content Include="Content\Icons\plus.png" />
@@ -180,14 +182,124 @@
     <Content Include="Content\Logo\Logo2.png" />
     <Content Include="Content\notify.css" />
     <Content Include="Content\notify.min.css" />
+    <Content Include="Content\PostsFoto\10\1.jpg" />
+    <Content Include="Content\PostsFoto\10\2.jpg" />
+    <Content Include="Content\PostsFoto\180ccb26-7221-4ae1-8825-32d34c7bce4b.png" />
+    <Content Include="Content\PostsFoto\4\123.JPG" />
+    <Content Include="Content\PostsFoto\4\instr1.png" />
+    <Content Include="Content\PostsFoto\4\instr2.jpg" />
+    <Content Include="Content\PostsFoto\4\instr3.png" />
+    <Content Include="Content\PostsFoto\5\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\5\phone register.jpg" />
+    <Content Include="Content\PostsFoto\5\rad.jpg" />
+    <Content Include="Content\PostsFoto\67a70888-3b87-400d-8033-9cdad7827279.png" />
+    <Content Include="Content\PostsFoto\68b48f5a-7a20-4c0a-bcd3-3d57ebde68e5.png" />
+    <Content Include="Content\PostsFoto\6\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\6\test1.jpg" />
+    <Content Include="Content\PostsFoto\6\test2.jpg" />
+    <Content Include="Content\PostsFoto\6\test3.jpg" />
+    <Content Include="Content\PostsFoto\750b95dd-a304-4440-b0de-cd9dfef76619.png" />
+    <Content Include="Content\PostsFoto\98398520-04c5-4266-aa37-04b6746b324d.png" />
+    <Content Include="Content\PostsFoto\98551efe-628a-4be6-a749-361a0f4e39a3.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\100x100.2\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\100x100.2\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\100x100.2\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\100x100.2\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\1200x1200.0\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\1200x1200.0\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\1200x1200.0\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\1200x1200.0\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\90x90.2\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\90x90.2\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\90x90.2\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\086f824a5c256a4e053cbd84452a5072\90x90.2\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\100x100.2\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\100x100.2\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\100x100.2\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\1200x1200.0\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\1200x1200.0\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\1200x1200.0\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\90x90.2\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\90x90.2\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\2180a691da0f0404d38b2f6cb94254b8\90x90.2\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\100x100.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\100x100.2\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\100x100.2\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\100x100.2\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\1200x1200.0\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\1200x1200.0\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\1200x1200.0\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\1200x1200.0\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\150x150.2\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\150x150.2\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\150x150.2\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\90x90.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\90x90.2\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\90x90.2\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\41dc380e495a252fc7bde94ad47c0d0a\90x90.2\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\100x100.2\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\100x100.2\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\1200x1200.0\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\1200x1200.0\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\90x90.2\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\6426c9c7917a9f3cdf24d58d001f9187\90x90.2\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\100x100.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\100x100.2\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\100x100.2\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\100x100.2\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\100x100.2\Без названия.png" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\1200x1200.0\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\1200x1200.0\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\1200x1200.0\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\1200x1200.0\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\1200x1200.0\Без названия.png" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\90x90.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\90x90.2\news3 hitech.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\90x90.2\phone register.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\90x90.2\rad.jpg" />
+    <Content Include="Content\PostsFoto\Cache\91a6f837a08c76fdd9b66d0cdcff1b6b\90x90.2\Без названия.png" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\100x100.2\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\100x100.2\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\1200x1200.0\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\1200x1200.0\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\90x90.2\1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\cdfb112d0af38983ff7564173dbdc7fc\90x90.2\2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\100x100.2\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\100x100.2\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\100x100.2\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\100x100.2\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\1200x1200.0\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\1200x1200.0\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\1200x1200.0\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\1200x1200.0\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\90x90.2\123.JPG" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\90x90.2\instr1.png" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\90x90.2\instr2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\ced91827634b1cbd8231e4ecbd74693e\90x90.2\instr3.png" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\100x100.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\100x100.2\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\100x100.2\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\100x100.2\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\1200x1200.0\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\1200x1200.0\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\1200x1200.0\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\1200x1200.0\test3.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\90x90.2\moroz-iney-uzor-makro.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\90x90.2\test1.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\90x90.2\test2.jpg" />
+    <Content Include="Content\PostsFoto\Cache\fc947b1a9744a89c02029021be61d1f6\90x90.2\test3.jpg" />
+    <Content Include="Content\PostsFoto\EmptyPhotoNews.jpg" />
+    <Content Include="Content\PostsFoto\ff3c8845-854d-434d-a9cb-c4cfe6fe86f2.png" />
     <Content Include="Content\UsersContent\DefaultAvatar.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="NewAdList.aspx" />
     <Content Include="ObjectsCardView.aspx" />
     <Content Include="PostEditPage.aspx" />
     <Content Include="PostNewsDetails.aspx" />
     <Content Include="PostNewsList.aspx" />
     <Content Include="PostRegister.aspx" />
+    <Content Include="PropertyData.aspx" />
     <Content Include="PropertyDetails.aspx" />
     <Content Include="PropertyRegister.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -230,6 +342,7 @@
     <Content Include="Content\Fonts\caveat-v10-latin_cyrillic-regular.woff" />
     <Content Include="Content\Fonts\caveat-v10-latin_cyrillic-regular.woff2" />
     <Content Include="DeepWeb.Master" />
+    <Content Include="Content\PostsFoto\3934d2db-3c81-4405-bb7a-6fedf2835452" />
     <None Include="My Project\PublishProfiles\CustomProfile.pubxml" />
     <None Include="My Project\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
@@ -312,11 +425,13 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SendMail.aspx" />
+    <Content Include="SimilarNewsList.aspx" />
     <Content Include="Users\PersonalData.aspx" />
     <Content Include="Service.aspx" />
     <Content Include="Users\LoginUser.aspx" />
     <Content Include="Users\Registration.aspx" />
     <Content Include="Users\UsersList.aspx" />
+    <Content Include="VIPList.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +475,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="NewAdList.aspx.designer.vb">
+      <DependentUpon>NewAdList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewAdList.aspx.vb">
+      <DependentUpon>NewAdList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ObjectsCardView.aspx.designer.vb">
       <DependentUpon>ObjectsCardView.aspx</DependentUpon>
     </Compile>
@@ -395,6 +517,13 @@
       <DependentUpon>PostRegister.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PropertyData.aspx.designer.vb">
+      <DependentUpon>PropertyData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyData.aspx.vb">
+      <DependentUpon>PropertyData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PropertyDetails.aspx.designer.vb">
       <DependentUpon>PropertyDetails.aspx</DependentUpon>
     </Compile>
@@ -421,6 +550,13 @@
     </Compile>
     <Compile Include="Service.aspx.vb">
       <DependentUpon>Service.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SimilarNewsList.aspx.designer.vb">
+      <DependentUpon>SimilarNewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SimilarNewsList.aspx.vb">
+      <DependentUpon>SimilarNewsList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Site1.Master.designer.vb">
@@ -456,6 +592,13 @@
     </Compile>
     <Compile Include="Users\UsersList.aspx.vb">
       <DependentUpon>UsersList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="VIPList.aspx.designer.vb">
+      <DependentUpon>VIPList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VIPList.aspx.vb">
+      <DependentUpon>VIPList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
@@ -501,9 +644,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UploadTemp\" />
-    <Folder Include="Content\PostsFoto\" />
+    <Folder Include="Content\PostsFoto\2\" />
+    <Folder Include="Content\PostsFoto\3\" />
+    <Folder Include="Content\PostsFoto\7\" />
+    <Folder Include="Content\PostsFoto\9\" />
     <Folder Include="Content\Thumb\ImageGalleryThumb\" />
+    <Folder Include="Content\Thumb\NewAdThumb\" />
     <Folder Include="Content\Thumb\PostsThumb\" />
+    <Folder Include="Content\Thumb\VIPThumb\" />
     <Folder Include="Content\XMLFeed\" />
     <Folder Include="Controllers\" />
   </ItemGroup>

@@ -109,10 +109,85 @@
         }
 
 
+        //function myFunction(x) {
+        //    x.classList.toggle("change");
+
+        //    document.getElementById("myDropdown").classList.toggle("show");
+
+
+        //}
+
+
     </script>
 
 
+    <style type="text/css">
 
+
+        .containerButton {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 20px;
+            height: 2px;
+            background-color: #333;
+            margin:4px;
+            transition: 0.2s;
+        }
+        /*
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                  
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+
+
+        .show {display: block;}
+
+
+
+
+        .change .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-5px, 3px);
+            transform: rotate(-45deg) translate(-5px, 3px);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            -webkit-transform: rotate(45deg) translate(-5px, -4px);
+            transform: rotate(45deg) translate(-5px, -4px);
+        }*/
+        
+
+
+    </style>
 
 </head>
 
@@ -132,67 +207,75 @@
 
         <div><img src="https://mc.yandex.ru/watch/72756289" style="position:absolute; left:-9999px;" alt="" /></div>
 
-        <div class="container-fluid">
-            <dx:ASPxPanel ID="TopPanel" ClientInstanceName="TopPanel" runat="server" FixedPosition="None"  Border-BorderStyle="None" >        
+        <div class="container" >
+
+            <dx:ASPxPanel ID="TopPanel" ClientInstanceName="TopPanel" runat="server" FixedPosition="None"  Border-BorderStyle="None" Paddings-PaddingTop="30" >        
                 <PanelCollection>
                     <dx:PanelContent runat="server">
 
-                        
-                        <dx:ASPxFormLayout ID="HeadFormLayout" runat="server" Width="100%" ColumnCount="3" Style="margin-top: 20px; margin-bottom:-10px; margin-left:10px; margin-right: 10px">
-                            <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="500" />
-                            <Items>
 
-                                <dx:LayoutItem ShowCaption="False" ColumnSpan="2"  >
-                                    <LayoutItemNestedControlCollection>
-                                        <dx:LayoutItemNestedControlContainer runat="server">
+                        <div class="d-lg-flex">
+                            <div class="col-lg-6 col-12">
 
-                                            <dx:ASPxHeadline ID="HeadLine" runat="server"
-                                                HeaderText="Сочи" HeaderStyle-Font-Size="32" HeaderStyle-CssClass="FontClassComfortaaSpacing" HeaderStyle-LineHeight="15" HeaderStyle-Paddings-PaddingTop="15"
-                                                ContentText="недвижимость" ContentStyle-Font-Size="13" ContentStyle-CssClass="FontClassComfortaa" ContentStyle-LineHeight="0"
-                                                Image-Url="~/Content/Logo/Logo2.png" NavigateUrl="~/Default.aspx" ShowImageAsLink="true" Image-ToolTip="На главную" />
+                                <dx:ASPxHeadline ID="HeadLine" runat="server"
+                                    HeaderText="Сочи" HeaderStyle-Font-Size="32" HeaderStyle-CssClass="FontClassComfortaaSpacing" HeaderStyle-LineHeight="15" HeaderStyle-Paddings-PaddingTop="15"
+                                    ContentText="недвижимость" ContentStyle-Font-Size="13" ContentStyle-CssClass="FontClassComfortaa" ContentStyle-LineHeight="0"
+                                    Image-Url="~/Content/Logo/Logo2.png" NavigateUrl="~/Default.aspx" ShowImageAsLink="true" Image-ToolTip="На главную" />
 
-                                        </dx:LayoutItemNestedControlContainer>
-                                    </LayoutItemNestedControlCollection>
-                                </dx:LayoutItem>
+                            </div>
+                            <div class="col-lg-6 col-12 mt-4" style="display:flex; justify-content:flex-end; align-items:center">
+
+                                <dx:ASPxMenu ID="LKMenu" ClientInstanceName="LKMenu" runat="server" Border-BorderStyle="None" BackColor="Transparent" CssClass="PrintButtonClass"
+                                    AutoPostBack="false" SeparatorColor="Transparent" >
+
+                                    <ClientSideEvents ItemClick="function(s,e){ MenuItemClick(s,e); }" />
+                                    <Items>
+
+                                        <dx:MenuItem Name="PrintBtn" Text="Печать" Image-Url="~/Content/Icons/printer.png" Visible="false" />
+                                        <dx:MenuItem Name="AuthorizationBtn" Text="Вход" Image-Url="~/Content/Icons/Login.png" NavigateUrl="Users/LoginUser.aspx" />
+                                        <dx:MenuItem Name="LK">
+                                            <Items>
+                                                <dx:MenuItem Text="Персональные данные" Name="PersonalData" NavigateUrl="Users/PersonalData.aspx" />
+                                                <dx:MenuItem Text="Список объектов" Name="PropertyRegister" NavigateUrl="PropertyRegister.aspx" />
+                                                <dx:MenuItem Text="Список публикаций" Name="PostsList" NavigateUrl="PostRegister.aspx" Visible="false" />
+                                                <dx:MenuItem Text="Список пользователей" Name="UsersList" NavigateUrl="Users/UsersList.aspx" Visible="false" />
+                                                <dx:MenuItem Text="Выход" Name="ExitButton" BeginGroup="true" />
+                                            </Items>
+                                        </dx:MenuItem>
+                                        <dx:MenuItem Text="">
+                                            <Image Url="Content/Icons/HamburgerButton.png" />
+                                            <Items>
+                                                <dx:MenuItem Text="Объявления" NavigateUrl="Default.aspx" />
+                                                <dx:MenuItem Text="Новости" NavigateUrl="PostNewsList.aspx" />
+                                            </Items>
+                                        </dx:MenuItem>
+                                    </Items>
+                                </dx:ASPxMenu>
+
+                            </div>
+                            <%--<div class="col-lg-1 col-12" style="display:flex; align-items:center">
+
+                                <div class="dropdown">
+
+                                    <div class="containerButton" onclick="myFunction(this)">
+                                        <div class="bar1"></div>
+                                        <div class="bar2"></div>
+                                        <div class="bar3"></div>
+                                    </div>
+
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a href="Default.aspx">Объявления</a>
+                                        <a href="#">Новости</a>
+                                    </div>
+
+                                </div>
+
+                            </div>--%>
+                        </div>                        
+                 
 
 
-                                <dx:LayoutItem ShowCaption="False" ColumnSpan="1" VerticalAlign="Bottom" HorizontalAlign="Right" ParentContainerStyle-Paddings-PaddingTop="20"  >
-                                    <LayoutItemNestedControlCollection>
-                                        <dx:LayoutItemNestedControlContainer runat="server">  
-
-
-<%--                                            <dx:ASPxButton ID="AuthorizationButton" runat="server" Text="Вход" AutoPostBack="false" RenderMode="link" CssClass="PrintButtonClass" 
-                                                Width="100" Style="margin-left:20px; margin-top:20px; margin-right: 10px" Image-Url="~/Content/Icons/Login.png">
-                                                <ClientSideEvents Click="function(s,e){ var redirectWindow = window.open('../Users/LoginUser.aspx', '_self'); }" />
-                                            </dx:ASPxButton>--%>
-
-
-                                            <dx:ASPxMenu ID="LKMenu" runat="server" Border-BorderStyle="None" BackColor="Transparent" CssClass="PrintButtonClass" 
-                                                AutoPostBack="false" >
-                                                <ClientSideEvents ItemClick="function(s,e){ MenuItemClick(s,e); }" />
-                                                <Items>
-                                                    <dx:MenuItem Name="PrintBtn" Text="Печать" Image-Url="~/Content/Icons/printer.png" Visible="false" />
-                                                    <dx:MenuItem Name="AuthorizationBtn" Text="Вход" Image-Url="~/Content/Icons/Login.png" NavigateUrl="Users/LoginUser.aspx" />
-                                                    <dx:MenuItem Name="LK" >
-                                                        <Items>
-                                                            <dx:MenuItem Text="Персональные данные" Name="PersonalData" NavigateUrl="Users/PersonalData.aspx"  />
-                                                            <dx:MenuItem Text="Список объектов" Name="PropertyRegister" NavigateUrl="PropertyRegister.aspx"  />
-                                                            <dx:MenuItem Text="Список пользователей" Name="UsersList" NavigateUrl="Users/UsersList.aspx" Visible="false" />
-                                                            <dx:MenuItem Text="Выход" Name="ExitButton" BeginGroup="true"  />
-                                                        </Items>
-                                                    </dx:MenuItem>
-                                                </Items>
-                                            </dx:ASPxMenu>
-
-                                        </dx:LayoutItemNestedControlContainer>
-                                    </LayoutItemNestedControlCollection>
-                                </dx:LayoutItem>
-
-                            </Items>
-                        </dx:ASPxFormLayout>
-
-
-                        <hr style="width:95%" />
+                        <hr style="width:100%" />
 
                     </dx:PanelContent>
                 </PanelCollection>
@@ -201,26 +284,23 @@
 
         
 
-        <div class="container-fluid">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" >
-
-                
-
-            </asp:ContentPlaceHolder>
+        <div class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
 
 
 
-            <dx:ASPxPanel ID="BottomPanel" ClientInstanceName="BottomPanel" runat="server" FixedPosition="None" Height="70px" >
+        <div class="container">
+
+            <dx:ASPxPanel ID="BottomPanel" ClientInstanceName="BottomPanel" runat="server" FixedPosition="None" Height="70px">
                 <PanelCollection>
                     <dx:PanelContent runat="server">
 
-                        <div class="container-fluid">
 
-                            <hr style="width:95%" />
+                            <hr style="width: 100%" />
 
 
-                            <dx:ASPxFormLayout ID="BottomForm" runat="server" Width="100%" Styles-LayoutItem-Paddings-Padding="10" >
+                            <dx:ASPxFormLayout ID="BottomForm" runat="server" Width="100%" Styles-LayoutItem-Paddings-Padding="10">
                                 <Items>
 
                                     <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
@@ -236,17 +316,20 @@
                                 </Items>
                             </dx:ASPxFormLayout>
 
-                            
-
-                        </div>
 
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxPanel>
 
+        </div>
+
+            
+
         <dx:ASPxCallback ID="CBack" ClientInstanceName="CBack" runat="server" OnCallback="CBack_Callback">
             <ClientSideEvents CallbackComplete="function(s,e){ var redirectWindow = window.open('../Default.aspx', '_self'); }" />
         </dx:ASPxCallback>
+
+
 
 
     </form>
