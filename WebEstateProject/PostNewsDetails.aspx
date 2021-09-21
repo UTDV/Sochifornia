@@ -113,7 +113,7 @@
 
         <Items>
 
-            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="2" ColumnCount="1">
+            <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="2" ColumnCount="1" >
                 <Items>
 
                     <dx:LayoutItem ShowCaption="False" Name="HeaderItem">

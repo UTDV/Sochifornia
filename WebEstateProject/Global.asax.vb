@@ -1,7 +1,6 @@
 ﻿Imports System.Web.SessionState
 Imports System.Web.Routing
 
-Imports routeconfig
 Public Class Global_asax
     Inherits System.Web.HttpApplication
 

@@ -68,7 +68,7 @@
                                                  , CONCAT('../object/', [Slug]) Slug, CONCAT('../Content/Foto/', ID, '/!Main.jpg') ImageURL
                                             FROM [dbo].[PropertyObjects] p
                                             where p.AdStatus = 73 
-                                              and p.ActualUntil >= CONVERT(DATE, GETDATE())
+                                             -- and p.ActualUntil >= CONVERT(DATE, GETDATE())
                                               and p.Sale = 0
                                               and p.Hide = 0
                                             order by p.LastUpdate desc" />

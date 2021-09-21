@@ -10,14 +10,19 @@ Public Class PostNewsDetails
 
         Dim tp As String = ""
 
-        If Request.QueryString("type") IsNot Nothing Then
-            tp = Request.QueryString("type")
+        If Request.QueryString("ViewType") IsNot Nothing Then
+            tp = Request.QueryString("ViewType")
         End If
 
 
         If Not IsPostBack Then
 
             HiddenField("slug") = Request.CurrentExecutionFilePath.Split("/")(2)
+
+            ' не отображать дату для служебной информации
+            If Request.CurrentExecutionFilePath.Split("/")(1) = "about" Then
+                NewsFormLayout.FindItemOrGroupByName("DateItem").Visible = False
+            End If
 
             Dim cmd As New SqlCommand("Exec dbo.[GetPostInfoShow] @slug, @type", c)
             cmd.Parameters.AddWithValue("slug", Request.CurrentExecutionFilePath.Split("/")(2))
@@ -49,8 +54,15 @@ Public Class PostNewsDetails
 
                 End If
 
+                Dim galleryCount As Integer
+                Try
+                    galleryCount = Directory.GetFiles(Server.MapPath(RDR("GalleryUrl").ToString)).Count
+                Catch ex As Exception
+                    galleryCount = 0
+                End Try
 
-                Dim galleryCount As Integer = Directory.GetFiles(Server.MapPath(RDR("GalleryUrl").ToString)).Count
+
+
 
                 If galleryCount > 0 Then
 

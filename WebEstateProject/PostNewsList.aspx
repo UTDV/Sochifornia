@@ -147,7 +147,7 @@
                         </dx:ASPxNewsControl>
 
                         <asp:SqlDataSource ID="PostNewsDS" runat="server" ConnectionString='<%$ ConnectionStrings:propertyConnectionString %>'
-                            SelectCommand=" Exec dbo.PostNewsList @Category">
+                            SelectCommand=" Exec dbo.PostNewsList @Category , 'novosti'">
                             <SelectParameters>
                                 <asp:QueryStringParameter QueryStringField="cat" Name="Category" DefaultValue="all" />
                             </SelectParameters>

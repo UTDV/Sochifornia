@@ -169,7 +169,7 @@
                 alert('Не указан slug');
             }
             else {
-                var redirectWindow = window.open('novosti/' + vl + '?type=view');
+                var redirectWindow = window.open(vl + '?ViewType=view');
                 redirectWindow.location;
             }
         }

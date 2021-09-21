@@ -42,7 +42,7 @@ Public Class PostRegister
 
         Try
 
-            Dim cmd As New SqlCommand("select Slug from [dbo].[Posts] where ID = @ID", c)
+            Dim cmd As New SqlCommand("select iif (category =1,'novosti/',iif(category=9,'about/','')) + Slug from [dbo].[Posts] where ID = @ID", c)
             cmd.Parameters.AddWithValue("ID", e.Parameter)
             c.Open()
             Dim res As String = cmd.ExecuteScalar.ToString

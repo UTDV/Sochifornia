@@ -10,6 +10,9 @@ Public Class RouteConfig
         'routes.MapPageRoute("", "Customers", "~/Customers.aspx")
         routes.MapPageRoute("Object", "object/{id}", "~/PropertyDetails.aspx")
         routes.MapPageRoute("Novosti", "novosti/{slug}", "~/PostNewsDetails.aspx")
+        routes.MapPageRoute("About", "about/{slug}", "~/PostNewsDetails.aspx")
+        routes.MapPageRoute("Jiloi-kompleks-sochi", "Jiloi-kompleks-sochi/{slug}", "~/PostNewsDetails.aspx")
+        routes.MapPageRoute("Rajon-Sochi", "rajon-sochi/{slug}", "~/PostNewsDetails.aspx")
 
     End Sub
 
