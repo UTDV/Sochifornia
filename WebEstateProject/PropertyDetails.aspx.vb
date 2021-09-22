@@ -174,7 +174,7 @@ Public Class PropertyDetails
 
             Dim bld As New BodyBuilder()
             Dim message = New MimeMessage()
-            message.From.Add(New MailboxAddress("Система уведомлений Sochifornia", "info@sochifornia.realty"))
+            message.From.Add(New MailboxAddress("Система уведомлений Sochifornia", "noreply@sochifornia.realty"))
             message.To.Add(New MailboxAddress(emailto, emailto))
 
             message.Subject = "Сообщение с сайта от клиента"
@@ -187,7 +187,7 @@ Public Class PropertyDetails
 
             Dim client = New SmtpClient()
             client.Connect("smtp.mail.ru", 465, True)
-            client.Authenticate("info@sochifornia.realty", "Ii123456")
+            client.Authenticate("noreply@sochifornia.realty", "S)ch1fornia")
             client.Send(message)
             client.Disconnect(True)
 

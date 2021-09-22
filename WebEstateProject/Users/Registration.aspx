@@ -74,7 +74,7 @@
                             <dx:LayoutItemNestedControlContainer runat="server">
 
                                 <dx:ASPxTextBox ID="PhoneTB" ClientInstanceName="PhoneTB" runat="server" SelectInputTextOnClick="true"  Width="100%" ValidationSettings-RequiredField-IsRequired="true">
-                                    <MaskSettings Mask="+7 (999) 000-00-00" IncludeLiterals="None" ErrorText="Некорректный номер телефона" />
+                                    <MaskSettings Mask="+7 (000) 000-00-00" IncludeLiterals="None" ErrorText="Некорректный номер телефона" />
                                     <ValidationSettings SetFocusOnError="true" Display="Dynamic" ErrorDisplayMode="Text" ErrorTextPosition="Bottom" >
                                         <ErrorFrameStyle Font-Size="Smaller" />
                                     </ValidationSettings>

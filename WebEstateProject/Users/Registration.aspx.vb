@@ -137,7 +137,7 @@ Public Class Registration
             'Формирование и отправка письма
             Dim bld As New BodyBuilder()
             Dim message = New MimeMessage()
-            message.From.Add(New MailboxAddress("Агентство недвижимости Sochifornia", "info@sochifornia.realty"))
+            message.From.Add(New MailboxAddress("Агентство недвижимости Sochifornia", "noreply@sochifornia.realty"))
             message.To.Add(New MailboxAddress(prm(1), prm(1)))
 
             message.Subject = "Подтверждение электронной почты"
@@ -150,7 +150,7 @@ Public Class Registration
 
                 Dim client = New SmtpClient()
                 client.Connect("smtp.mail.ru", 465, True)
-                client.Authenticate("info@sochifornia.realty", "Ii123456")
+                client.Authenticate("noreply@sochifornia.realty", "S)ch1fornia")
                 client.Send(message)
                 client.Disconnect(True)
 

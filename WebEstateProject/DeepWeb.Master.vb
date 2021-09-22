@@ -5,7 +5,7 @@ Public Class DeepWeb
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Request.Path.ToLower = "/users/loginuser.aspx" Or Request.Path.ToLower = "/users/registration.aspx" Then
+        If Request.Path.ToLower = "/users/loginuser.aspx" Or Request.Path.ToLower = "/users/registration.aspx" Or Request.Path.ToLower = "/users/password.aspx" Then
 
             LKMenu.Visible = False
 

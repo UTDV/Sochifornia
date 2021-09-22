@@ -11,61 +11,52 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Login1
+Partial Public Class Password
 
     '''<summary>
-    '''LoginForm элемент управления.
+    '''InfoLabel элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents LoginForm As Global.DevExpress.Web.ASPxFormLayout
+    Protected WithEvents InfoLabel As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
-    '''LoginEmailTB элемент управления.
+    '''ChangePasswordForm элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents LoginEmailTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents ChangePasswordForm As Global.DevExpress.Web.ASPxFormLayout
 
     '''<summary>
-    '''PasswordTB элемент управления.
+    '''PasswordOneTB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents PasswordTB As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents PasswordOneTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
-    '''ForgetPasswordButton элемент управления.
+    '''PasswordTwoTB элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents ForgetPasswordButton As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents PasswordTwoTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
-    '''LoginButton элемент управления.
+    '''ChangePasswordButton элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents LoginButton As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
-    '''RegButton элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents RegButton As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents ChangePasswordButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ErrorLabel элемент управления.
@@ -77,58 +68,22 @@ Partial Public Class Login1
     Protected WithEvents ErrorLabel As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
-    '''ForgetPasswordPopup элемент управления.
+    '''RequestResultPopup элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents ForgetPasswordPopup As Global.DevExpress.Web.ASPxPopupControl
+    Protected WithEvents RequestResultPopup As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
-    '''ForgetPasswordForm элемент управления.
+    '''Timer элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents ForgetPasswordForm As Global.DevExpress.Web.ASPxFormLayout
-
-    '''<summary>
-    '''NewPasswordRadioButtonList элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents NewPasswordRadioButtonList As Global.DevExpress.Web.ASPxRadioButtonList
-
-    '''<summary>
-    '''NewPasswordEmailTB элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents NewPasswordEmailTB As Global.DevExpress.Web.ASPxTextBox
-
-    '''<summary>
-    '''NewPasswordSMSTB элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents NewPasswordSMSTB As Global.DevExpress.Web.ASPxTextBox
-
-    '''<summary>
-    '''Captcha элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents Captcha As Global.DevExpress.Web.ASPxCaptcha
+    Protected WithEvents Timer As Global.DevExpress.Web.ASPxTimer
 
     '''<summary>
     '''LoadingPanel элемент управления.
@@ -140,11 +95,11 @@ Partial Public Class Login1
     Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 
     '''<summary>
-    '''CBackNewPassword элемент управления.
+    '''CBackChangePassword элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents CBackNewPassword As Global.DevExpress.Web.ASPxCallback
+    Protected WithEvents CBackChangePassword As Global.DevExpress.Web.ASPxCallback
 End Class

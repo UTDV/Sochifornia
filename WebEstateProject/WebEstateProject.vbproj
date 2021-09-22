@@ -421,6 +421,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SendMail.aspx" />
     <Content Include="SimilarNewsList.aspx" />
+    <Content Include="Users\Password.aspx" />
     <Content Include="Users\PersonalData.aspx" />
     <Content Include="Service.aspx" />
     <Content Include="Users\LoginUser.aspx" />
@@ -567,6 +568,13 @@
     <Compile Include="Site1.Master.vb">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Password.aspx.designer.vb">
+      <DependentUpon>Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Password.aspx.vb">
+      <DependentUpon>Password.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Users\PersonalData.aspx.designer.vb">
       <DependentUpon>PersonalData.aspx</DependentUpon>
