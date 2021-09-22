@@ -164,9 +164,9 @@ Public Class Login1
             g = Guid.NewGuid
             'checkCode = g.ToString
 
-            'Dim path As String = "https://Sochifornia.realty/Users/Password.aspx?type=1&id=" & g.ToString
+            Dim path As String = "https://Sochifornia.realty/Users/Password.aspx?type=1&id=" & g.ToString
 
-            Dim path As String = "https://localhost:44386/Users/Password.aspx?type=1&id=" & g.ToString
+            'Dim path As String = "https://localhost:44386/Users/Password.aspx?type=1&id=" & g.ToString
 
             Try
 

@@ -40,7 +40,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Visible="false">
+                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Visible="true">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -114,8 +114,8 @@
                                         <ClientSideEvents SelectedIndexChanged="function(s,e){ NewPasswordRadioButtonListChanged(s,e); }" />
                                         <Items>
                                             <dx:ListEditItem Text="Отправить ссылку на почту" Value="0" />
-                                            <dx:ListEditItem Text="Отправить код в SMS" Value="1" />
-                                            <dx:ListEditItem Text="Позвонить по номеру телефона" Value="2" />
+                                           <%-- <dx:ListEditItem Text="Отправить код в SMS" Value="1" />
+                                            <dx:ListEditItem Text="Позвонить по номеру телефона" Value="2" />--%>
                                         </Items>
                                     </dx:ASPxRadioButtonList>
 
