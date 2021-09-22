@@ -109,6 +109,8 @@
 
     <dx:ASPxFormLayout ID="NewsFormLayout" ClientInstanceName="NewsFormLayout" runat="server" ColumnCount="3"  >
 
+        <ClientSideEvents Init="function(s,e) { NewsFormInit(); }" />
+
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="990" />
 
         <Items>
@@ -248,24 +250,24 @@
                 </Items>
             </dx:LayoutGroup>
 
-            <dx:LayoutItem ColumnSpan="1" ShowCaption="False" >                
+            <dx:LayoutItem ColumnSpan="1" ShowCaption="False" Name="VipItem" >                
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">                        
 
                         <div class="VIPContainer">                                
-                            <iframe class="vip-iframe" src="../VIPList.aspx"></iframe>
+                            <iframe id="vipiframe" class="vip-iframe" src="../VIPList.aspx"></iframe>
                         </div>
 
                     </dx:LayoutItemNestedControlContainer>
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
 
-            <dx:LayoutItem ColumnSpan="2" ShowCaption="False" >
+            <dx:LayoutItem ColumnSpan="2" ShowCaption="False" Name="NewAdItem" >
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
 
                         <div class="NewAdContainer">
-                            <iframe class="responsive-iframe" src="../NewAdList.aspx"></iframe>
+                            <iframe id="respiframe" class="responsive-iframe" src="../NewAdList.aspx"></iframe>
                         </div>
                         
                     </dx:LayoutItemNestedControlContainer>
@@ -277,7 +279,20 @@
         </Items>
     </dx:ASPxFormLayout>
 
+    <script type="text/javascript"> 
 
+
+        function NewsFormInit() {
+            if ($.trim($('#vipiframe').contents().find("#VIPGallery").text().includes('Нет данных для отображения')) == "true" || $.trim($('#vipiframe').contents().find("#VIPGallery").text().includes('No data to display')) == "true") { 
+                NewsFormLayout.GetItemByName('VipItem').SetVisible(0);
+            }
+            if ($.trim($('#respiframe').contents().find("#NewAdGallery").text().includes('Нет данных для отображения')) == "true" || $.trim($('#respiframe').contents().find("#NewAdGallery").text().includes('No data to display')) == "true") {
+                NewsFormLayout.GetItemByName('NewAdItem').SetVisible(0);
+            }
+        }
+
+        
+    </script>
 
 
 </asp:Content>

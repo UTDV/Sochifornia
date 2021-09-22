@@ -35,6 +35,8 @@
                 NavigateUrlField="Slug" TextField="Name" TextVisibility="Always" Target="_blank" NameField="ID" AllowPaging="false" ItemSpacing="20"
                 OnItemDataBound="VIPGallery_ItemDataBound" Layout="Breakpoints" ThumbnailImageSizeMode="FillAndCrop" Width="100%" >
 
+                <ClientSideEvents Init="function(s,e){ if(VIPGallery.itemsCount == 0) { VIPGallery.SetClientVisible(0); } }" />
+
                 <SettingsFolder ImageCacheFolder="~/Content/Thumb/VIPThumb" />
 
                 <SettingsBreakpointsLayout ItemsPerPage="3" ItemsPerRow="3">
@@ -56,7 +58,7 @@
                                                  , [Name]
                                                  , CONCAT('../object/', [Slug]) Slug
                                             FROM [dbo].[PropertyObjects] p
-                                            where p.AdStatus = 73 
+                                            where  p.AdStatus = 73 
                                               and p.VIP = 1
                                               and p.ActualUntil >= CONVERT(DATE, GETDATE()) --and id in (127, 138,139,140)
                                               and p.Sale = 0

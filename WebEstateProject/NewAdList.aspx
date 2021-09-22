@@ -45,6 +45,8 @@
                 NavigateUrlField="Slug" TextField="Name" TextVisibility="Always" Target="_blank" NameField="ID" AllowPaging="false"   
                 OnItemDataBound="NewAdGallery_ItemDataBound" Layout="Breakpoints" ThumbnailImageSizeMode="FillAndCrop" Width="100%" ItemSpacing="20" >
 
+                <ClientSideEvents Init="function(s,e){ if(NewAdGallery.itemsCount == 0) { NewAdGallery.SetClientVisible(0); } }" />
+
                 <SettingsFolder ImageCacheFolder="~/Content/Thumb/NewAdThumb" />
                 
                 <SettingsBreakpointsLayout ItemsPerPage="3" ItemsPerRow="3">

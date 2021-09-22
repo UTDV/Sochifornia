@@ -4,6 +4,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+
+
+
     <style type="text/css">
 
         .responsive-iframe {
@@ -101,7 +104,9 @@
 
     </style>
 
-    <dx:ASPxFormLayout ID="NewsForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingTop="20">
+    <dx:ASPxFormLayout ID="NewsForm" ClientInstanceName="NewsForm" runat="server" Width="100%" ColumnCount="3" Paddings-PaddingTop="20" Paddings-PaddingBottom="40">
+
+        <ClientSideEvents Init="function(s,e) { NewsFormInit(); }" />
 
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="990" />
 
@@ -157,24 +162,24 @@
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
 
-            <dx:LayoutItem ColumnSpan="1" ShowCaption="False" >                
+            <dx:LayoutItem ColumnSpan="1" ShowCaption="False" Name="VipItem" >                
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                        <div class="VIPContainer">                                
-                            <iframe class="vip-iframe" src="../VIPList.aspx"></iframe>
+                        <div id="VIPContainer" class="VIPContainer" >                                
+                            <iframe id="vipiframe" class="vip-iframe" src="../VIPList.aspx" onclick="vipiframeload(this)"></iframe>
                         </div>
 
                     </dx:LayoutItemNestedControlContainer>
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
 
-            <dx:LayoutItem ColumnSpan="2" ShowCaption="False" >
+            <dx:LayoutItem ColumnSpan="2" ShowCaption="False" Name="NewAdItem" >
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer runat="server">
 
-                        <div class="NewAdContainer">
-                            <iframe class="responsive-iframe" src="../NewAdList.aspx"></iframe>
+                        <div id="NewAdContainer" class="NewAdContainer">
+                            <iframe id="respiframe" class="responsive-iframe" src="../NewAdList.aspx"></iframe>
                         </div>
                         
                     </dx:LayoutItemNestedControlContainer>
@@ -183,5 +188,37 @@
 
         </Items>
     </dx:ASPxFormLayout>
+
+    <script type="text/javascript"> 
+
+
+        function NewsFormInit() {
+            if ($.trim($('#vipiframe').contents().find("#VIPGallery").text().includes('Нет данных для отображения')) == "true" || $.trim($('#vipiframe').contents().find("#VIPGallery").text().includes('No data to display')) == "true") { 
+                NewsForm.GetItemByName('VipItem').SetVisible(0);
+            }
+            if ($.trim($('#respiframe').contents().find("#NewAdGallery").text().includes('Нет данных для отображения')) == "true" || $.trim($('#respiframe').contents().find("#NewAdGallery").text().includes('No data to display')) == "true") {
+                NewsForm.GetItemByName('NewAdItem').SetVisible(0);
+            }
+        }
+
+        //document.getElementById('vipiframe').onload = function () {
+        //    if ($.trim($('#vipiframe').contents().find("#VIPGallery").text().includes('Нет данных для отображения')) == "true") {
+        //        //$('#vipiframe').hide();
+        //        //$('#VIPContainer').hide();
+        //        NewsForm.GetItemByName('VipItem').SetVisible(0);
+        //    }
+        //}
+
+        //document.getElementById('respiframe').onload = function () {
+        //    if ($.trim($('#respiframe').contents().find("#NewAdGallery").text().includes('Нет данных для отображения')) == "true") {
+        //        //$('#respiframe').hide();
+        //        //$('#NewAdContainer').hide();
+        //        NewsForm.GetItemByName('VipItem').SetVisible(0);
+        //    }
+        //}
+
+    </script>
+
+
 
 </asp:Content>
