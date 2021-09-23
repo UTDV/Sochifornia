@@ -14,6 +14,9 @@ Public Class PostNewsDetails
             tp = Request.QueryString("ViewType")
         End If
 
+        If tp = "view" And Request.IsAuthenticated = False Then
+            Response.Redirect("~\")
+        End If
 
         If Not IsPostBack Then
 
@@ -37,23 +40,27 @@ Public Class PostNewsDetails
                 Page.Title = RDR("Header").ToString
                 HeaderLabel.Text = RDR("Header").ToString
                 DateLabel.Text = FormatDateTime(CDate(RDR("Created").ToString), DateFormat.ShortDate)
+                Try
+                    If RDR("ImageUrl").ToString <> "/Content/PostsFoto/" Then
 
-                If RDR("ImageUrl").ToString <> "/Content/PostsFoto/" Then
+                        Dim byteArray() As Byte = Nothing
+                        Using stream As New IO.FileStream(Server.MapPath("~" + RDR("ImageUrl").ToString), IO.FileMode.Open, IO.FileAccess.Read)
+                            byteArray = New Byte(stream.Length - 1) {}
+                            stream.Read(byteArray, 0, CInt(Fix(stream.Length)))
+                        End Using
+                        MainFotoBI.ContentBytes = byteArray
 
-                    Dim byteArray() As Byte = Nothing
-                    Using stream As New IO.FileStream(Server.MapPath("~" + RDR("ImageUrl").ToString), IO.FileMode.Open, IO.FileAccess.Read)
-                        byteArray = New Byte(stream.Length - 1) {}
-                        stream.Read(byteArray, 0, CInt(Fix(stream.Length)))
-                    End Using
-                    MainFotoBI.ContentBytes = byteArray
+                        NewsFormLayout.FindItemOrGroupByName("MainFotoLayoutItem").ClientVisible = True
 
-                    NewsFormLayout.FindItemOrGroupByName("MainFotoLayoutItem").ClientVisible = True
+                    Else
 
-                Else
+                        NewsFormLayout.FindItemOrGroupByName("MainFotoLayoutItem").ClientVisible = False
 
+                    End If
+                Catch ex As Exception
                     NewsFormLayout.FindItemOrGroupByName("MainFotoLayoutItem").ClientVisible = False
+                End Try
 
-                End If
 
                 Dim galleryCount As Integer
                 Try
