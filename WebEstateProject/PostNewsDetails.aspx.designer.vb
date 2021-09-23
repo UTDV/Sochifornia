@@ -68,13 +68,13 @@ Partial Public Class PostNewsDetails
     Protected WithEvents NewsImageGallegy As Global.DevExpress.Web.ASPxImageGallery
 
     '''<summary>
-    '''NewsHeadline элемент управления.
+    '''TextLabel элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents NewsHeadline As Global.DevExpress.Web.ASPxHeadline
+    Protected WithEvents TextLabel As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''SimilarNewsGallery элемент управления.

@@ -112,7 +112,7 @@
         <ClientSideEvents Init="function(s,e) { NewsFormInit(); }" />
 
         <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="990" />
-
+        
         <Items>
 
             <dx:LayoutGroup GroupBoxDecoration="None" ColumnSpan="2" ColumnCount="1" >
@@ -121,7 +121,7 @@
                     <dx:LayoutItem ShowCaption="False" Name="HeaderItem">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-
+                                
                                 <dx:ASPxLabel ID="HeaderLabel" runat="server" CssClass="FontClassComfortaa mb-3 mt-3" />
 
                             </dx:LayoutItemNestedControlContainer>
@@ -177,8 +177,8 @@
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-
-                                <dx:ASPxHeadline ID="NewsHeadline" runat="server" EncodeHtml="false"  EnableViewState="false" HorizontalAlign="Justify"/>
+                                <dx:ASPxLabel ID ="TextLabel" runat="server" EncodeHtml="false" EnableViewState="false" Width ="100%" ></dx:ASPxLabel>
+                                <%--<dx:ASPxHeadline ID="NewsHeadline" runat="server" EncodeHtml="false"  EnableViewState="false" HorizontalAlign="Justify"/>--%>
 
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>

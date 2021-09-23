@@ -32,7 +32,8 @@ Public Class PostNewsDetails
             RDR = cmd.ExecuteReader
             RDR.Read()
             If RDR.HasRows Then
-                NewsHeadline.ContentText = RDR("Text").ToString
+                TextLabel.Text = RDR("Text").ToString
+                'NewsHeadline.ContentText = RDR("Text").ToString
                 Page.Title = RDR("Header").ToString
                 HeaderLabel.Text = RDR("Header").ToString
                 DateLabel.Text = FormatDateTime(CDate(RDR("Created").ToString), DateFormat.ShortDate)
