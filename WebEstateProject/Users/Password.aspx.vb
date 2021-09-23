@@ -68,7 +68,7 @@ Public Class Password
 
                                                     if @Created is null select '0|Некорректная ссылка'
 
-                                                    if @isChanged = 1 select '0|Ссылка на восстановление пароля недействительна'
+                                                    else if @isChanged = 1 select '0|Ссылка на восстановление пароля недействительна'
 
                                                     else if @Created > DATEADD(d, 1, getdate())  select '0|Истек срок действия ссылки для восстановления пароля'
 
@@ -97,7 +97,61 @@ Public Class Password
 
                 End If
 
+                'Восстановление пароля через код/смс
+            ElseIf Request.QueryString("type") = "2" Then
+
+                If Request.QueryString("id") Is Nothing Then
+
+                    Response.Redirect("~/Default.aspx")
+
+                Else
+
+                    Page.Title = "Восстановление пароля"
+
+                    Try
+
+                        Dim cmd As New SqlCommand("declare @Created datetime, @isChanged int, @isCodeAccess int
+
+                                                SELECT @Created = [Created], @isChanged = isPasswordChanged, @isCodeAccess = isCodeAccess
+                                                FROM [dbo].[UsersMetaData] 
+                                                where [MetaNameID] in (90,91)  and [MetaData] = @id 
+
+                                                if @Created is null select '0|Некорректная ссылка'
+
+                                                else if @isChanged = 1 select '0|Ссылка на восстановление пароля недействительна'
+
+                                                else if @isCodeAccess is null or @isCodeAccess = 0 select '0|Ссылка на восстановление пароля недействительна'
+
+                                                else if @Created > DATEADD(d, 1, getdate())  select '0|Истек срок восстановления пароля'
+
+                                                else select '1|'", c)
+                        cmd.Parameters.AddWithValue("id", Request.QueryString("id"))
+                        c.Open()
+                        Dim CheckResult As String = cmd.ExecuteScalar.ToString
+                        c.Close()
+                        cmd.Dispose()
+
+                        If CheckResult.Split("|")(0) = "0" Then
+                            InfoLabel.Text = CheckResult.Split("|")(1)
+                            ChangePasswordForm.Visible = False
+                        Else
+                            InfoLabel.Visible = False
+                            ChangePasswordForm.Visible = True
+                            ChangePasswordForm.FindItemOrGroupByName("group").Caption = "Восстановление пароля"
+                        End If
+
+                    Catch ex As Exception
+
+                        InfoLabel.Text = "Ошибка восстановления пароля"
+                        ChangePasswordForm.Visible = False
+
+                    End Try
+
+                End If
+
             End If
+
+
 
         End If
 

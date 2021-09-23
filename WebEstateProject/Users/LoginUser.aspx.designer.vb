@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Login1
 
     '''<summary>
+    '''HiddenField элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents HiddenField As Global.DevExpress.Web.ASPxHiddenField
+
+    '''<summary>
     '''LoginForm элемент управления.
     '''</summary>
     '''<remarks>
@@ -131,6 +140,33 @@ Partial Public Class Login1
     Protected WithEvents Captcha As Global.DevExpress.Web.ASPxCaptcha
 
     '''<summary>
+    '''CheckCodePopup элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CheckCodePopup As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''CheckCodeTextBox элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CheckCodeTextBox As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''Timer элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents Timer As Global.DevExpress.Web.ASPxTimer
+
+    '''<summary>
     '''LoadingPanel элемент управления.
     '''</summary>
     '''<remarks>
@@ -147,4 +183,13 @@ Partial Public Class Login1
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents CBackNewPassword As Global.DevExpress.Web.ASPxCallback
+
+    '''<summary>
+    '''CBackCheckCode элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackCheckCode As Global.DevExpress.Web.ASPxCallback
 End Class

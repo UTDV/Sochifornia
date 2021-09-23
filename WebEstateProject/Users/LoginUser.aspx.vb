@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+Imports System.Net
 Imports MailKit.Net.Smtp
 Imports MimeKit
 
@@ -9,6 +11,13 @@ Public Class Login1
     Dim c As New SqlConnection(ConfigurationManager.ConnectionStrings("propertyConnectionString").ConnectionString)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not IsPostBack Then
+
+            HiddenField("CallCode") = ""
+            HiddenField("CallGUID") = ""
+
+        End If
 
     End Sub
 
@@ -154,15 +163,14 @@ Public Class Login1
 
     Private Function NewPassword(ByVal Type As Integer, ByVal Creator As String, UserID As Integer, ByVal Contact As String)
 
-        'Dim checkCode As String = ""
         Dim res As String = "0|"
+
+        Dim g As Guid
+        g = Guid.NewGuid
+
 
         'ОТПРАВКА ССЫЛКИ НА ПОЧТУ
         If Type = 0 Then
-
-            Dim g As Guid
-            g = Guid.NewGuid
-            'checkCode = g.ToString
 
             Dim path As String = "https://Sochifornia.realty/Users/Password.aspx?type=1&id=" & g.ToString
 
@@ -202,11 +210,114 @@ Public Class Login1
                 res = "1|Ссылка для восстановления пароля отправлена на почту " & Contact
 
             Catch ex As Exception
+                'res = "0|" & ex.ToString
                 res = "0|Что-то пошло не так..."
             End Try
+
+
+            'ЗВОНОК НА ТЕЛЕФОН
+        ElseIf Type = 1 Then
+
+            Dim requestUrl As String = "https://smsc.ru/sys/send.php?login=it.sochi@rd-net.ru&psw=Admin32297044&phones=" & "7" & NewPasswordSMSTB.Value & "&mes=code&call=1&fmt=2"
+
+            Dim req As HttpWebRequest = TryCast(WebRequest.Create(requestUrl), HttpWebRequest)
+
+            Try
+
+                Dim resp As HttpWebResponse = DirectCast(req.GetResponse(), HttpWebResponse)
+
+                If resp.StatusDescription = "OK" Then
+
+                    Dim dataStream As Stream = resp.GetResponseStream()
+                    Dim reader As New StreamReader(dataStream, Encoding.UTF8)
+                    Dim ResponseFromServer As String = reader.ReadToEnd()
+                    reader.Close()
+                    dataStream.Close()
+                    resp.Close()
+
+                    Dim phcode As XElement = XElement.Parse(ResponseFromServer)
+
+                    Dim code As String = phcode.Descendants("code").Value
+
+                    Dim err As String = phcode.Descendants("error_code").Value
+
+                    If IsNothing(code) = True Then
+
+                        If IsNothing(err) = True Then
+                            res = "0|Ошибка подтверждения телефона"
+                        Else
+                            res = "0|Ошибка подтверждения телефона, код " & err.ToString
+                        End If
+                    Else
+
+                        Dim hashCallCode As String = GetHash.GetPasswordHash(Right(code.ToString, 4))
+
+                        Dim cmd As New SqlCommand("insert into [dbo].[UsersMetaData] ([Creator], [UserID], [MetaNameID], [MetaData])
+                                       values (@Creator, @UserID, 90, @MetaData)", c)
+                        cmd.Parameters.AddWithValue("Creator", Creator)
+                        cmd.Parameters.AddWithValue("UserID", UserID)
+                        cmd.Parameters.AddWithValue("MetaData", g.ToString)
+                        c.Open()
+                        cmd.ExecuteNonQuery()
+                        c.Close()
+                        cmd.Dispose()
+
+                        res = "2|" & hashCallCode & "|" & g.ToString
+
+                    End If
+
+                Else
+                    res = "0|Ошибка подтверждения телефона. Статус: " & resp.StatusDescription
+                End If
+
+                'Dim hashCallCode As String = GetHash.GetPasswordHash("6672")
+                'res = "2|" & hashCallCode & "|6ac14d2f-eb6d-4062-b978-6a7c957fcb08"
+
+            Catch ex As Exception
+                'res = "0|" & ex.ToString
+                res = "0|Что-то пошло не так..."
+            End Try
+
+
+            'КОД В СМС
+        ElseIf Type = 2 Then
+
+
         End If
+
+
         Return res
 
     End Function
+
+    Protected Sub CBackCheckCode_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
+
+        Dim hashCheckCode As String = GetHash.GetPasswordHash(e.Parameter.Split("|")(0))
+
+        If hashCheckCode = e.Parameter.Split("|")(1) Then
+
+            Try
+
+                Dim cmd As New SqlCommand("update [dbo].[UsersMetaData]
+                                           set isCodeAccess = 1
+                                           where MetaData = @GUID and MetaNameID = 90", c)
+                cmd.Parameters.AddWithValue("GUID", e.Parameter.Split("|")(2))
+                c.Open()
+                cmd.ExecuteNonQuery()
+                c.Close()
+                cmd.Dispose()
+
+                e.Result = "1|" & e.Parameter.Split("|")(2)
+
+            Catch ex As Exception
+                e.Result = "0|Что-то пошло не так"
+            End Try
+
+        Else
+            e.Result = "0|Неверный код"
+        End If
+
+
+    End Sub
 
 End Class
