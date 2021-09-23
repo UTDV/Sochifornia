@@ -5,6 +5,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+    <dx:ASPxHiddenField ID="HiddenField" ClientInstanceName="HiddenField" runat="server" />
+
     <dx:ASPxFormLayout ID="LoginForm" runat="server" Width="100%">
         <ClientSideEvents Init="function(s,e){ s.SetHeight (window.innerHeight - TopPanel.GetHeight() - 60); }" />
         <Items>
@@ -95,6 +97,7 @@
 
     <dx:ASPxPopupControl ID="ForgetPasswordPopup" ClientInstanceName="ForgetPasswordPopup" runat="server" HeaderText="Восстановление пароля" 
         ShowFooter="true" AutoUpdatePosition="true" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" CloseAction="CloseButton">
+
         <SettingsAdaptivity Mode="Always" VerticalAlign="WindowTop" HorizontalAlign="WindowCenter"  MaxWidth="400" MinWidth="330" FixedFooter="false" FixedHeader="false"/>
 
         <ClientSideEvents PopUp="function(s,e) { LoginButton.SetEnabled(false); GetPasswordButton.SetEnabled(true); }" Closing="function(s,e) { ForgetPasswordPopupClosing(); }" />
@@ -113,9 +116,9 @@
                                         Width="100%" SelectedIndex="0" Border-BorderWidth="0">
                                         <ClientSideEvents SelectedIndexChanged="function(s,e){ NewPasswordRadioButtonListChanged(s,e); }" />
                                         <Items>
-                                            <dx:ListEditItem Text="Отправить ссылку на почту" Value="0" />
-                                           <%-- <dx:ListEditItem Text="Отправить код в SMS" Value="1" />
-                                            <dx:ListEditItem Text="Позвонить по номеру телефона" Value="2" />--%>
+                                            <dx:ListEditItem Text="Отправить ссылку на почту" Value="0" />                                            
+                                            <dx:ListEditItem Text="Позвонить по номеру телефона" Value="1" />
+                                           <%-- <dx:ListEditItem Text="Отправить код в SMS" Value="2" />--%>
                                         </Items>
                                     </dx:ASPxRadioButtonList>
 
@@ -194,6 +197,39 @@
     </dx:ASPxPopupControl>
 
 
+    <dx:ASPxPopupControl ID="CheckCodePopup" ClientInstanceName="CheckCodePopup" runat="server" HeaderText="" AutoUpdatePosition="true"
+        CloseAction="CloseButton" Modal="true" ShowCloseButton="true">
+
+        <ClientSideEvents PopUp="function(s,e) { CheckCodePopupPopUp(); }" Closing="function(s,e) { CheckCodePopupClosing(); }" />
+
+        <SettingsAdaptivity Mode="Always" VerticalAlign="WindowTop" HorizontalAlign="WindowCenter" MaxWidth="400" MinWidth="200" FixedFooter="false" FixedHeader="false" />
+
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">
+
+                <p style="text-align: center; margin-top: -20px;">
+                    <span id="CheckCodeText"></span> 
+                    <br />
+                    <dx:ASPxTextBox ID="CheckCodeTextBox" ClientInstanceName="CheckCodeTextBox" runat="server" Width="100%">
+                        <ClientSideEvents UserInput="function(s,e) { CheckCodeTextBoxInput(); }" />
+                    </dx:ASPxTextBox>
+                    <span id="ErrorCheckCodeText" style="color:red; text-align:center; font-size:smaller;"></span>
+                </p>
+                <p id="c2" style="text-align: center;">
+                    Код действителен в течении <span id="demoCountdown" style="color: #59A1E9;">&nbsp;</span> секунд
+                </p>
+                <p id="c3" style="text-align: center; color: #17293F; cursor:pointer; display:none" onclick="NewCheckClick()">
+                    Повторить
+                </p>
+
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+
+    <dx:ASPxTimer ID="Timer" ClientInstanceName="Timer" runat="server" Interval="1000" Enabled="false">
+        <ClientSideEvents Init="function(s,e){  }" Tick="function(s,e){ demoTick(); }" />
+    </dx:ASPxTimer>
+
 
     <dx:ASPxLoadingPanel ID="LoadingPanel" ClientInstanceName="LoadingPanel" runat="server" Modal="true" />
 
@@ -201,7 +237,14 @@
         <ClientSideEvents CallbackComplete="function(s,e) { CBackNewPasswordResult(e.result); }" />
     </dx:ASPxCallback>
 
+    <dx:ASPxCallback ID="CBackCheckCode" ClientInstanceName="CBackCheckCode" runat="server" OnCallback="CBackCheckCode_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e) { CBackCheckCodedResult(e.result); }" />
+    </dx:ASPxCallback>
+
     <script type="text/javascript">
+
+        var demoCounter;       
+
 
         //Восстановление пароля
 
@@ -267,10 +310,16 @@
                 ForgetPasswordPopup.Hide();
                 alert(vl.split('|')[1]);
             }
-
+            else if (vl.split('|')[0] == '2') {
+                ForgetPasswordPopup.Hide();
+                HiddenField.Set("CallCode", vl.split('|')[1]);
+                HiddenField.Set("CallGUID", vl.split('|')[2]);
+                document.getElementById("CheckCodeText").innerHTML = "Введите ниже последние 4 цифры номера телефона, с которого поступил звонок на Ваш номер:";
+                CheckCodePopup.Show();
+            }
         }
 
-        //Закрытие popup
+        //Закрытие ForgetPasswordPopup
         function ForgetPasswordPopupClosing() {
             NewPasswordRadioButtonList.SetSelectedIndex(0);
             TabbedGroup.SetActiveTabIndex(0);
@@ -282,6 +331,81 @@
             LoginButton.SetEnabled(true);
             GetPasswordButton.SetEnabled(false);
         }
+        
+
+        //Таймер
+
+        function demoUpdate() {
+            if (demoCounter > 0) {
+                document.getElementById("demoCountdown").innerHTML = demoCounter;
+            }
+            else {
+                Timer.SetEnabled(false);
+                CheckCodeTextBox.SetEnabled(0);
+                HiddenField.Set("CallCode", '');
+                HiddenField.Set("CallGUID", '');
+                document.getElementById("ErrorCheckCodeText").innerHTML = 'Истек срок для ввода кода';
+                document.getElementById("c2").style.display = 'none';
+                document.getElementById("c3").style.display = 'block';
+            }
+        }
+
+        function demoTick() {
+            demoCounter -= 1;
+            demoUpdate();
+        }
+
+        //Окно для ввода кода
+
+        function CheckCodePopupPopUp() {
+            demoCounter = 120;
+            document.getElementById("demoCountdown").innerHTML = demoCounter;
+            Timer.SetEnabled(true);
+            CheckCodeTextBox.Focus();
+        }
+
+        function CheckCodePopupClosing() {
+            Timer.SetEnabled(false);
+            HiddenField.Set("CallCode", '');
+            HiddenField.Set("CallGUID", '');
+            CheckCodeTextBox.SetEnabled(1);
+            CheckCodeTextBox.SetValue(null);
+            document.getElementById("ErrorCheckCodeText").innerHTML = '';
+            document.getElementById("c2").style.display = 'block';
+            document.getElementById("c3").style.display = 'none';
+        }
+
+        //Новая проверка
+        function NewCheckClick() {
+            CheckCodePopup.Hide();
+            ForgetPasswordPopup.Show();
+        }
+
+        //Ввод кода
+        function CheckCodeTextBoxInput() {
+            if (CheckCodeTextBox.GetText().length == 4) {
+                CheckCodeTextBox.SetEnabled(0);
+                document.getElementById("ErrorCheckCodeText").innerHTML = '';
+                Timer.SetEnabled(false);
+                LoadingPanel.Show();
+                CBackCheckCode.PerformCallback(CheckCodeTextBox.GetText() + '|' + HiddenField.Get('CallCode') + '|' + HiddenField.Get('CallGUID'));
+            }
+        }
+
+        function CBackCheckCodedResult(vl) {
+            LoadingPanel.Hide();
+
+            if (vl.split('|')[0] == 1) {
+                window.open('/Users/Password.aspx?type=2&id=' + vl.split('|')[1], '_self');
+            }
+            else {
+                Timer.SetEnabled(true);
+                CheckCodeTextBox.SetEnabled(1);
+                document.getElementById("ErrorCheckCodeText").innerHTML = vl.split('|')[1];
+            }            
+        }
+
+        
 
     </script>
 
