@@ -218,6 +218,9 @@ Public Class Login1
             'ЗВОНОК НА ТЕЛЕФОН
         ElseIf Type = 1 Then
 
+            'sochifornia.realty
+            'Ss123456
+
             Dim requestUrl As String = "https://smsc.ru/sys/send.php?login=it.sochi@rd-net.ru&psw=Admin32297044&phones=" & "7" & NewPasswordSMSTB.Value & "&mes=code&call=1&fmt=2"
 
             Dim req As HttpWebRequest = TryCast(WebRequest.Create(requestUrl), HttpWebRequest)
@@ -246,7 +249,8 @@ Public Class Login1
                         If IsNothing(err) = True Then
                             res = "0|Ошибка подтверждения телефона"
                         Else
-                            res = "0|Ошибка подтверждения телефона, код " & err.ToString
+                            'res = "0|Ошибка подтверждения телефона, код " & err.ToString
+                            res = "0|Ошибка подтверждения телефона"
                         End If
                     Else
 
@@ -267,7 +271,8 @@ Public Class Login1
                     End If
 
                 Else
-                    res = "0|Ошибка подтверждения телефона. Статус: " & resp.StatusDescription
+                    'res = "0|Ошибка подтверждения телефона. Статус: " & resp.StatusDescription
+                    res = "0|Ошибка подтверждения телефона"
                 End If
 
                 'Dim hashCallCode As String = GetHash.GetPasswordHash("6672")
@@ -282,6 +287,66 @@ Public Class Login1
             'КОД В СМС
         ElseIf Type = 2 Then
 
+            Dim rn = New Random
+
+            Dim smscode As String = rn.Next(0, 9).ToString & rn.Next(0, 9).ToString & rn.Next(0, 9).ToString & rn.Next(0, 9).ToString
+
+            Dim HashSMSCode As String = GetHash.GetPasswordHash(smscode)
+
+            Dim mes As String = "Код восстановления доступа Sochifornia: " & smscode
+
+            Dim requestUrlsms As String = "https://smsc.ru/sys/send.php?login=it.sochi@rd-net.ru&psw=Admin32297044&phones=" & "7" & NewPasswordSMSTB.Value & "&mes=" & mes & "&fmt=2"
+
+            Dim reqsms As HttpWebRequest = TryCast(WebRequest.Create(requestUrlsms), HttpWebRequest)
+
+            Try
+
+                Dim respsms As HttpWebResponse = DirectCast(reqsms.GetResponse(), HttpWebResponse)
+
+                If respsms.StatusDescription = "OK" Then
+
+                    Dim dataStreamsms As Stream = respsms.GetResponseStream()
+                    Dim readersms As New StreamReader(dataStreamsms, Encoding.UTF8)
+                    Dim ResponseFromServersms As String = readersms.ReadToEnd()
+                    readersms.Close()
+                    dataStreamsms.Close()
+                    respsms.Close()
+
+                    Dim phcode As XElement = XElement.Parse(ResponseFromServersms)
+
+                    Dim err As String = phcode.Descendants("error_code").Value
+
+                    If IsNothing(err) = False Then
+                        'res = "0|Ошибка отправки сообщения, код " & err.ToString
+                        res = "0|Ошибка отправки сообщения"
+                    Else
+
+                        Dim cmd As New SqlCommand("insert into [dbo].[UsersMetaData] ([Creator], [UserID], [MetaNameID], [MetaData])
+                                       values (@Creator, @UserID, 91, @MetaData)", c)
+                        cmd.Parameters.AddWithValue("Creator", Creator)
+                        cmd.Parameters.AddWithValue("UserID", UserID)
+                        cmd.Parameters.AddWithValue("MetaData", g.ToString)
+                        c.Open()
+                        cmd.ExecuteNonQuery()
+                        c.Close()
+                        cmd.Dispose()
+
+                        res = "3|" & HashSMSCode & "|" & g.ToString
+
+                    End If
+
+                Else
+                    'res = "0|Ошибка отправки сообщения. Статус: " & respsms.StatusDescription
+                    res = "0|Ошибка отправки сообщения"
+                End If
+
+
+                'res = "|" & HashSMSCode & "|6ac14d2f-eb6d-4062-b978-6a7c957fcb08"
+
+            Catch ex As Exception
+                'res = "0|" & ex.ToString
+                res = "0|Что-то пошло не так..."
+            End Try
 
         End If
 
@@ -300,7 +365,7 @@ Public Class Login1
 
                 Dim cmd As New SqlCommand("update [dbo].[UsersMetaData]
                                            set isCodeAccess = 1
-                                           where MetaData = @GUID and MetaNameID = 90", c)
+                                           where MetaData = @GUID and MetaNameID in (90,91)", c)
                 cmd.Parameters.AddWithValue("GUID", e.Parameter.Split("|")(2))
                 c.Open()
                 cmd.ExecuteNonQuery()

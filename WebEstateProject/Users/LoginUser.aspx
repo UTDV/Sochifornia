@@ -65,7 +65,7 @@
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
 
-                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Paddings-PaddingTop="20" Visible="false">
+                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center" Paddings-PaddingTop="20" Visible="true">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -118,7 +118,7 @@
                                         <Items>
                                             <dx:ListEditItem Text="Отправить ссылку на почту" Value="0" />                                            
                                             <dx:ListEditItem Text="Позвонить по номеру телефона" Value="1" />
-                                           <%-- <dx:ListEditItem Text="Отправить код в SMS" Value="2" />--%>
+                                            <dx:ListEditItem Text="Отправить код в SMS" Value="2" />
                                         </Items>
                                     </dx:ASPxRadioButtonList>
 
@@ -315,6 +315,13 @@
                 HiddenField.Set("CallCode", vl.split('|')[1]);
                 HiddenField.Set("CallGUID", vl.split('|')[2]);
                 document.getElementById("CheckCodeText").innerHTML = "Введите ниже последние 4 цифры номера телефона, с которого поступил звонок на Ваш номер:";
+                CheckCodePopup.Show();
+            }
+            else if (vl.split('|')[0] == '3') {
+                ForgetPasswordPopup.Hide();
+                HiddenField.Set("CallCode", vl.split('|')[1]);
+                HiddenField.Set("CallGUID", vl.split('|')[2]);
+                document.getElementById("CheckCodeText").innerHTML = "На Ваш номер отправлено SMS-сообщение с кодом. Введите ниже код, указанный в сообщении:";
                 CheckCodePopup.Show();
             }
         }

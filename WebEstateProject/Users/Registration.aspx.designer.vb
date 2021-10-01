@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class Registration
 
     '''<summary>
-    '''HiddenField элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents HiddenField As Global.DevExpress.Web.ASPxHiddenField
-
-    '''<summary>
     '''RegistrationForm элемент управления.
     '''</summary>
     '''<remarks>
@@ -194,15 +185,6 @@ Partial Public Class Registration
     Protected WithEvents ConfirmPhonePopup As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
-    '''ConfirmPopupLabel элемент управления.
-    '''</summary>
-    '''<remarks>
-    '''Автоматически создаваемое поле.
-    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-    '''</remarks>
-    Protected WithEvents ConfirmPopupLabel As Global.DevExpress.Web.ASPxLabel
-
-    '''<summary>
     '''ConfirmPhoneCodeTB элемент управления.
     '''</summary>
     '''<remarks>
@@ -212,13 +194,40 @@ Partial Public Class Registration
     Protected WithEvents ConfirmPhoneCodeTB As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
-    '''CheckPhoneButton элемент управления.
+    '''GetSMSButton элемент управления.
     '''</summary>
     '''<remarks>
     '''Автоматически создаваемое поле.
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
-    Protected WithEvents CheckPhoneButton As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents GetSMSButton As Global.DevExpress.Web.ASPxButton
+
+    '''<summary>
+    '''ConfirmSMSPopup элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmSMSPopup As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''ConfirmSMSCodeTB элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents ConfirmSMSCodeTB As Global.DevExpress.Web.ASPxTextBox
+
+    '''<summary>
+    '''LoadingPanel элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 
     '''<summary>
     '''ConfirmCBack элемент управления.
@@ -228,4 +237,13 @@ Partial Public Class Registration
     '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
     '''</remarks>
     Protected WithEvents ConfirmCBack As Global.DevExpress.Web.ASPxCallback
+
+    '''<summary>
+    '''CBackCheckCode элемент управления.
+    '''</summary>
+    '''<remarks>
+    '''Автоматически создаваемое поле.
+    '''Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+    '''</remarks>
+    Protected WithEvents CBackCheckCode As Global.DevExpress.Web.ASPxCallback
 End Class
